@@ -1,0 +1,15 @@
+id: py-roman-numerals
+language: python
+category: bugfix
+maxTurns: 20
+prompt: |
+  The function `to_roman(n)` in `roman.py` converts an integer (1..3999) to a
+  Roman numeral string, but it has bugs: several values convert incorrectly
+  (for example numbers involving 4, 9, 40, 90, 400, 900 — the "subtractive"
+  forms — are wrong).
+
+  Fix `roman.py` so every value from 1 to 3999 converts correctly. Keep the
+  public function name and signature.
+
+  Do not edit `test_roman.py` — it is the acceptance test.
+acceptance: python3 -m pytest -q

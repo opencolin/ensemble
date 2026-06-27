@@ -1,0 +1,18 @@
+id: ts-refactor-validator
+language: typescript
+category: refactor
+maxTurns: 22
+prompt: |
+  `validator.mjs` exports `validatePassword(pw)`, which returns an array of
+  human-readable error strings for a password (empty array means valid). The
+  current implementation is correct but messy: deeply nested conditionals,
+  duplicated logic, and a hard-to-extend structure.
+
+  Refactor `validator.mjs` for clarity WITHOUT changing its behavior:
+  - Keep the exported name and signature `validatePassword(pw)`.
+  - Return the exact same error strings, in the same order, for every input.
+  - Prefer a small data-driven set of rules over nested if/else.
+
+  Do not edit `test.mjs` — it is the acceptance test (it pins the exact
+  messages and ordering). Run with `node --test`.
+acceptance: node --test

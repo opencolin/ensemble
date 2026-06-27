@@ -1,0 +1,60 @@
+id: go-csv-parse
+language: go
+category: feature
+maxTurns: 30
+prompt: |
+  Implement `func Parse(input string) ([][]string, error)` in `csv.go`
+  (package `csvparse`) — an RFC-4180-style CSV parser. The current body is a
+  non-working stub; replace it with a correct implementation. Keep the function
+  name and signature, and keep the package name `csvparse`.
+
+  `Parse` reads the whole `input` string and returns the parsed records as a
+  slice of rows, where each row is a slice of field strings.
+
+  Grammar and rules (the hidden tests check exactly these):
+
+  - Records (rows) are separated by `\n` (LF) or `\r\n` (CRLF). Fields within a
+    record are separated by `,` (comma).
+  - A field may be QUOTED with double-quotes `"`. The opening quote must be the
+    first character of the field. Inside a quoted field, `,`, `\n`, and `\r\n`
+    are LITERAL characters that belong to the field value (they do NOT end the
+    field or record). A literal double-quote inside a quoted field is written as
+    two double-quotes `""`, which unescape to a single `"` in the value. The
+    field ends at the matching closing quote.
+  - An UNQUOTED field is taken literally up to the next `,`, `\n`, `\r\n`, or end
+    of input. No trimming of spaces is performed (leading/trailing spaces are
+    kept verbatim).
+  - A trailing record separator at the very end of the input does NOT create an
+    extra empty trailing record. For example `"a\nb\n"` parses to 2 rows
+    (`[["a"],["b"]]`), not 3.
+  - The empty input string `""` parses to ZERO records: return an empty,
+    non-nil `[][]string{}` together with a nil error.
+  - Rows may have differing numbers of fields (ragged rows). That is NOT an
+    error.
+
+  Return a non-nil error (the test only checks that `err != nil`) for any of:
+
+  - An unterminated quoted field — end of input reached while still inside an
+    open quoted field (e.g. `"abc`).
+  - A `"` appearing inside an UNQUOTED field (e.g. `ab"c` — the quote is not at
+    the start of the field, so it is illegal).
+  - Any character other than `,`, `\r`, `\n`, or end-of-input appearing
+    immediately after a field's CLOSING quote (e.g. `"a"b` — the `b` after the
+    closing quote is junk). Note `""` inside the quoted field is the escape and
+    does NOT close the field.
+
+  A few worked examples (success):
+
+  - `a`                     -> `[["a"]]`
+  - `a,b,c`                 -> `[["a","b","c"]]`
+  - `a,,c`                  -> `[["a","","c"]]`
+  - `"x,y"`                 -> `[["x,y"]]`        (comma is literal inside quotes)
+  - `"line1\nline2"`        -> `[["line1\nline2"]]` (newline literal inside quotes)
+  - `"he said ""hi"""`      -> `[['he said "hi"']]`  ("" unescapes to ")
+  - `""`                    -> `[[""]]`           (a quoted empty field)
+
+  Implement only `csv.go`, to this specification. It is graded against a hidden
+  test suite you never see, so handle every rule and edge case described above.
+acceptance: 'go test -json ./...'
+hiddenTests:
+  - csv_test.go

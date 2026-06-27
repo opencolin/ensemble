@@ -1,0 +1,20 @@
+id: py-anagram-groups
+language: python
+category: feature
+maxTurns: 20
+prompt: |
+  Implement the function `group_anagrams(words)` in `solution.py`.
+
+  Given a list of strings, return a list of groups, where each group contains
+  all strings from the input that are anagrams of one another. Two strings are
+  anagrams if they contain exactly the same letters with the same counts
+  (case-sensitive; order does not matter).
+
+  Requirements:
+  - Each input word appears in exactly one group.
+  - Within a group, words are sorted ascending (Python default string order).
+  - The list of groups is sorted ascending by each group's first element.
+  - An empty input returns an empty list.
+
+  Do not edit `test_solution.py` — it is the acceptance test.
+acceptance: python3 -m pytest -q

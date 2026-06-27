@@ -1,0 +1,18 @@
+id: go-balanced-parens
+language: go
+category: bugfix
+maxTurns: 20
+prompt: |
+  The function `IsBalanced(s string) bool` in `parens.go` should report whether
+  the brackets in `s` are balanced. It must handle three bracket types — (), [],
+  {} — and they must be correctly nested (every opener closed by the matching
+  closer in the right order). Non-bracket characters are ignored.
+
+  The current implementation is buggy: it does not check that a closer matches
+  the most recent opener (so "(]" is wrongly accepted) and mishandles a closer
+  that appears with no opener.
+
+  Fix `parens.go`. Keep the function name and signature.
+
+  Do not edit `parens_test.go` — it is the acceptance test.
+acceptance: go test ./...

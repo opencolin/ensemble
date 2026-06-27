@@ -1,0 +1,62 @@
+# Models to benchmark for the Ensemble-runs source, plus runner settings.
+# Real Nebius Token Factory ids (case-sensitive). `name` matches the scraped
+# leaderboard so results merge with model profiles and fill the gap cells.
+
+settings:
+  runsPerTask: 1            # reruns per task (1 = fast first pass; raise later)
+  maxTurns: 25             # default agent max turns (task.yaml may override)
+  proxyBasePort: 8083      # claude-code-proxy: model i listens on proxyBasePort + i
+  nebiusBaseUrl: https://api.studio.nebius.com/v1
+  servedBy: Nebius Token Factory
+  agentTimeoutSec: 360     # per-attempt wall-clock cap (seconds)
+
+models:
+  - id: openai/gpt-oss-120b
+    name: gpt-oss-120b
+    vendor: OpenAI
+    priceMtok: 0.30
+
+  - id: zai-org/GLM-5.2
+    name: GLM-5.2
+    vendor: Z.ai
+    priceMtok: 0.55
+
+  - id: deepseek-ai/DeepSeek-V3.2
+    name: DeepSeek-V3.2
+    vendor: DeepSeek
+    priceMtok: 0.50
+
+  - id: Qwen/Qwen3.5-397B-A17B-fast
+    name: Qwen3.5-397B-A17B
+    vendor: Alibaba
+    priceMtok: 0.45
+
+  - id: moonshotai/Kimi-K2.5-fast
+    name: Kimi K2.5
+    vendor: Moonshot AI
+    priceMtok: 0.60
+
+  - id: meta-llama/Llama-3.3-70B-Instruct
+    name: Llama 3.3 70B
+    vendor: Meta
+    priceMtok: 0.13
+
+  - id: deepseek-ai/DeepSeek-V4-Pro
+    name: DeepSeek-V4
+    vendor: DeepSeek
+    priceMtok: 0.55
+
+  - id: moonshotai/Kimi-K2.6
+    name: Kimi K2.6
+    vendor: Moonshot AI
+    priceMtok: 0.60
+
+  - id: nvidia/Nemotron-3-Ultra-550b-a55b
+    name: Nemotron-3 Ultra 550B
+    vendor: NVIDIA
+    priceMtok: 0.40
+
+  - id: MiniMaxAI/MiniMax-M2.5
+    name: MiniMax M2.5
+    vendor: MiniMax
+    priceMtok: 0.30

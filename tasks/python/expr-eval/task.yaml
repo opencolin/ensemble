@@ -1,0 +1,52 @@
+id: py-expr-eval
+language: python
+category: feature
+maxTurns: 28
+prompt: |
+  Implement `evaluate(expr: str) -> float` in `solution.py` — a calculator for
+  arithmetic expressions given as a string.
+
+  Grammar and semantics:
+  - Binary operators: `+`, `-`, `*`, `/`, `%`. Unary `+` and `-`. Parentheses
+    `(` and `)` for grouping.
+  - Operands are non-negative integer and decimal literals, e.g. `3`, `3.5`,
+    `.5`, `10.`. There is no exponent / `e` notation and no thousands
+    separators. (Negative numbers arise only via the unary `-` operator.)
+  - Precedence, highest to lowest:
+      1. unary `+` / `-`
+      2. `*`, `/`, `%`
+      3. `+`, `-`
+    Binary operators of equal precedence are LEFT-associative
+    (so `10-3-2` == 5 and `8/2/2` == 2). Unary binds tighter than any binary
+    operator, and unary operators may chain: `--3` == 3, `---3` == -3.
+  - `/` is true (floating-point) division. `%` is the remainder operator; in
+    every `%` test both operands are non-negative, so it matches Python's `%`.
+  - Whitespace anywhere in the input is insignificant.
+  - Return the numeric result as a `float`. (Tests compare with absolute
+    tolerance 1e-9.)
+
+  Raise `ValueError` for any malformed input, including (but not limited to):
+  - empty or whitespace-only input;
+  - unbalanced parentheses (`(1+2`, `1+2)`);
+  - a missing operand (`1+`, `*2`, `(`);
+  - two adjacent operands with no operator between them (`1 2`);
+  - any unknown / unsupported character (`@`, `3 & 4`);
+  - the unsupported power operator `**` (`2**3`);
+  - division or modulo by zero (`1/0`, `5%0`).
+
+  Examples:
+    evaluate("2+3*4")      ==  14.0
+    evaluate("(2+3)*4")    ==  20.0
+    evaluate("2*-3")       == -6.0
+    evaluate("--3")        ==   3.0
+    evaluate("10/4")       ==   2.5
+    evaluate("10%3")       ==   1.0
+    evaluate("2*(3+4)-5")  ==   9.0
+    evaluate(".5+.5")      ==   1.0
+    evaluate("  1 +  2 ")  ==   3.0
+
+  Implement `solution.py` to this specification. It is graded against a hidden
+  test suite you never see, so handle every rule and edge case described above.
+acceptance: 'python3 -m pytest -q'
+hiddenTests:
+  - test_solution.py

@@ -1,0 +1,31 @@
+# python
+.venv/
+runner/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# env / secrets
+.env
+.env.local
+*.local
+
+# runner artifacts (keep the aggregated web/src/data/leaderboard.json tracked)
+results/runs/
+results/leaderboard.dryrun.json
+results/**/*.tmp
+
+# os / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# node (web/ has its own .gitignore too)
+node_modules/
+.gstack/
+
+# vendored claude-code-proxy (cloned, not committed) + its artifacts
+vendor/
+observability.sqlite3
+*.sqlite3

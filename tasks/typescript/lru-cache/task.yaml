@@ -1,0 +1,20 @@
+id: ts-lru-cache
+language: typescript
+category: feature
+maxTurns: 22
+prompt: |
+  Implement an LRU (least-recently-used) cache in `lru.mjs`.
+
+  Export a class `LRUCache` with:
+  - `constructor(capacity)` where capacity is a positive integer.
+  - `get(key)` returns the value, or `undefined` if absent. A successful get
+    marks the key as most-recently-used.
+  - `put(key, value)` inserts/updates. Updating marks the key most-recently-used.
+    When inserting a new key would exceed capacity, evict the least-recently-used
+    key first.
+  - `size` getter returning the current number of entries.
+
+  Keys may be strings or numbers. Use ES module syntax (the file is `.mjs`).
+
+  Do not edit `test.mjs` — it is the acceptance test, run with `node --test`.
+acceptance: node --test

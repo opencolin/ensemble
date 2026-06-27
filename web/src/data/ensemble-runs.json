@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-06-22",
+  "harness": "claude-code",
+  "dryRun": false,
+  "results": [
+    {
+      "harness": "claude-code",
+      "model": "openai/gpt-oss-120b",
+      "modelName": "gpt-oss-120b",
+      "modelOrg": "OpenAI",
+      "passRate": 83.33333333333333,
+      "runs": 6,
+      "date": "2026-06-21"
+    },
+    {
+      "harness": "claude-code",
+      "model": "zai-org/GLM-5.2",
+      "modelName": "GLM-5.2",
+      "modelOrg": "Z.ai",
+      "passRate": 100.0,
+      "runs": 6,
+      "date": "2026-06-21"
+    },
+    {
+      "harness": "claude-code",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "modelName": "DeepSeek-V3.2",
+      "modelOrg": "DeepSeek",
+      "passRate": 16.666666666666668,
+      "runs": 6,
+      "date": "2026-06-21"
+    },
+    {
+      "harness": "claude-code",
+      "model": "Qwen/Qwen3.5-397B-A17B-fast",
+      "modelName": "Qwen3.5-397B-A17B",
+      "modelOrg": "Alibaba",
+      "passRate": 16.666666666666668,
+      "runs": 6,
+      "date": "2026-06-21"
+    },
+    {
+      "harness": "claude-code",
+      "model": "moonshotai/Kimi-K2.5-fast",
+      "modelName": "Kimi K2.5",
+      "modelOrg": "Moonshot AI",
+      "passRate": 83.33333333333333,
+      "runs": 6,
+      "date": "2026-06-21"
+    },
+    {
+      "harness": "claude-code",
+      "model": "meta-llama/Llama-3.3-70B-Instruct",
+      "modelName": "Llama 3.3 70B",
+      "modelOrg": "Meta",
+      "passRate": 16.666666666666668,
+      "runs": 6,
+      "date": "2026-06-21"
+    },
+    {
+      "harness": "claude-code",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "modelName": "DeepSeek-V4",
+      "modelOrg": "DeepSeek",
+      "passRate": 50.0,
+      "runs": 6,
+      "date": "2026-06-21"
+    },
+    {
+      "harness": "claude-code",
+      "model": "moonshotai/Kimi-K2.6",
+      "modelName": "Kimi K2.6",
+      "modelOrg": "Moonshot AI",
+      "passRate": 100.0,
+      "runs": 6,
+      "date": "2026-06-21"
+    },
+    {
+      "harness": "claude-code",
+      "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+      "modelName": "Nemotron-3 Ultra 550B",
+      "modelOrg": "NVIDIA",
+      "passRate": 100.0,
+      "runs": 6,
+      "date": "2026-06-22"
+    },
+    {
+      "harness": "claude-code",
+      "model": "MiniMaxAI/MiniMax-M2.5",
+      "modelName": "MiniMax M2.5",
+      "modelOrg": "MiniMax",
+      "passRate": 100.0,
+      "runs": 6,
+      "date": "2026-06-22"
+    }
+  ]
+}

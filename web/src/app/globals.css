@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* ───────────────────────────── design tokens ───────────────────────────── */
+@theme {
+  --color-canvas: #0a0b0f;
+  --color-surface: #14161d;
+  --color-surface2: #1b1e27;
+  --color-edge: #262a35;
+  --color-edge2: #353b49;
+
+  --color-ink: #e8eaf0;
+  --color-dim: #9aa1b2;
+  --color-faint: #646b7d;
+
+  --color-accent: #c2f04b;
+  --color-accent-dim: #8aa83a;
+
+  --color-excellent: #34d399;
+  --color-solid: #fbbf24;
+  --color-iffy: #fb7185;
+
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ───────────────────────────── base ───────────────────────────── */
+html {
+  color-scheme: dark;
+  scrollbar-color: var(--color-edge2) transparent;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* faint instrument-panel grid + top vignette */
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, rgba(194, 240, 75, 0.06), transparent 60%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 100% 100%, 56px 56px, 56px 56px;
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(194, 240, 75, 0.28);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-edge2);
+  border-radius: 6px;
+  border: 2px solid var(--color-canvas);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #454c5d;
+}
+
+/* ───────────────────────────── helpers ───────────────────────────── */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* entrance animation for rows / cards */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* animated bar fill */
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+.bar-fill {
+  transform-origin: left;
+  animation: grow 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .bar-fill {
+    animation: none;
+  }
+}

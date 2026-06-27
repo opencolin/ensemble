@@ -1,0 +1,16 @@
+id: go-stack-tests
+language: go
+category: test
+maxTurns: 22
+prompt: |
+  `stack.go` implements a generic `Stack[T]` with `Push`, `Pop`, `Peek`, `Len`,
+  and `IsEmpty`. It has NO tests. Write a table-driven test file
+  `stack_test.go` (package `stack`) that exercises the full API, including:
+  - pushing then popping returns values in LIFO order,
+  - `Pop`/`Peek` on an empty stack return the zero value and `ok == false`,
+  - `Len` and `IsEmpty` reflect the current state.
+
+  Your tests must pass and must cover at least 90% of statements in the package.
+  Do not modify `stack.go`; only add `stack_test.go`.
+acceptance: |
+  go test -coverprofile=cover.out ./... && go tool cover -func=cover.out | awk '/^total:/ {pct=$3+0; print "coverage", pct"%"; if (pct < 90) exit 1}'

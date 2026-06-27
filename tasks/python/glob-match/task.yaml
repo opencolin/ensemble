@@ -1,0 +1,50 @@
+id: py-glob-match
+language: python
+category: feature
+maxTurns: 28
+prompt: |
+  Implement the function `match(pattern: str, text: str) -> bool` in
+  `solution.py`. It performs shell-style glob matching that is ANCHORED: the
+  pattern must match the ENTIRE `text`, not just a prefix or substring. Matching
+  is case-sensitive. Return `True` if `pattern` matches `text` exactly, else
+  `False`.
+
+  Implement these rules exactly (do NOT delegate to `fnmatch`/`re` — their
+  character-class semantics differ from the spec below):
+
+  - `*` matches any run of characters, including the empty run.
+  - `?` matches exactly one character (any character).
+  - `[...]` is a character class that matches exactly one character:
+    - A set of literal characters: `[abc]` matches `a`, `b`, or `c`.
+    - Ranges: `a-z`, `0-9`, `A-Z` match any one character in that inclusive
+      range (compared by Unicode code point). Multiple items may be mixed, e.g.
+      `[a-z0-9_]`.
+    - Negation: if the FIRST character inside the brackets is `!`, the class is
+      negated — it matches exactly one character that is NOT in the set. For
+      example `[!a-c]` matches any single character except `a`, `b`, or `c`.
+    - A literal `]` is allowed as the FIRST character of the class (immediately
+      after the optional leading `!`): `[]ab]` matches `]`, `a`, or `b`; and
+      `[!]ab]` matches one character that is none of `]`, `a`, `b`.
+    - A `-` is treated as a literal `-` when it is the first or the last
+      character of the class, e.g. `[-a]` and `[a-]` both match `-` or `a`.
+    - If a `[` has NO closing `]` for the rest of the pattern, treat that `[` as
+      a LITERAL `[` character (there is no character class).
+  - Backslash `\` escapes the next character, making it a literal. So `\*`
+    matches a literal `*`, `\?` a literal `?`, `\[` a literal `[`, and `\\` a
+    literal backslash. A trailing backslash at the very end of the pattern
+    (with nothing after it) matches a single literal backslash.
+  - Every other character is a literal that matches only itself.
+
+  Notes / clarifications:
+  - Backslash escaping applies in the pattern at top level. Inside `[...]`,
+    backslash is NOT special — it is just an ordinary character (so `[\]` is an
+    unclosed class containing `\`, hence... see the unclosed-`[` rule; and
+    `[a\]` is a class matching `a` or `\`).
+  - The empty pattern `""` matches ONLY the empty text `""`.
+  - Anchoring means e.g. `a*` does NOT match `ba` (must match the whole string),
+    and `*c` does NOT match `cx`.
+
+  Keep the public function name and signature: `match(pattern, text)`.
+
+  Do not edit `test_solution.py` — it is the acceptance test.
+acceptance: python3 -m pytest -q

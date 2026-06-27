@@ -1,0 +1,7 @@
+# Ensemble runner dependencies. Stdlib-first; only PyYAML is required.
+# Python 3.11+ recommended.
+PyYAML>=6.0,<7.0
+
+# Everything else (subprocess, urllib, hashlib, tempfile, json, dataclasses)
+# is from the standard library. No HTTP client dependency is needed: the proxy
+# health check uses urllib, and Claude Code is invoked as a subprocess.
