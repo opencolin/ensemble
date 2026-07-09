@@ -18,6 +18,7 @@ const NAV = [
   { href: "/", label: "Top Model" },
   { href: "/agents", label: "Top Agent" },
   { href: "/team", label: "Top Team" },
+  { href: "/code-review", label: "Code Review" },
   { href: "/benchmarks", label: "Benchmarks" },
   { href: "/gaps", label: "Gaps" },
   { href: "/#method", label: "Method" },

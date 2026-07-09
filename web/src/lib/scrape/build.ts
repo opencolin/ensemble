@@ -11,11 +11,12 @@ import { fetchChatbotArena, CHATBOT_ARENA_URL } from "./sources/chatbotArena";
 import { fetchArenaAgent, ARENA_AGENT_URL } from "./sources/arenaAgent";
 import { fetchEnsembleRuns, ENSEMBLE_RUNS_URL } from "./sources/ensembleRuns";
 import { fetchStratixCup, STRATIX_CUP_URL } from "./sources/stratixCup";
+import { fetchBridgeBench, BRIDGE_BENCH_URL } from "./sources/bridgeBench";
 
 export const BENCHMARKS: Benchmark[] = [
   // Agent benchmarks: scored via a (harness, model) pair → harness boards.
   { id: "coding-agent-bench", name: "CodingAgentBench", metric: "Pass rate", kind: "agent", unit: "pct", blurb: "Open coding agents (CLIs/TUIs) across open-weight models.", source: CODING_AGENT_BENCH_URL, homepage: "https://codingagentbench.com/" },
-  { id: "swe-bench", name: "SWE-bench Verified", metric: "% Resolved", kind: "agent", unit: "pct", blurb: "Resolve real GitHub issues; hidden tests must pass.", source: SWE_BENCH_URL, homepage: "https://www.swebench.com/" },
+  { id: "swe-bench", name: "SWE-bench Verified", metric: "% Resolved", kind: "model", unit: "pct", blurb: "Resolve real GitHub issues; hidden tests must pass (best per model).", source: SWE_BENCH_URL, homepage: "https://www.swebench.com/" },
   { id: "terminal-bench", name: "Terminal-Bench 2.0", metric: "Accuracy", kind: "agent", unit: "pct", blurb: "Complete real end-to-end terminal tasks.", source: TERMINAL_BENCH_URL, homepage: "https://www.tbench.ai/" },
   { id: "ensemble-runs", name: "ixio runs", metric: "Pass rate", kind: "agent", unit: "pct", blurb: "Our own runs — any harness × any model via the proxy. Fills gaps nobody else measures.", source: ENSEMBLE_RUNS_URL, homepage: ENSEMBLE_RUNS_URL },
   // Model benchmarks: scored on the raw model → model profiles + Top Team.
@@ -24,6 +25,7 @@ export const BENCHMARKS: Benchmark[] = [
   { id: "arc-agi", name: "ARC-AGI", metric: "Score", kind: "model", unit: "pct", blurb: "Abstraction & reasoning puzzles (ARC Prize).", source: CHATBOT_ARENA_URL, homepage: "https://arcprize.org/" },
   { id: "arena-agent", name: "Arena Agent", metric: "Net Improvement", kind: "model", unit: "pct", blurb: "Agentic coding eval over real sessions.", source: ARENA_AGENT_URL, homepage: "https://arena.ai/leaderboard/agent" },
   { id: "stratix-cup", name: "Stratix Cup", metric: "Tournament score", kind: "model", unit: "index", blurb: "16 frontier models write their own soccer-strategy code and compete head-to-head (LayerLens).", source: STRATIX_CUP_URL, homepage: "https://layerlens.ai/stratix-cup/season-1/" },
+  { id: "bridge-bench", name: "BridgeBench", metric: "Qualified rate", kind: "model", unit: "pct", blurb: "Vibe-coding tasks (UI, debugging) measured direct from each provider's API; season rebuilt every 90 days (BridgeMind).", source: "https://github.com/bridge-mind/bridgebench", homepage: "https://bridgebench.ai" },
 ];
 
 interface Src { id: string; name: string; url: string; fn: () => Promise<RawRecord[]> }
@@ -35,6 +37,7 @@ const SOURCES: Src[] = [
   { id: "arena-agent", name: "Arena Agent", url: ARENA_AGENT_URL, fn: fetchArenaAgent },
   { id: "ensemble-runs", name: "ixio runs", url: ENSEMBLE_RUNS_URL, fn: fetchEnsembleRuns },
   { id: "stratix-cup", name: "Stratix Cup", url: STRATIX_CUP_URL, fn: fetchStratixCup },
+  { id: "bridge-bench", name: "BridgeBench", url: BRIDGE_BENCH_URL, fn: fetchBridgeBench },
 ];
 
 const round1 = (x: number) => Math.round(x * 10) / 10;
@@ -199,7 +202,7 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
   // Editorial rubric (agent-native / realism / openness) × data-driven coverage.
   const RUBRIC: Record<string, { agentNative: number; realism: number; openness: number }> = {
     "coding-agent-bench": { agentNative: 100, realism: 95, openness: 95 },
-    "swe-bench": { agentNative: 100, realism: 100, openness: 90 },
+    "swe-bench": { agentNative: 65, realism: 100, openness: 90 },
     "terminal-bench": { agentNative: 100, realism: 95, openness: 88 },
     "ensemble-runs": { agentNative: 100, realism: 90, openness: 100 },
     "arena-agent": { agentNative: 45, realism: 80, openness: 60 },
@@ -209,6 +212,8 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     // Model-level, but executable head-to-head where models write/iterate real code,
     // every match traced + signed — so it rates well on realism/openness for a model bench.
     "stratix-cup": { agentNative: 35, realism: 80, openness: 85 },
+    // Real UI/debug coding tasks scored in a browser, direct-to-provider, open repo + tasks.
+    "bridge-bench": { agentNative: 30, realism: 85, openness: 90 },
   };
   const BW = { agentNative: 0.3, coverage: 0.3, realism: 0.25, openness: 0.15 };
   const bStats = new Map<string, { entries: number; runs: number; harnesses: Set<string>; models: Set<string> }>();
