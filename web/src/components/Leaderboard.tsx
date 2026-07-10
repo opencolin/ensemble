@@ -95,7 +95,7 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
           <span className="font-mono text-xs text-faint">
             {models.length} models · {benches.map((b) => b.name).join(" + ")}
           </span>
-          <OpenFilter value={weights} onChange={setWeights} />
+          <OpenFilter value={weights} onChange={setWeights} labels={["Frontier", "Open Weight"]} />
         </div>
       </div>
 
