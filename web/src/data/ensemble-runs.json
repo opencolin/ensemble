@@ -135,7 +135,7 @@
       "modelName": "GPT-5.5",
       "modelOrg": "OpenAI",
       "passRate": 100.0,
-      "runs": 3,
+      "runs": 5,
       "date": "2026-07-09"
     },
     {
@@ -144,7 +144,7 @@
       "modelName": "Grok 4.5",
       "modelOrg": "xAI",
       "passRate": 100.0,
-      "runs": 1,
+      "runs": 5,
       "date": "2026-07-09"
     }
   ]
