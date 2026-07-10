@@ -2,7 +2,7 @@
   "meta": {
     "title": "ixio — best models for coding agents",
     "status": "live",
-    "scrapedAt": "2026-07-10T03:23:59.251Z",
+    "scrapedAt": "2026-07-10T03:30:54.098Z",
     "defaultHarnessId": "claude-code",
     "sources": [
       {
@@ -6394,8 +6394,36 @@
         "benchmark": "arena-coding",
         "raw": 1566
       },
-      "composite": 91.9,
+      "composite": 97.6,
       "rank": 1,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "gpt-5-6-sol",
+      "modelName": "GPT-5.6 Sol",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "swe-bench": {
+          "value": 0.9620000000000001,
+          "raw": 96.2,
+          "date": "2026-07-09"
+        },
+        "artificial-analysis": {
+          "value": 0.8,
+          "raw": 80
+        },
+        "arc-agi": {
+          "value": 0.925,
+          "raw": 92.5
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 96.2
+      },
+      "composite": 94.9,
+      "rank": 2,
       "tier": "excellent"
     },
     {
@@ -6435,8 +6463,8 @@
         "benchmark": "stratix-cup",
         "raw": 100
       },
-      "composite": 89,
-      "rank": 2,
+      "composite": 94.3,
+      "rank": 3,
       "tier": "excellent"
     },
     {
@@ -6483,36 +6511,32 @@
         "raw": 84.7,
         "harnessId": "nexau-ahe"
       },
-      "composite": 88.9,
-      "rank": 3,
+      "composite": 93.6,
+      "rank": 4,
       "tier": "excellent"
     },
     {
-      "modelId": "gpt-5-6-sol",
-      "modelName": "GPT-5.6 Sol",
-      "vendor": "OpenAI",
+      "modelId": "grok-4-5",
+      "modelName": "Grok 4.5",
+      "vendor": "xAI",
       "openWeight": false,
       "scores": {
         "swe-bench": {
-          "value": 0.9620000000000001,
-          "raw": 96.2,
-          "date": "2026-07-09"
+          "value": 0.866,
+          "raw": 86.6,
+          "date": "2026-07-08"
         },
         "artificial-analysis": {
-          "value": 0.8,
-          "raw": 80
-        },
-        "arc-agi": {
-          "value": 0.925,
-          "raw": 92.5
+          "value": 0.75,
+          "raw": 75
         }
       },
       "best": {
-        "benchmark": "swe-bench",
-        "raw": 96.2
+        "benchmark": "artificial-analysis",
+        "raw": 75
       },
-      "composite": 87.4,
-      "rank": 4,
+      "composite": 87.3,
+      "rank": 5,
       "tier": "excellent"
     },
     {
@@ -6558,32 +6582,41 @@
         "benchmark": "arena-coding",
         "raw": 1560
       },
-      "composite": 82.6,
-      "rank": 5,
+      "composite": 86.5,
+      "rank": 6,
       "tier": "excellent"
     },
     {
-      "modelId": "grok-4-5",
-      "modelName": "Grok 4.5",
-      "vendor": "xAI",
+      "modelId": "claude-sonnet-5",
+      "modelName": "Claude Sonnet 5",
+      "vendor": "Anthropic",
       "openWeight": false,
       "scores": {
         "swe-bench": {
-          "value": 0.866,
-          "raw": 86.6,
-          "date": "2026-07-08"
+          "value": 0.7979999999999999,
+          "raw": 79.8,
+          "date": "2026-06-30"
+        },
+        "arena-coding": {
+          "value": 15.2,
+          "raw": 1520
         },
         "artificial-analysis": {
-          "value": 0.75,
-          "raw": 75
+          "value": 0.73,
+          "raw": 73
+        },
+        "arena-agent": {
+          "value": 0.0816,
+          "raw": 8.16,
+          "stderr": 1.38
         }
       },
       "best": {
-        "benchmark": "artificial-analysis",
-        "raw": 75
+        "benchmark": "arena-coding",
+        "raw": 1520
       },
-      "composite": 81.1,
-      "rank": 6,
+      "composite": 85.4,
+      "rank": 7,
       "tier": "excellent"
     },
     {
@@ -6624,8 +6657,60 @@
         "benchmark": "artificial-analysis",
         "raw": 75
       },
-      "composite": 81.1,
-      "rank": 7,
+      "composite": 85.3,
+      "rank": 8,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "grok-4-3",
+      "modelName": "Grok 4.3",
+      "vendor": "SpaceXAI",
+      "openWeight": false,
+      "scores": {
+        "arena-agent": {
+          "value": 0.1557,
+          "raw": 15.57,
+          "stderr": 1.02
+        },
+        "stratix-cup": {
+          "value": 0.511,
+          "raw": 51.1
+        }
+      },
+      "best": {
+        "benchmark": "arena-agent",
+        "raw": 15.57
+      },
+      "composite": 85,
+      "rank": 9,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "nemotron-3-ultra-550b-a55b",
+      "modelName": "nemotron-3-ultra-550b-a55b",
+      "vendor": "NVIDIA",
+      "openWeight": true,
+      "scores": {
+        "coding-agent-bench": {
+          "value": 0.92,
+          "raw": 92
+        },
+        "arena-coding": {
+          "value": 14.52,
+          "raw": 1452
+        },
+        "artificial-analysis": {
+          "value": 0.7,
+          "raw": 70
+        }
+      },
+      "best": {
+        "benchmark": "coding-agent-bench",
+        "raw": 92,
+        "harnessId": "opencode"
+      },
+      "composite": 84.9,
+      "rank": 10,
       "tier": "excellent"
     },
     {
@@ -6670,93 +6755,100 @@
         "raw": 100,
         "harnessId": "claude-code"
       },
-      "composite": 81,
-      "rank": 8,
+      "composite": 84.7,
+      "rank": 11,
       "tier": "excellent"
     },
     {
-      "modelId": "claude-sonnet-5",
-      "modelName": "Claude Sonnet 5",
-      "vendor": "Anthropic",
+      "modelId": "ernie-5-1",
+      "modelName": "ERNIE-5.1",
+      "vendor": "Baidu",
       "openWeight": false,
       "scores": {
-        "swe-bench": {
-          "value": 0.7979999999999999,
-          "raw": 79.8,
-          "date": "2026-06-30"
-        },
         "arena-coding": {
-          "value": 15.2,
-          "raw": 1520
+          "value": 14.95,
+          "raw": 1495
         },
         "artificial-analysis": {
-          "value": 0.73,
-          "raw": 73
-        },
-        "arena-agent": {
-          "value": 0.0816,
-          "raw": 8.16,
-          "stderr": 1.38
+          "value": 0.71,
+          "raw": 71
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1520
+        "raw": 1495
       },
-      "composite": 80.1,
-      "rank": 9,
+      "composite": 83.7,
+      "rank": 12,
       "tier": "excellent"
     },
     {
-      "modelId": "grok-4-3",
-      "modelName": "Grok 4.3",
-      "vendor": "SpaceXAI",
+      "modelId": "muse-spark",
+      "modelName": "Muse Spark",
+      "vendor": "Meta",
       "openWeight": false,
       "scores": {
-        "arena-agent": {
-          "value": 0.1557,
-          "raw": 15.57,
-          "stderr": 1.02
+        "arena-coding": {
+          "value": 14.93,
+          "raw": 1493
         },
-        "stratix-cup": {
-          "value": 0.511,
-          "raw": 51.1
+        "artificial-analysis": {
+          "value": 0.71,
+          "raw": 71
         }
       },
       "best": {
-        "benchmark": "arena-agent",
-        "raw": 15.57
+        "benchmark": "arena-coding",
+        "raw": 1493
       },
-      "composite": 79.2,
-      "rank": 10,
+      "composite": 83.4,
+      "rank": 13,
       "tier": "excellent"
     },
     {
-      "modelId": "nemotron-3-ultra-550b-a55b",
-      "modelName": "nemotron-3-ultra-550b-a55b",
-      "vendor": "NVIDIA",
+      "modelId": "kimi-k2-6-thinking",
+      "modelName": "Kimi-K2.6-Thinking ✅",
+      "vendor": "Moonshot AI",
       "openWeight": true,
       "scores": {
-        "coding-agent-bench": {
-          "value": 0.92,
-          "raw": 92
-        },
         "arena-coding": {
-          "value": 14.52,
-          "raw": 1452
+          "value": 14.93,
+          "raw": 1493
         },
         "artificial-analysis": {
-          "value": 0.7,
-          "raw": 70
+          "value": 0.71,
+          "raw": 71
         }
       },
       "best": {
-        "benchmark": "coding-agent-bench",
-        "raw": 92,
-        "harnessId": "opencode"
+        "benchmark": "arena-coding",
+        "raw": 1493
       },
-      "composite": 79.1,
-      "rank": 11,
+      "composite": 83.4,
+      "rank": 14,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "deepseek-v4-pro",
+      "modelName": "DeepSeek-V4-Pro ✅",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 14.91,
+          "raw": 1491
+        },
+        "artificial-analysis": {
+          "value": 0.71,
+          "raw": 71
+        }
+      },
+      "best": {
+        "benchmark": "artificial-analysis",
+        "raw": 71
+      },
+      "composite": 83,
+      "rank": 15,
       "tier": "excellent"
     },
     {
@@ -6798,14 +6890,14 @@
         "benchmark": "arena-coding",
         "raw": 1545
       },
-      "composite": 78.4,
-      "rank": 12,
+      "composite": 82.3,
+      "rank": 16,
       "tier": "excellent"
     },
     {
-      "modelId": "ernie-5-1",
-      "modelName": "ERNIE-5.1",
-      "vendor": "Baidu",
+      "modelId": "seed2-0-pro",
+      "modelName": "Seed2.0 Pro",
+      "vendor": "ByteDance",
       "openWeight": false,
       "scores": {
         "arena-coding": {
@@ -6813,22 +6905,22 @@
           "raw": 1495
         },
         "artificial-analysis": {
-          "value": 0.71,
-          "raw": 71
+          "value": 0.7,
+          "raw": 70
         }
       },
       "best": {
         "benchmark": "arena-coding",
         "raw": 1495
       },
-      "composite": 78.1,
-      "rank": 13,
+      "composite": 82.2,
+      "rank": 17,
       "tier": "excellent"
     },
     {
-      "modelId": "muse-spark",
-      "modelName": "Muse Spark",
-      "vendor": "Meta",
+      "modelId": "qwen3-5-max",
+      "modelName": "Qwen3.5-Max",
+      "vendor": "Alibaba",
       "openWeight": false,
       "scores": {
         "arena-coding": {
@@ -6836,39 +6928,16 @@
           "raw": 1493
         },
         "artificial-analysis": {
-          "value": 0.71,
-          "raw": 71
+          "value": 0.7,
+          "raw": 70
         }
       },
       "best": {
         "benchmark": "arena-coding",
         "raw": 1493
       },
-      "composite": 77.8,
-      "rank": 14,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "kimi-k2-6-thinking",
-      "modelName": "Kimi-K2.6-Thinking ✅",
-      "vendor": "Moonshot AI",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.93,
-          "raw": 1493
-        },
-        "artificial-analysis": {
-          "value": 0.71,
-          "raw": 71
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1493
-      },
-      "composite": 77.8,
-      "rank": 15,
+      "composite": 81.9,
+      "rank": 18,
       "tier": "excellent"
     },
     {
@@ -6905,8 +6974,8 @@
         "benchmark": "artificial-analysis",
         "raw": 73
       },
-      "composite": 77.6,
-      "rank": 16,
+      "composite": 81.8,
+      "rank": 19,
       "tier": "excellent"
     },
     {
@@ -6942,76 +7011,7 @@
         "benchmark": "arena-coding",
         "raw": 1518
       },
-      "composite": 77.5,
-      "rank": 17,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "deepseek-v4-pro",
-      "modelName": "DeepSeek-V4-Pro ✅",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.91,
-          "raw": 1491
-        },
-        "artificial-analysis": {
-          "value": 0.71,
-          "raw": 71
-        }
-      },
-      "best": {
-        "benchmark": "artificial-analysis",
-        "raw": 71
-      },
-      "composite": 77.5,
-      "rank": 18,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "seed2-0-pro",
-      "modelName": "Seed2.0 Pro",
-      "vendor": "ByteDance",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.95,
-          "raw": 1495
-        },
-        "artificial-analysis": {
-          "value": 0.7,
-          "raw": 70
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1495
-      },
-      "composite": 76.8,
-      "rank": 19,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "qwen3-5-max",
-      "modelName": "Qwen3.5-Max",
-      "vendor": "Alibaba",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.93,
-          "raw": 1493
-        },
-        "artificial-analysis": {
-          "value": 0.7,
-          "raw": 70
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1493
-      },
-      "composite": 76.6,
+      "composite": 81.7,
       "rank": 20,
       "tier": "excellent"
     },
@@ -7034,7 +7034,7 @@
         "benchmark": "arena-coding",
         "raw": 1482
       },
-      "composite": 75.6,
+      "composite": 80.8,
       "rank": 21,
       "tier": "excellent"
     },
@@ -7061,29 +7061,84 @@
         "benchmark": "arena-coding",
         "raw": 1510
       },
-      "composite": 75.5,
+      "composite": 80.6,
       "rank": 22,
       "tier": "excellent"
     },
     {
-      "modelId": "nemotron-3-ultra-550b",
-      "modelName": "Nemotron-3 Ultra 550B",
-      "vendor": "NVIDIA",
-      "openWeight": true,
+      "modelId": "gpt-5-2",
+      "modelName": "GPT-5.2",
+      "vendor": "OpenAI",
+      "openWeight": false,
       "scores": {
-        "ensemble-runs": {
-          "value": 1,
-          "raw": 100,
-          "date": "2026-06-22"
+        "swe-bench": {
+          "value": 0.728,
+          "raw": 72.8,
+          "date": "2025-12-11"
+        },
+        "terminal-bench": {
+          "value": 0.649,
+          "raw": 64.9,
+          "date": "2025-12-24",
+          "stderr": 2.8
+        },
+        "arena-coding": {
+          "value": 14.7,
+          "raw": 1470
+        },
+        "artificial-analysis": {
+          "value": 0.72,
+          "raw": 72
+        },
+        "arc-agi": {
+          "value": 0.529,
+          "raw": 52.9
         }
       },
       "best": {
-        "benchmark": "ensemble-runs",
-        "raw": 100,
-        "harnessId": "claude-code"
+        "benchmark": "artificial-analysis",
+        "raw": 72
       },
-      "composite": 75,
+      "composite": 78.6,
       "rank": 23,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "minimax-m2-7",
+      "modelName": "MiniMax M2.7",
+      "vendor": "MiniMax",
+      "openWeight": true,
+      "scores": {
+        "coding-agent-bench": {
+          "value": 0.84,
+          "raw": 84
+        },
+        "terminal-bench": {
+          "value": 0.451,
+          "raw": 45.1,
+          "date": "2026-05-14"
+        },
+        "arena-coding": {
+          "value": 14.48,
+          "raw": 1448
+        },
+        "artificial-analysis": {
+          "value": 0.69,
+          "raw": 69
+        },
+        "arena-agent": {
+          "value": 0.1018,
+          "raw": 10.18,
+          "stderr": 2.14
+        }
+      },
+      "best": {
+        "benchmark": "coding-agent-bench",
+        "raw": 84,
+        "harnessId": "openhands"
+      },
+      "composite": 78.5,
+      "rank": 24,
       "tier": "excellent"
     },
     {
@@ -7125,84 +7180,63 @@
         "benchmark": "artificial-analysis",
         "raw": 71
       },
-      "composite": 74.8,
-      "rank": 24,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "gpt-5-2",
-      "modelName": "GPT-5.2",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "swe-bench": {
-          "value": 0.728,
-          "raw": 72.8,
-          "date": "2025-12-11"
-        },
-        "terminal-bench": {
-          "value": 0.649,
-          "raw": 64.9,
-          "date": "2025-12-24",
-          "stderr": 2.8
-        },
-        "arena-coding": {
-          "value": 14.7,
-          "raw": 1470
-        },
-        "artificial-analysis": {
-          "value": 0.72,
-          "raw": 72
-        },
-        "arc-agi": {
-          "value": 0.529,
-          "raw": 52.9
-        }
-      },
-      "best": {
-        "benchmark": "artificial-analysis",
-        "raw": 72
-      },
-      "composite": 74.8,
+      "composite": 78.2,
       "rank": 25,
       "tier": "excellent"
     },
     {
-      "modelId": "minimax-m2-7",
-      "modelName": "MiniMax M2.7",
-      "vendor": "MiniMax",
+      "modelId": "grok-4-1-thinking",
+      "modelName": "Grok-4.1-Thinking",
+      "vendor": "xAI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 14.83,
+          "raw": 1483
+        },
+        "artificial-analysis": {
+          "value": 0.7,
+          "raw": 70
+        },
+        "arc-agi": {
+          "value": 0.26,
+          "raw": 26
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1483
+      },
+      "composite": 77.5,
+      "rank": 26,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "step-3-5-flash",
+      "modelName": "step-3.5-flash",
+      "vendor": "StepFun",
       "openWeight": true,
       "scores": {
         "coding-agent-bench": {
-          "value": 0.84,
-          "raw": 84
-        },
-        "terminal-bench": {
-          "value": 0.451,
-          "raw": 45.1,
-          "date": "2026-05-14"
+          "value": 0.92,
+          "raw": 92
         },
         "arena-coding": {
-          "value": 14.48,
-          "raw": 1448
+          "value": 14.33,
+          "raw": 1433
         },
         "artificial-analysis": {
-          "value": 0.69,
-          "raw": 69
-        },
-        "arena-agent": {
-          "value": 0.1018,
-          "raw": 10.18,
-          "stderr": 2.14
+          "value": 0.6,
+          "raw": 60
         }
       },
       "best": {
         "benchmark": "coding-agent-bench",
-        "raw": 84,
-        "harnessId": "openhands"
+        "raw": 92,
+        "harnessId": "qwen-code"
       },
-      "composite": 74.7,
-      "rank": 26,
+      "composite": 76.7,
+      "rank": 27,
       "tier": "excellent"
     },
     {
@@ -7242,63 +7276,8 @@
         "benchmark": "arena-coding",
         "raw": 1535
       },
-      "composite": 73.2,
-      "rank": 27,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "grok-4-1-thinking",
-      "modelName": "Grok-4.1-Thinking",
-      "vendor": "xAI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.83,
-          "raw": 1483
-        },
-        "artificial-analysis": {
-          "value": 0.7,
-          "raw": 70
-        },
-        "arc-agi": {
-          "value": 0.26,
-          "raw": 26
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1483
-      },
-      "composite": 72.9,
+      "composite": 76.4,
       "rank": 28,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "step-3-5-flash",
-      "modelName": "step-3.5-flash",
-      "vendor": "StepFun",
-      "openWeight": true,
-      "scores": {
-        "coding-agent-bench": {
-          "value": 0.92,
-          "raw": 92
-        },
-        "arena-coding": {
-          "value": 14.33,
-          "raw": 1433
-        },
-        "artificial-analysis": {
-          "value": 0.6,
-          "raw": 60
-        }
-      },
-      "best": {
-        "benchmark": "coding-agent-bench",
-        "raw": 92,
-        "harnessId": "qwen-code"
-      },
-      "composite": 72.3,
-      "rank": 29,
       "tier": "excellent"
     },
     {
@@ -7320,28 +7299,8 @@
         "benchmark": "arena-coding",
         "raw": 1463
       },
-      "composite": 71.9,
-      "rank": 30,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "gemma-4-31b",
-      "modelName": "Gemma 4 31B",
-      "vendor": "Google",
-      "openWeight": false,
-      "scores": {
-        "arena-agent": {
-          "value": 0.1309,
-          "raw": 13.09,
-          "stderr": 1.48
-        }
-      },
-      "best": {
-        "benchmark": "arena-agent",
-        "raw": 13.09
-      },
-      "composite": 71.9,
-      "rank": 31,
+      "composite": 76.2,
+      "rank": 29,
       "tier": "excellent"
     },
     {
@@ -7367,8 +7326,29 @@
         "raw": 78.4,
         "harnessId": "sageagent"
       },
-      "composite": 71.7,
-      "rank": 32,
+      "composite": 76,
+      "rank": 30,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "nemotron-3-ultra-550b",
+      "modelName": "Nemotron-3 Ultra 550B",
+      "vendor": "NVIDIA",
+      "openWeight": true,
+      "scores": {
+        "ensemble-runs": {
+          "value": 1,
+          "raw": 100,
+          "date": "2026-06-22"
+        }
+      },
+      "best": {
+        "benchmark": "ensemble-runs",
+        "raw": 100,
+        "harnessId": "claude-code"
+      },
+      "composite": 75,
+      "rank": 31,
       "tier": "excellent"
     },
     {
@@ -7403,28 +7383,133 @@
         "benchmark": "arena-coding",
         "raw": 1506
       },
-      "composite": 70.9,
+      "composite": 74.2,
+      "rank": 32,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "ernie-5-0",
+      "modelName": "ERNIE-5.0",
+      "vendor": "Baidu",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 14.61,
+          "raw": 1461
+        },
+        "artificial-analysis": {
+          "value": 0.65,
+          "raw": 65
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1461
+      },
+      "composite": 73.9,
       "rank": 33,
       "tier": "excellent"
     },
     {
-      "modelId": "mistral-small-4-119b-2603",
-      "modelName": "mistral-small-4-119b-2603",
-      "vendor": "Mistral AI",
+      "modelId": "mimo-v2-pro",
+      "modelName": "MiMo-V2-Pro",
+      "vendor": "Xiaomi",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 14.41,
+          "raw": 1441
+        },
+        "artificial-analysis": {
+          "value": 0.69,
+          "raw": 69
+        }
+      },
+      "best": {
+        "benchmark": "artificial-analysis",
+        "raw": 69
+      },
+      "composite": 73.6,
+      "rank": 34,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "qwen3-next-80b-a3b-instruct",
+      "modelName": "qwen3-next-80b-a3b-instruct",
+      "vendor": "Alibaba",
       "openWeight": true,
       "scores": {
         "coding-agent-bench": {
-          "value": 0.8,
-          "raw": 80
+          "value": 0.68,
+          "raw": 68
+        },
+        "arena-coding": {
+          "value": 14.56,
+          "raw": 1456
+        },
+        "artificial-analysis": {
+          "value": 0.57,
+          "raw": 57
         }
       },
       "best": {
         "benchmark": "coding-agent-bench",
-        "raw": 80,
-        "harnessId": "qwen-code"
+        "raw": 68,
+        "harnessId": "openhands"
       },
-      "composite": 70.4,
-      "rank": 34,
+      "composite": 73.3,
+      "rank": 35,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "nemotron-3-super-120b-a12b",
+      "modelName": "nemotron-3-super-120b-a12b",
+      "vendor": "NVIDIA",
+      "openWeight": true,
+      "scores": {
+        "coding-agent-bench": {
+          "value": 0.84,
+          "raw": 84
+        },
+        "arena-coding": {
+          "value": 14.01,
+          "raw": 1401
+        },
+        "artificial-analysis": {
+          "value": 0.6,
+          "raw": 60
+        }
+      },
+      "best": {
+        "benchmark": "coding-agent-bench",
+        "raw": 84,
+        "harnessId": "codex-cli"
+      },
+      "composite": 73.2,
+      "rank": 36,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "kimi-k2-thinking",
+      "modelName": "Kimi-K2-Thinking",
+      "vendor": "Moonshot AI",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 14.5,
+          "raw": 1450
+        },
+        "artificial-analysis": {
+          "value": 0.67,
+          "raw": 67
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1450
+      },
+      "composite": 73.1,
+      "rank": 37,
       "tier": "excellent"
     },
     {
@@ -7464,153 +7549,8 @@
         "benchmark": "arena-coding",
         "raw": 1538
       },
-      "composite": 70.2,
-      "rank": 35,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "muse-spark-1-1",
-      "modelName": "Muse Spark 1.1",
-      "vendor": "Meta",
-      "openWeight": false,
-      "scores": {
-        "swe-bench": {
-          "value": 0.82,
-          "raw": 82,
-          "date": "2026-07-09"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 82
-      },
-      "composite": 70.1,
-      "rank": 36,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "ernie-5-0",
-      "modelName": "ERNIE-5.0",
-      "vendor": "Baidu",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.61,
-          "raw": 1461
-        },
-        "artificial-analysis": {
-          "value": 0.65,
-          "raw": 65
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1461
-      },
-      "composite": 70,
-      "rank": 37,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "mimo-v2-pro",
-      "modelName": "MiMo-V2-Pro",
-      "vendor": "Xiaomi",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.41,
-          "raw": 1441
-        },
-        "artificial-analysis": {
-          "value": 0.69,
-          "raw": 69
-        }
-      },
-      "best": {
-        "benchmark": "artificial-analysis",
-        "raw": 69
-      },
-      "composite": 69.7,
+      "composite": 73,
       "rank": 38,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "qwen3-next-80b-a3b-instruct",
-      "modelName": "qwen3-next-80b-a3b-instruct",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "coding-agent-bench": {
-          "value": 0.68,
-          "raw": 68
-        },
-        "arena-coding": {
-          "value": 14.56,
-          "raw": 1456
-        },
-        "artificial-analysis": {
-          "value": 0.57,
-          "raw": 57
-        }
-      },
-      "best": {
-        "benchmark": "coding-agent-bench",
-        "raw": 68,
-        "harnessId": "openhands"
-      },
-      "composite": 69.5,
-      "rank": 39,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "nemotron-3-super-120b-a12b",
-      "modelName": "nemotron-3-super-120b-a12b",
-      "vendor": "NVIDIA",
-      "openWeight": true,
-      "scores": {
-        "coding-agent-bench": {
-          "value": 0.84,
-          "raw": 84
-        },
-        "arena-coding": {
-          "value": 14.01,
-          "raw": 1401
-        },
-        "artificial-analysis": {
-          "value": 0.6,
-          "raw": 60
-        }
-      },
-      "best": {
-        "benchmark": "coding-agent-bench",
-        "raw": 84,
-        "harnessId": "codex-cli"
-      },
-      "composite": 69.4,
-      "rank": 40,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "kimi-k2-thinking",
-      "modelName": "Kimi-K2-Thinking",
-      "vendor": "Moonshot AI",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.5,
-          "raw": 1450
-        },
-        "artificial-analysis": {
-          "value": 0.67,
-          "raw": 67
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1450
-      },
-      "composite": 69.2,
-      "rank": 41,
       "tier": "excellent"
     },
     {
@@ -7636,8 +7576,8 @@
         "benchmark": "arena-coding",
         "raw": 1461
       },
-      "composite": 68.9,
-      "rank": 42,
+      "composite": 72.7,
+      "rank": 39,
       "tier": "excellent"
     },
     {
@@ -7663,8 +7603,8 @@
         "benchmark": "arena-coding",
         "raw": 1480
       },
-      "composite": 68.9,
-      "rank": 43,
+      "composite": 72.7,
+      "rank": 40,
       "tier": "excellent"
     },
     {
@@ -7686,8 +7626,8 @@
         "benchmark": "arena-coding",
         "raw": 1462
       },
-      "composite": 68.8,
-      "rank": 44,
+      "composite": 72.6,
+      "rank": 41,
       "tier": "excellent"
     },
     {
@@ -7713,8 +7653,8 @@
         "benchmark": "arena-coding",
         "raw": 1460
       },
-      "composite": 68.7,
-      "rank": 45,
+      "composite": 72.5,
+      "rank": 42,
       "tier": "excellent"
     },
     {
@@ -7736,8 +7676,51 @@
         "benchmark": "artificial-analysis",
         "raw": 66
       },
-      "composite": 68.7,
-      "rank": 46,
+      "composite": 72.5,
+      "rank": 43,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "gemma-4-31b",
+      "modelName": "Gemma 4 31B",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "arena-agent": {
+          "value": 0.1309,
+          "raw": 13.09,
+          "stderr": 1.48
+        }
+      },
+      "best": {
+        "benchmark": "arena-agent",
+        "raw": 13.09
+      },
+      "composite": 71.9,
+      "rank": 44,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "claude-opus-4-1-thinking-16k",
+      "modelName": "Claude Opus 4.1 (thinking-16k)",
+      "vendor": "Anthropic",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 14.75,
+          "raw": 1475
+        },
+        "artificial-analysis": {
+          "value": 0.59,
+          "raw": 59
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1475
+      },
+      "composite": 71.6,
+      "rank": 45,
       "tier": "excellent"
     },
     {
@@ -7779,30 +7762,59 @@
         "benchmark": "arena-coding",
         "raw": 1511
       },
-      "composite": 68.6,
-      "rank": 47,
+      "composite": 71.1,
+      "rank": 46,
       "tier": "excellent"
     },
     {
-      "modelId": "claude-opus-4-1-thinking-16k",
-      "modelName": "Claude Opus 4.1 (thinking-16k)",
-      "vendor": "Anthropic",
-      "openWeight": false,
+      "modelId": "mimo-v2-5-pro",
+      "modelName": "MiMo-V2.5-Pro",
+      "vendor": "Xiaomi",
+      "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 14.75,
-          "raw": 1475
+          "value": 14.85,
+          "raw": 1485
         },
         "artificial-analysis": {
-          "value": 0.59,
-          "raw": 59
+          "value": 0.7,
+          "raw": 70
+        },
+        "arena-agent": {
+          "value": 0.0371,
+          "raw": 3.71,
+          "stderr": 1.87
+        },
+        "stratix-cup": {
+          "value": 0.341,
+          "raw": 34.1
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1475
+        "raw": 1485
       },
-      "composite": 68,
+      "composite": 70.6,
+      "rank": 47,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "mistral-small-4-119b-2603",
+      "modelName": "mistral-small-4-119b-2603",
+      "vendor": "Mistral AI",
+      "openWeight": true,
+      "scores": {
+        "coding-agent-bench": {
+          "value": 0.8,
+          "raw": 80
+        }
+      },
+      "best": {
+        "benchmark": "coding-agent-bench",
+        "raw": 80,
+        "harnessId": "qwen-code"
+      },
+      "composite": 70.4,
       "rank": 48,
       "tier": "excellent"
     },
@@ -7840,62 +7852,28 @@
         "benchmark": "arena-coding",
         "raw": 1496
       },
-      "composite": 67.5,
+      "composite": 70.2,
       "rank": 49,
       "tier": "excellent"
     },
     {
-      "modelId": "mimo-v2-5-pro",
-      "modelName": "MiMo-V2.5-Pro",
-      "vendor": "Xiaomi",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.85,
-          "raw": 1485
-        },
-        "artificial-analysis": {
-          "value": 0.7,
-          "raw": 70
-        },
-        "arena-agent": {
-          "value": 0.0371,
-          "raw": 3.71,
-          "stderr": 1.87
-        },
-        "stratix-cup": {
-          "value": 0.341,
-          "raw": 34.1
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1485
-      },
-      "composite": 67.5,
-      "rank": 50,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "gpt-5-2-codex",
-      "modelName": "GPT-5.2-Codex",
-      "vendor": "OpenAI",
+      "modelId": "muse-spark-1-1",
+      "modelName": "Muse Spark 1.1",
+      "vendor": "Meta",
       "openWeight": false,
       "scores": {
-        "terminal-bench": {
-          "value": 0.665,
-          "raw": 66.5,
-          "date": "2026-02-12",
-          "stderr": 3.1
+        "swe-bench": {
+          "value": 0.82,
+          "raw": 82,
+          "date": "2026-07-09"
         }
       },
       "best": {
-        "benchmark": "terminal-bench",
-        "raw": 66.5,
-        "harnessId": "deep-agents"
+        "benchmark": "swe-bench",
+        "raw": 82
       },
-      "composite": 66.8,
-      "rank": 51,
+      "composite": 70.1,
+      "rank": 50,
       "tier": "excellent"
     },
     {
@@ -7921,8 +7899,8 @@
         "benchmark": "arena-coding",
         "raw": 1485
       },
-      "composite": 66.2,
-      "rank": 52,
+      "composite": 69.5,
+      "rank": 51,
       "tier": "excellent"
     },
     {
@@ -7944,8 +7922,8 @@
         "benchmark": "arena-coding",
         "raw": 1442
       },
-      "composite": 65.9,
-      "rank": 53,
+      "composite": 69.1,
+      "rank": 52,
       "tier": "excellent"
     },
     {
@@ -7967,8 +7945,8 @@
         "benchmark": "arena-coding",
         "raw": 1441
       },
-      "composite": 65.8,
-      "rank": 54,
+      "composite": 68.9,
+      "rank": 53,
       "tier": "excellent"
     },
     {
@@ -8000,7 +7978,30 @@
         "benchmark": "arena-coding",
         "raw": 1505
       },
-      "composite": 65.7,
+      "composite": 68.4,
+      "rank": 54,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "gemma-4-26b-a4b-it",
+      "modelName": "Gemma-4-26B-A4B-it",
+      "vendor": "Google",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 14.6,
+          "raw": 1460
+        },
+        "artificial-analysis": {
+          "value": 0.56,
+          "raw": 56
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1460
+      },
+      "composite": 67.9,
       "rank": 55,
       "tier": "excellent"
     },
@@ -8038,31 +8039,8 @@
         "benchmark": "artificial-analysis",
         "raw": 70
       },
-      "composite": 65.2,
+      "composite": 67.6,
       "rank": 56,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "gemma-4-26b-a4b-it",
-      "modelName": "Gemma-4-26B-A4B-it",
-      "vendor": "Google",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.6,
-          "raw": 1460
-        },
-        "artificial-analysis": {
-          "value": 0.56,
-          "raw": 56
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1460
-      },
-      "composite": 64.9,
-      "rank": 57,
       "tier": "excellent"
     },
     {
@@ -8084,8 +8062,8 @@
         "benchmark": "arena-coding",
         "raw": 1432
       },
-      "composite": 64.2,
-      "rank": 58,
+      "composite": 67.1,
+      "rank": 57,
       "tier": "excellent"
     },
     {
@@ -8107,7 +8085,29 @@
         "benchmark": "arena-coding",
         "raw": 1431
       },
-      "composite": 64.1,
+      "composite": 66.9,
+      "rank": 58,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "gpt-5-2-codex",
+      "modelName": "GPT-5.2-Codex",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.665,
+          "raw": 66.5,
+          "date": "2026-02-12",
+          "stderr": 3.1
+        }
+      },
+      "best": {
+        "benchmark": "terminal-bench",
+        "raw": 66.5,
+        "harnessId": "deep-agents"
+      },
+      "composite": 66.8,
       "rank": 59,
       "tier": "excellent"
     },
@@ -8135,8 +8135,31 @@
         "benchmark": "arena-coding",
         "raw": 1468
       },
-      "composite": 63.8,
+      "composite": 66.6,
       "rank": 60,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "longcat-flash-chat",
+      "modelName": "LongCat-Flash-Chat",
+      "vendor": "Meituan",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 14.61,
+          "raw": 1461
+        },
+        "artificial-analysis": {
+          "value": 0.49,
+          "raw": 49
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1461
+      },
+      "composite": 66.2,
+      "rank": 61,
       "tier": "excellent"
     },
     {
@@ -8172,28 +8195,31 @@
         "raw": 92,
         "harnessId": "qwen-code"
       },
-      "composite": 63.6,
-      "rank": 61,
+      "composite": 65.6,
+      "rank": 62,
       "tier": "excellent"
     },
     {
-      "modelId": "kimi-k2-7",
-      "modelName": "Kimi K2.7",
-      "vendor": "Moonshot AI",
+      "modelId": "deepseek-v3-1-thinking",
+      "modelName": "DeepSeek-V3.1-Thinking",
+      "vendor": "DeepSeek",
       "openWeight": true,
       "scores": {
-        "swe-bench": {
-          "value": 0.782,
-          "raw": 78.2,
-          "date": "2026-06-12"
+        "arena-coding": {
+          "value": 14.37,
+          "raw": 1437
+        },
+        "artificial-analysis": {
+          "value": 0.58,
+          "raw": 58
         }
       },
       "best": {
-        "benchmark": "swe-bench",
-        "raw": 78.2
+        "benchmark": "arena-coding",
+        "raw": 1437
       },
-      "composite": 63.5,
-      "rank": 62,
+      "composite": 65.6,
+      "rank": 63,
       "tier": "excellent"
     },
     {
@@ -8230,30 +8256,7 @@
         "benchmark": "artificial-analysis",
         "raw": 70
       },
-      "composite": 63.5,
-      "rank": 63,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "longcat-flash-chat",
-      "modelName": "LongCat-Flash-Chat",
-      "vendor": "Meituan",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.61,
-          "raw": 1461
-        },
-        "artificial-analysis": {
-          "value": 0.49,
-          "raw": 49
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1461
-      },
-      "composite": 63.5,
+      "composite": 65.5,
       "rank": 64,
       "tier": "excellent"
     },
@@ -8293,7 +8296,7 @@
         "benchmark": "arena-coding",
         "raw": 1485
       },
-      "composite": 63.3,
+      "composite": 65,
       "rank": 65,
       "tier": "excellent"
     },
@@ -8337,50 +8340,8 @@
         "raw": 100,
         "harnessId": "claude-code"
       },
-      "composite": 63.2,
+      "composite": 65,
       "rank": 66,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "deepseek-v3-1-thinking",
-      "modelName": "DeepSeek-V3.1-Thinking",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.37,
-          "raw": 1437
-        },
-        "artificial-analysis": {
-          "value": 0.58,
-          "raw": 58
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1437
-      },
-      "composite": 63,
-      "rank": 67,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "qwen-vl-max-2025-08-13",
-      "modelName": "Qwen-VL-Max-2025-08-13",
-      "vendor": "Alibaba",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.4,
-          "raw": 1440
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1440
-      },
-      "composite": 62.7,
-      "rank": 68,
       "tier": "excellent"
     },
     {
@@ -8402,30 +8363,8 @@
         "benchmark": "arena-coding",
         "raw": 1457
       },
-      "composite": 62.5,
-      "rank": 69,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "gpt-5-1-codex-mini",
-      "modelName": "GPT-5.1-Codex-Mini",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "terminal-bench": {
-          "value": 0.616,
-          "raw": 61.6,
-          "date": "2026-05-14",
-          "stderr": 1.9
-        }
-      },
-      "best": {
-        "benchmark": "terminal-bench",
-        "raw": 61.6,
-        "harnessId": "hookele"
-      },
-      "composite": 62.3,
-      "rank": 70,
+      "composite": 65,
+      "rank": 67,
       "tier": "excellent"
     },
     {
@@ -8447,7 +8386,83 @@
         "benchmark": "artificial-analysis",
         "raw": 61
       },
-      "composite": 61.9,
+      "composite": 64.3,
+      "rank": 68,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "glm-4-7",
+      "modelName": "GLM-4.7",
+      "vendor": "Z.ai",
+      "openWeight": true,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.33399999999999996,
+          "raw": 33.4,
+          "date": "2026-01-28",
+          "stderr": 2.8
+        },
+        "arena-coding": {
+          "value": 14.6,
+          "raw": 1460
+        },
+        "artificial-analysis": {
+          "value": 0.68,
+          "raw": 68
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1460
+      },
+      "composite": 64,
+      "rank": 69,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "o3-2025-04-16",
+      "modelName": "o3-2025-04-16",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 14.41,
+          "raw": 1441
+        },
+        "artificial-analysis": {
+          "value": 0.65,
+          "raw": 65
+        },
+        "arc-agi": {
+          "value": 0.065,
+          "raw": 6.5
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1441
+      },
+      "composite": 64,
+      "rank": 70,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "kimi-k2-7",
+      "modelName": "Kimi K2.7",
+      "vendor": "Moonshot AI",
+      "openWeight": true,
+      "scores": {
+        "swe-bench": {
+          "value": 0.782,
+          "raw": 78.2,
+          "date": "2026-06-12"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 78.2
+      },
+      "composite": 63.5,
       "rank": 71,
       "tier": "excellent"
     },
@@ -8485,86 +8500,8 @@
         "benchmark": "arena-coding",
         "raw": 1460
       },
-      "composite": 61.7,
+      "composite": 63.5,
       "rank": 72,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "glm-4-7",
-      "modelName": "GLM-4.7",
-      "vendor": "Z.ai",
-      "openWeight": true,
-      "scores": {
-        "terminal-bench": {
-          "value": 0.33399999999999996,
-          "raw": 33.4,
-          "date": "2026-01-28",
-          "stderr": 2.8
-        },
-        "arena-coding": {
-          "value": 14.6,
-          "raw": 1460
-        },
-        "artificial-analysis": {
-          "value": 0.68,
-          "raw": 68
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1460
-      },
-      "composite": 61.7,
-      "rank": 73,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "o3-2025-04-16",
-      "modelName": "o3-2025-04-16",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.41,
-          "raw": 1441
-        },
-        "artificial-analysis": {
-          "value": 0.65,
-          "raw": 65
-        },
-        "arc-agi": {
-          "value": 0.065,
-          "raw": 6.5
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1441
-      },
-      "composite": 61.6,
-      "rank": 74,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "gpt-5-1-codex-max",
-      "modelName": "GPT-5.1-Codex-Max",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "terminal-bench": {
-          "value": 0.604,
-          "raw": 60.4,
-          "date": "2025-11-24",
-          "stderr": 2.7
-        }
-      },
-      "best": {
-        "benchmark": "terminal-bench",
-        "raw": 60.4,
-        "harnessId": "codex-cli"
-      },
-      "composite": 60.8,
-      "rank": 75,
       "tier": "excellent"
     },
     {
@@ -8586,8 +8523,8 @@
         "benchmark": "artificial-analysis",
         "raw": 60
       },
-      "composite": 60.8,
-      "rank": 76,
+      "composite": 63,
+      "rank": 73,
       "tier": "excellent"
     },
     {
@@ -8613,28 +8550,49 @@
         "benchmark": "artificial-analysis",
         "raw": 65
       },
-      "composite": 60.8,
-      "rank": 77,
+      "composite": 63,
+      "rank": 74,
       "tier": "excellent"
     },
     {
-      "modelId": "qwen3-5-122b-a10b",
-      "modelName": "qwen3.5-122b-a10b",
+      "modelId": "qwen-vl-max-2025-08-13",
+      "modelName": "Qwen-VL-Max-2025-08-13",
       "vendor": "Alibaba",
-      "openWeight": true,
+      "openWeight": false,
       "scores": {
-        "coding-agent-bench": {
-          "value": 0.48,
-          "raw": 48
+        "arena-coding": {
+          "value": 14.4,
+          "raw": 1440
         }
       },
       "best": {
-        "benchmark": "coding-agent-bench",
-        "raw": 48,
-        "harnessId": "pi"
+        "benchmark": "arena-coding",
+        "raw": 1440
       },
-      "composite": 60.4,
-      "rank": 78,
+      "composite": 62.7,
+      "rank": 75,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "gpt-5-1-codex-mini",
+      "modelName": "GPT-5.1-Codex-Mini",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.616,
+          "raw": 61.6,
+          "date": "2026-05-14",
+          "stderr": 1.9
+        }
+      },
+      "best": {
+        "benchmark": "terminal-bench",
+        "raw": 61.6,
+        "harnessId": "hookele"
+      },
+      "composite": 62.3,
+      "rank": 76,
       "tier": "excellent"
     },
     {
@@ -8667,27 +8625,8 @@
         "benchmark": "arena-coding",
         "raw": 1464
       },
-      "composite": 60.3,
-      "rank": 79,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "hunyuan-vision-1-5-thinking",
-      "modelName": "Hunyuan-Vision-1.5-Thinking",
-      "vendor": "Tencent",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.19,
-          "raw": 1419
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1419
-      },
-      "composite": 59.5,
-      "rank": 80,
+      "composite": 62.1,
+      "rank": 77,
       "tier": "excellent"
     },
     {
@@ -8713,8 +8652,8 @@
         "benchmark": "arena-coding",
         "raw": 1434
       },
-      "composite": 59.5,
-      "rank": 81,
+      "composite": 61.4,
+      "rank": 78,
       "tier": "excellent"
     },
     {
@@ -8744,31 +8683,51 @@
         "raw": 100,
         "harnessId": "claude-code"
       },
-      "composite": 59.3,
-      "rank": 82,
+      "composite": 61.2,
+      "rank": 79,
       "tier": "excellent"
     },
     {
-      "modelId": "gpt-5-1-codex",
-      "modelName": "GPT-5.1-Codex",
+      "modelId": "gpt-5-1-codex-max",
+      "modelName": "GPT-5.1-Codex-Max",
       "vendor": "OpenAI",
       "openWeight": false,
       "scores": {
         "terminal-bench": {
-          "value": 0.578,
-          "raw": 57.8,
-          "date": "2025-11-16",
-          "stderr": 2.9
+          "value": 0.604,
+          "raw": 60.4,
+          "date": "2025-11-24",
+          "stderr": 2.7
         }
       },
       "best": {
         "benchmark": "terminal-bench",
-        "raw": 57.8,
-        "harnessId": "crux"
+        "raw": 60.4,
+        "harnessId": "codex-cli"
       },
-      "composite": 59,
-      "rank": 83,
-      "tier": "solid"
+      "composite": 60.8,
+      "rank": 80,
+      "tier": "excellent"
+    },
+    {
+      "modelId": "qwen3-5-122b-a10b",
+      "modelName": "qwen3.5-122b-a10b",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "coding-agent-bench": {
+          "value": 0.48,
+          "raw": 48
+        }
+      },
+      "best": {
+        "benchmark": "coding-agent-bench",
+        "raw": 48,
+        "harnessId": "pi"
+      },
+      "composite": 60.4,
+      "rank": 81,
+      "tier": "excellent"
     },
     {
       "modelId": "minimax-m2-1",
@@ -8795,28 +8754,9 @@
         "benchmark": "artificial-analysis",
         "raw": 64
       },
-      "composite": 58.5,
-      "rank": 84,
-      "tier": "solid"
-    },
-    {
-      "modelId": "hunyuan-t1-20250711",
-      "modelName": "Hunyuan-T1-20250711",
-      "vendor": "Tencent",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.09,
-          "raw": 1409
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1409
-      },
-      "composite": 58.3,
-      "rank": 85,
-      "tier": "solid"
+      "composite": 60.2,
+      "rank": 82,
+      "tier": "excellent"
     },
     {
       "modelId": "grok-3-preview-02-24",
@@ -8837,27 +8777,8 @@
         "benchmark": "arena-coding",
         "raw": 1439
       },
-      "composite": 58.1,
-      "rank": 86,
-      "tier": "solid"
-    },
-    {
-      "modelId": "mai-1-preview",
-      "modelName": "MAI-1-Preview",
-      "vendor": "Microsoft",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.06,
-          "raw": 1406
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1406
-      },
-      "composite": 58.1,
-      "rank": 87,
+      "composite": 59.7,
+      "rank": 83,
       "tier": "solid"
     },
     {
@@ -8883,28 +8804,77 @@
         "benchmark": "artificial-analysis",
         "raw": 66
       },
-      "composite": 58,
-      "rank": 88,
+      "composite": 59.6,
+      "rank": 84,
       "tier": "solid"
     },
     {
-      "modelId": "grok-build-0-1",
-      "modelName": "Grok Build 0.1",
-      "vendor": "SpaceXAI",
+      "modelId": "hunyuan-vision-1-5-thinking",
+      "modelName": "Hunyuan-Vision-1.5-Thinking",
+      "vendor": "Tencent",
       "openWeight": false,
       "scores": {
-        "arena-agent": {
-          "value": 0.0787,
-          "raw": 7.87,
-          "stderr": 0.81
+        "arena-coding": {
+          "value": 14.19,
+          "raw": 1419
         }
       },
       "best": {
-        "benchmark": "arena-agent",
-        "raw": 7.87
+        "benchmark": "arena-coding",
+        "raw": 1419
       },
-      "composite": 57.8,
-      "rank": 89,
+      "composite": 59.5,
+      "rank": 85,
+      "tier": "solid"
+    },
+    {
+      "modelId": "llama-4-maverick-17b-128e-instruct",
+      "modelName": "llama-4-maverick-17b-128e-instruct",
+      "vendor": "Meta",
+      "openWeight": true,
+      "scores": {
+        "coding-agent-bench": {
+          "value": 0.76,
+          "raw": 76
+        },
+        "arena-coding": {
+          "value": 13.12,
+          "raw": 1312
+        },
+        "artificial-analysis": {
+          "value": 0.4,
+          "raw": 40
+        }
+      },
+      "best": {
+        "benchmark": "coding-agent-bench",
+        "raw": 76,
+        "harnessId": "aider"
+      },
+      "composite": 59,
+      "rank": 86,
+      "tier": "solid"
+    },
+    {
+      "modelId": "gpt-5-1-codex",
+      "modelName": "GPT-5.1-Codex",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.578,
+          "raw": 57.8,
+          "date": "2025-11-16",
+          "stderr": 2.9
+        }
+      },
+      "best": {
+        "benchmark": "terminal-bench",
+        "raw": 57.8,
+        "harnessId": "crux"
+      },
+      "composite": 59,
+      "rank": 87,
       "tier": "solid"
     },
     {
@@ -8942,36 +8912,54 @@
         "raw": 96,
         "harnessId": "aider"
       },
-      "composite": 57.7,
-      "rank": 90,
+      "composite": 58.9,
+      "rank": 88,
       "tier": "solid"
     },
     {
-      "modelId": "llama-4-maverick-17b-128e-instruct",
-      "modelName": "llama-4-maverick-17b-128e-instruct",
-      "vendor": "Meta",
+      "modelId": "kimi-k2-0905-preview",
+      "modelName": "Kimi-K2-0905-Preview",
+      "vendor": "Moonshot AI",
       "openWeight": true,
       "scores": {
-        "coding-agent-bench": {
-          "value": 0.76,
-          "raw": 76
-        },
         "arena-coding": {
-          "value": 13.12,
-          "raw": 1312
+          "value": 14.03,
+          "raw": 1403
         },
         "artificial-analysis": {
-          "value": 0.4,
-          "raw": 40
+          "value": 0.49,
+          "raw": 49
         }
       },
       "best": {
-        "benchmark": "coding-agent-bench",
-        "raw": 76,
-        "harnessId": "aider"
+        "benchmark": "arena-coding",
+        "raw": 1403
       },
-      "composite": 57.5,
-      "rank": 91,
+      "composite": 58.8,
+      "rank": 89,
+      "tier": "solid"
+    },
+    {
+      "modelId": "grok-3-mini",
+      "modelName": "Grok-3-mini",
+      "vendor": "xAI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 13.8,
+          "raw": 1380
+        },
+        "artificial-analysis": {
+          "value": 0.56,
+          "raw": 56
+        }
+      },
+      "best": {
+        "benchmark": "artificial-analysis",
+        "raw": 56
+      },
+      "composite": 58.8,
+      "rank": 90,
       "tier": "solid"
     },
     {
@@ -9008,73 +8996,66 @@
         "benchmark": "arena-coding",
         "raw": 1453
       },
-      "composite": 57.5,
+      "composite": 58.7,
+      "rank": 91,
+      "tier": "solid"
+    },
+    {
+      "modelId": "hunyuan-t1-20250711",
+      "modelName": "Hunyuan-T1-20250711",
+      "vendor": "Tencent",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 14.09,
+          "raw": 1409
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1409
+      },
+      "composite": 58.3,
       "rank": 92,
       "tier": "solid"
     },
     {
-      "modelId": "kimi-k2-0905-preview",
-      "modelName": "Kimi-K2-0905-Preview",
-      "vendor": "Moonshot AI",
-      "openWeight": true,
+      "modelId": "mai-1-preview",
+      "modelName": "MAI-1-Preview",
+      "vendor": "Microsoft",
+      "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 14.03,
-          "raw": 1403
-        },
-        "artificial-analysis": {
-          "value": 0.49,
-          "raw": 49
+          "value": 14.06,
+          "raw": 1406
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1403
+        "raw": 1406
       },
-      "composite": 57.3,
+      "composite": 58.1,
       "rank": 93,
       "tier": "solid"
     },
     {
-      "modelId": "grok-3-mini",
-      "modelName": "Grok-3-mini",
-      "vendor": "xAI",
+      "modelId": "grok-build-0-1",
+      "modelName": "Grok Build 0.1",
+      "vendor": "SpaceXAI",
       "openWeight": false,
       "scores": {
-        "arena-coding": {
-          "value": 13.8,
-          "raw": 1380
-        },
-        "artificial-analysis": {
-          "value": 0.56,
-          "raw": 56
+        "arena-agent": {
+          "value": 0.0787,
+          "raw": 7.87,
+          "stderr": 0.81
         }
       },
       "best": {
-        "benchmark": "artificial-analysis",
-        "raw": 56
+        "benchmark": "arena-agent",
+        "raw": 7.87
       },
-      "composite": 57.3,
+      "composite": 57.8,
       "rank": 94,
-      "tier": "solid"
-    },
-    {
-      "modelId": "step-3",
-      "modelName": "Step-3",
-      "vendor": "StepFun",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14,
-          "raw": 1400
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1400
-      },
-      "composite": 56.9,
-      "rank": 95,
       "tier": "solid"
     },
     {
@@ -9096,8 +9077,8 @@
         "benchmark": "arena-coding",
         "raw": 1425
       },
-      "composite": 56.5,
-      "rank": 96,
+      "composite": 57.7,
+      "rank": 95,
       "tier": "solid"
     },
     {
@@ -9123,8 +9104,8 @@
         "benchmark": "artificial-analysis",
         "raw": 63
       },
-      "composite": 56.4,
-      "rank": 97,
+      "composite": 57.7,
+      "rank": 96,
       "tier": "solid"
     },
     {
@@ -9146,8 +9127,8 @@
         "benchmark": "arena-coding",
         "raw": 1402
       },
-      "composite": 56.3,
-      "rank": 98,
+      "composite": 57.5,
+      "rank": 97,
       "tier": "solid"
     },
     {
@@ -9180,27 +9161,27 @@
         "benchmark": "arena-coding",
         "raw": 1465
       },
-      "composite": 56.2,
-      "rank": 99,
+      "composite": 57.3,
+      "rank": 98,
       "tier": "solid"
     },
     {
-      "modelId": "hunyuan-turbos-20250416",
-      "modelName": "Hunyuan-Turbos-20250416",
-      "vendor": "Tencent",
+      "modelId": "step-3",
+      "modelName": "Step-3",
+      "vendor": "StepFun",
       "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 13.9,
-          "raw": 1390
+          "value": 14,
+          "raw": 1400
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1390
+        "raw": 1400
       },
-      "composite": 55.8,
-      "rank": 100,
+      "composite": 56.9,
+      "rank": 99,
       "tier": "solid"
     },
     {
@@ -9226,8 +9207,8 @@
         "benchmark": "arena-coding",
         "raw": 1412
       },
-      "composite": 55.7,
-      "rank": 101,
+      "composite": 56.9,
+      "rank": 100,
       "tier": "solid"
     },
     {
@@ -9249,8 +9230,8 @@
         "benchmark": "artificial-analysis",
         "raw": 51
       },
-      "composite": 55,
-      "rank": 102,
+      "composite": 56,
+      "rank": 101,
       "tier": "solid"
     },
     {
@@ -9277,8 +9258,8 @@
         "benchmark": "arena-coding",
         "raw": 1448
       },
-      "composite": 54.9,
-      "rank": 103,
+      "composite": 55.9,
+      "rank": 102,
       "tier": "solid"
     },
     {
@@ -9300,7 +9281,26 @@
         "benchmark": "arena-coding",
         "raw": 1434
       },
-      "composite": 54.9,
+      "composite": 55.9,
+      "rank": 103,
+      "tier": "solid"
+    },
+    {
+      "modelId": "hunyuan-turbos-20250416",
+      "modelName": "Hunyuan-Turbos-20250416",
+      "vendor": "Tencent",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 13.9,
+          "raw": 1390
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1390
+      },
+      "composite": 55.8,
       "rank": 104,
       "tier": "solid"
     },
@@ -9323,27 +9323,8 @@
         "benchmark": "arena-coding",
         "raw": 1394
       },
-      "composite": 54.7,
+      "composite": 55.6,
       "rank": 105,
-      "tier": "solid"
-    },
-    {
-      "modelId": "intellect-3",
-      "modelName": "INTELLECT-3",
-      "vendor": "Prime Intellect",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 13.76,
-          "raw": 1376
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1376
-      },
-      "composite": 54.2,
-      "rank": 106,
       "tier": "solid"
     },
     {
@@ -9367,8 +9348,8 @@
         "benchmark": "swe-bench",
         "raw": 76.2
       },
-      "composite": 53.9,
-      "rank": 107,
+      "composite": 54.7,
+      "rank": 106,
       "tier": "solid"
     },
     {
@@ -9390,7 +9371,26 @@
         "benchmark": "artificial-analysis",
         "raw": 50
       },
-      "composite": 53.9,
+      "composite": 54.6,
+      "rank": 107,
+      "tier": "solid"
+    },
+    {
+      "modelId": "intellect-3",
+      "modelName": "INTELLECT-3",
+      "vendor": "Prime Intellect",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 13.76,
+          "raw": 1376
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1376
+      },
+      "composite": 54.2,
       "rank": 108,
       "tier": "solid"
     },
@@ -9418,8 +9418,31 @@
         "raw": 52,
         "harnessId": "aider"
       },
-      "composite": 53.2,
+      "composite": 53.9,
       "rank": 109,
+      "tier": "solid"
+    },
+    {
+      "modelId": "mistral-medium-3-1",
+      "modelName": "Mistral Medium 3.1",
+      "vendor": "Mistral AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 14.12,
+          "raw": 1412
+        },
+        "artificial-analysis": {
+          "value": 0.38,
+          "raw": 38
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1412
+      },
+      "composite": 53.9,
+      "rank": 110,
       "tier": "solid"
     },
     {
@@ -9447,30 +9470,7 @@
         "benchmark": "arena-coding",
         "raw": 1458
       },
-      "composite": 53.2,
-      "rank": 110,
-      "tier": "solid"
-    },
-    {
-      "modelId": "mistral-medium-3-1",
-      "modelName": "Mistral Medium 3.1",
-      "vendor": "Mistral AI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.12,
-          "raw": 1412
-        },
-        "artificial-analysis": {
-          "value": 0.38,
-          "raw": 38
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1412
-      },
-      "composite": 53.2,
+      "composite": 53.8,
       "rank": 111,
       "tier": "solid"
     },
@@ -9494,7 +9494,7 @@
         "benchmark": "arena-agent",
         "raw": 11.87
       },
-      "composite": 53.1,
+      "composite": 53.8,
       "rank": 112,
       "tier": "solid"
     },
@@ -9525,7 +9525,7 @@
         "benchmark": "swe-bench",
         "raw": 70.8
       },
-      "composite": 52.9,
+      "composite": 53.5,
       "rank": 113,
       "tier": "solid"
     },
@@ -9553,7 +9553,7 @@
         "benchmark": "arena-coding",
         "raw": 1430
       },
-      "composite": 52.7,
+      "composite": 53.2,
       "rank": 114,
       "tier": "solid"
     },
@@ -9574,28 +9574,6 @@
       },
       "composite": 52.5,
       "rank": 115,
-      "tier": "solid"
-    },
-    {
-      "modelId": "gpt-5-codex",
-      "modelName": "GPT-5-Codex",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "terminal-bench": {
-          "value": 0.44299999999999995,
-          "raw": 44.3,
-          "date": "2025-11-04",
-          "stderr": 2.7
-        }
-      },
-      "best": {
-        "benchmark": "terminal-bench",
-        "raw": 44.3,
-        "harnessId": "codex-cli"
-      },
-      "composite": 51.9,
-      "rank": 116,
       "tier": "solid"
     },
     {
@@ -9621,8 +9599,8 @@
         "benchmark": "arena-coding",
         "raw": 1457
       },
-      "composite": 51.9,
-      "rank": 117,
+      "composite": 52.3,
+      "rank": 116,
       "tier": "solid"
     },
     {
@@ -9644,7 +9622,29 @@
         "benchmark": "arena-coding",
         "raw": 1376
       },
-      "composite": 51.8,
+      "composite": 52.2,
+      "rank": 117,
+      "tier": "solid"
+    },
+    {
+      "modelId": "gpt-5-codex",
+      "modelName": "GPT-5-Codex",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.44299999999999995,
+          "raw": 44.3,
+          "date": "2025-11-04",
+          "stderr": 2.7
+        }
+      },
+      "best": {
+        "benchmark": "terminal-bench",
+        "raw": 44.3,
+        "harnessId": "codex-cli"
+      },
+      "composite": 51.9,
       "rank": 118,
       "tier": "solid"
     },
@@ -9667,7 +9667,7 @@
         "benchmark": "arena-coding",
         "raw": 1383
       },
-      "composite": 51.6,
+      "composite": 51.9,
       "rank": 119,
       "tier": "solid"
     },
@@ -9690,7 +9690,7 @@
         "benchmark": "arena-coding",
         "raw": 1351
       },
-      "composite": 51.6,
+      "composite": 51.9,
       "rank": 120,
       "tier": "solid"
     },
@@ -9713,7 +9713,7 @@
         "benchmark": "arena-coding",
         "raw": 1396
       },
-      "composite": 51,
+      "composite": 51.2,
       "rank": 121,
       "tier": "solid"
     },
@@ -9736,7 +9736,7 @@
         "benchmark": "arena-coding",
         "raw": 1362
       },
-      "composite": 50.7,
+      "composite": 50.9,
       "rank": 122,
       "tier": "solid"
     },
@@ -9759,27 +9759,8 @@
         "benchmark": "arena-coding",
         "raw": 1387
       },
-      "composite": 50.5,
+      "composite": 50.7,
       "rank": 123,
-      "tier": "solid"
-    },
-    {
-      "modelId": "qwen-plus-0125",
-      "modelName": "Qwen-Plus-0125",
-      "vendor": "Alibaba",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 13.39,
-          "raw": 1339
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1339
-      },
-      "composite": 50.5,
-      "rank": 124,
       "tier": "solid"
     },
     {
@@ -9801,8 +9782,8 @@
         "benchmark": "arena-coding",
         "raw": 1345
       },
-      "composite": 50.5,
-      "rank": 125,
+      "composite": 50.6,
+      "rank": 124,
       "tier": "solid"
     },
     {
@@ -9824,7 +9805,26 @@
         "benchmark": "arena-coding",
         "raw": 1370
       },
-      "composite": 50.4,
+      "composite": 50.5,
+      "rank": 125,
+      "tier": "solid"
+    },
+    {
+      "modelId": "qwen-plus-0125",
+      "modelName": "Qwen-Plus-0125",
+      "vendor": "Alibaba",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 13.39,
+          "raw": 1339
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1339
+      },
+      "composite": 50.5,
       "rank": 126,
       "tier": "solid"
     },
@@ -9858,7 +9858,7 @@
         "benchmark": "arena-coding",
         "raw": 1436
       },
-      "composite": 50.3,
+      "composite": 50.4,
       "rank": 127,
       "tier": "solid"
     },
@@ -9886,7 +9886,7 @@
         "benchmark": "arena-coding",
         "raw": 1406
       },
-      "composite": 50.3,
+      "composite": 50.4,
       "rank": 128,
       "tier": "solid"
     },
@@ -9924,7 +9924,7 @@
         "benchmark": "arena-coding",
         "raw": 1465
       },
-      "composite": 49.9,
+      "composite": 49.8,
       "rank": 129,
       "tier": "solid"
     },
@@ -10004,8 +10004,27 @@
         "benchmark": "arena-coding",
         "raw": 1431
       },
-      "composite": 49.5,
+      "composite": 49.4,
       "rank": 132,
+      "tier": "solid"
+    },
+    {
+      "modelId": "yi-lightning",
+      "modelName": "Yi-Lightning",
+      "vendor": "01 AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 13.21,
+          "raw": 1321
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1321
+      },
+      "composite": 49.3,
+      "rank": 133,
       "tier": "solid"
     },
     {
@@ -10032,27 +10051,27 @@
         "benchmark": "arena-coding",
         "raw": 1410
       },
-      "composite": 49.3,
-      "rank": 133,
+      "composite": 49.1,
+      "rank": 134,
       "tier": "solid"
     },
     {
-      "modelId": "yi-lightning",
-      "modelName": "Yi-Lightning",
-      "vendor": "01 AI",
+      "modelId": "athene-v2-chat-72b",
+      "modelName": "Athene-v2-Chat-72B",
+      "vendor": "NexusFlow",
       "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 13.21,
-          "raw": 1321
+          "value": 13.2,
+          "raw": 1320
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1321
+        "raw": 1320
       },
-      "composite": 49.3,
-      "rank": 134,
+      "composite": 49.1,
+      "rank": 135,
       "tier": "solid"
     },
     {
@@ -10078,26 +10097,7 @@
         "benchmark": "artificial-analysis",
         "raw": 53
       },
-      "composite": 49.2,
-      "rank": 135,
-      "tier": "solid"
-    },
-    {
-      "modelId": "athene-v2-chat-72b",
-      "modelName": "Athene-v2-Chat-72B",
-      "vendor": "NexusFlow",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 13.2,
-          "raw": 1320
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1320
-      },
-      "composite": 49.1,
+      "composite": 49,
       "rank": 136,
       "tier": "solid"
     },
@@ -10120,7 +10120,7 @@
         "benchmark": "arena-coding",
         "raw": 1346
       },
-      "composite": 49,
+      "composite": 48.8,
       "rank": 137,
       "tier": "solid"
     },
@@ -10164,6 +10164,25 @@
       "tier": "solid"
     },
     {
+      "modelId": "hunyuan-large-2025-02-10",
+      "modelName": "Hunyuan-Large-2025-02-10",
+      "vendor": "Tencent",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 13.11,
+          "raw": 1311
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1311
+      },
+      "composite": 48.1,
+      "rank": 140,
+      "tier": "solid"
+    },
+    {
       "modelId": "qwen2-5-max",
       "modelName": "Qwen2.5-Max",
       "vendor": "Alibaba",
@@ -10182,26 +10201,7 @@
         "benchmark": "arena-coding",
         "raw": 1373
       },
-      "composite": 48.1,
-      "rank": 140,
-      "tier": "solid"
-    },
-    {
-      "modelId": "hunyuan-large-2025-02-10",
-      "modelName": "Hunyuan-Large-2025-02-10",
-      "vendor": "Tencent",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 13.11,
-          "raw": 1311
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1311
-      },
-      "composite": 48.1,
+      "composite": 47.7,
       "rank": 141,
       "tier": "solid"
     },
@@ -10258,7 +10258,7 @@
         "benchmark": "artificial-analysis",
         "raw": 62
       },
-      "composite": 47.6,
+      "composite": 47.3,
       "rank": 143,
       "tier": "solid"
     },
@@ -10286,8 +10286,27 @@
         "raw": 44,
         "harnessId": "opencode"
       },
-      "composite": 47.1,
+      "composite": 46.5,
       "rank": 144,
+      "tier": "solid"
+    },
+    {
+      "modelId": "glm-4-plus",
+      "modelName": "GLM-4-Plus",
+      "vendor": "Z.ai",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 13.01,
+          "raw": 1301
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1301
+      },
+      "composite": 46.5,
+      "rank": 145,
       "tier": "solid"
     },
     {
@@ -10313,8 +10332,27 @@
         "benchmark": "arena-coding",
         "raw": 1378
       },
-      "composite": 46.7,
-      "rank": 145,
+      "composite": 46.1,
+      "rank": 146,
+      "tier": "solid"
+    },
+    {
+      "modelId": "hunyuan-large-vision",
+      "modelName": "Hunyuan-Large-Vision",
+      "vendor": "Tencent",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.98,
+          "raw": 1298
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1298
+      },
+      "composite": 46,
+      "rank": 147,
       "tier": "solid"
     },
     {
@@ -10336,8 +10374,8 @@
         "benchmark": "arena-coding",
         "raw": 1361
       },
-      "composite": 46.6,
-      "rank": 146,
+      "composite": 45.9,
+      "rank": 148,
       "tier": "solid"
     },
     {
@@ -10363,27 +10401,8 @@
         "benchmark": "arena-coding",
         "raw": 1450
       },
-      "composite": 46.5,
-      "rank": 147,
-      "tier": "solid"
-    },
-    {
-      "modelId": "glm-4-plus",
-      "modelName": "GLM-4-Plus",
-      "vendor": "Z.ai",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 13.01,
-          "raw": 1301
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1301
-      },
-      "composite": 46.5,
-      "rank": 148,
+      "composite": 45.8,
+      "rank": 149,
       "tier": "solid"
     },
     {
@@ -10405,8 +10424,8 @@
         "benchmark": "arena-coding",
         "raw": 1327
       },
-      "composite": 46.3,
-      "rank": 149,
+      "composite": 45.5,
+      "rank": 150,
       "tier": "solid"
     },
     {
@@ -10432,8 +10451,27 @@
         "benchmark": "arena-coding",
         "raw": 1382
       },
-      "composite": 46.2,
-      "rank": 150,
+      "composite": 45.4,
+      "rank": 151,
+      "tier": "solid"
+    },
+    {
+      "modelId": "qwen-max-0919",
+      "modelName": "Qwen-Max-0919",
+      "vendor": "Alibaba",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.96,
+          "raw": 1296
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1296
+      },
+      "composite": 45.4,
+      "rank": 152,
       "tier": "solid"
     },
     {
@@ -10455,8 +10493,8 @@
         "benchmark": "arena-coding",
         "raw": 1337
       },
-      "composite": 46,
-      "rank": 151,
+      "composite": 45.2,
+      "rank": 153,
       "tier": "solid"
     },
     {
@@ -10478,27 +10516,8 @@
         "benchmark": "arena-coding",
         "raw": 1337
       },
-      "composite": 46,
-      "rank": 152,
-      "tier": "solid"
-    },
-    {
-      "modelId": "hunyuan-large-vision",
-      "modelName": "Hunyuan-Large-Vision",
-      "vendor": "Tencent",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.98,
-          "raw": 1298
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1298
-      },
-      "composite": 46,
-      "rank": 153,
+      "composite": 45.2,
+      "rank": 154,
       "tier": "solid"
     },
     {
@@ -10520,27 +10539,27 @@
         "benchmark": "arena-coding",
         "raw": 1340
       },
-      "composite": 45.7,
-      "rank": 154,
+      "composite": 44.8,
+      "rank": 155,
       "tier": "solid"
     },
     {
-      "modelId": "qwen-max-0919",
-      "modelName": "Qwen-Max-0919",
-      "vendor": "Alibaba",
+      "modelId": "hunyuan-standard-2025-02-10",
+      "modelName": "Hunyuan-Standard-2025-02-10",
+      "vendor": "Tencent",
       "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 12.96,
-          "raw": 1296
+          "value": 12.89,
+          "raw": 1289
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1296
+        "raw": 1289
       },
-      "composite": 45.4,
-      "rank": 155,
+      "composite": 44.7,
+      "rank": 156,
       "tier": "solid"
     },
     {
@@ -10571,8 +10590,27 @@
         "benchmark": "arena-coding",
         "raw": 1405
       },
-      "composite": 45.2,
-      "rank": 156,
+      "composite": 44.3,
+      "rank": 157,
+      "tier": "solid"
+    },
+    {
+      "modelId": "yi-lightning-lite",
+      "modelName": "Yi-Lightning-lite",
+      "vendor": "01 AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.86,
+          "raw": 1286
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1286
+      },
+      "composite": 44.2,
+      "rank": 158,
       "tier": "solid"
     },
     {
@@ -10603,8 +10641,8 @@
         "benchmark": "arena-coding",
         "raw": 1436
       },
-      "composite": 45,
-      "rank": 157,
+      "composite": 44.1,
+      "rank": 159,
       "tier": "solid"
     },
     {
@@ -10626,31 +10664,8 @@
         "benchmark": "arena-coding",
         "raw": 1336
       },
-      "composite": 44.8,
-      "rank": 158,
-      "tier": "solid"
-    },
-    {
-      "modelId": "magistral-medium-2506",
-      "modelName": "magistral-medium-2506",
-      "vendor": "Mistral AI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 13.07,
-          "raw": 1307
-        },
-        "artificial-analysis": {
-          "value": 0.36,
-          "raw": 36
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1307
-      },
-      "composite": 44.8,
-      "rank": 159,
+      "composite": 43.8,
+      "rank": 160,
       "tier": "solid"
     },
     {
@@ -10673,8 +10688,51 @@
         "benchmark": "stratix-cup",
         "raw": 41.5
       },
-      "composite": 44.8,
-      "rank": 160,
+      "composite": 43.8,
+      "rank": 161,
+      "tier": "solid"
+    },
+    {
+      "modelId": "v4-flash",
+      "modelName": "V4 Flash",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
+        "arena-agent": {
+          "value": 0.04650000000000001,
+          "raw": 4.65,
+          "stderr": 1.75
+        }
+      },
+      "best": {
+        "benchmark": "arena-agent",
+        "raw": 4.65
+      },
+      "composite": 43.8,
+      "rank": 162,
+      "tier": "solid"
+    },
+    {
+      "modelId": "magistral-medium-2506",
+      "modelName": "magistral-medium-2506",
+      "vendor": "Mistral AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 13.07,
+          "raw": 1307
+        },
+        "artificial-analysis": {
+          "value": 0.36,
+          "raw": 36
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1307
+      },
+      "composite": 43.7,
+      "rank": 163,
       "tier": "solid"
     },
     {
@@ -10696,27 +10754,27 @@
         "benchmark": "arena-coding",
         "raw": 1338
       },
-      "composite": 44.7,
-      "rank": 161,
+      "composite": 43.6,
+      "rank": 164,
       "tier": "solid"
     },
     {
-      "modelId": "hunyuan-standard-2025-02-10",
-      "modelName": "Hunyuan-Standard-2025-02-10",
-      "vendor": "Tencent",
+      "modelId": "grok-2-mini-08-13",
+      "modelName": "Grok-2-mini-08-13",
+      "vendor": "xAI",
       "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 12.89,
-          "raw": 1289
+          "value": 12.79,
+          "raw": 1279
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1289
+        "raw": 1279
       },
-      "composite": 44.7,
-      "rank": 162,
+      "composite": 43.3,
+      "rank": 165,
       "tier": "solid"
     },
     {
@@ -10747,47 +10805,27 @@
         "benchmark": "arena-coding",
         "raw": 1384
       },
-      "composite": 44.2,
-      "rank": 163,
+      "composite": 43.2,
+      "rank": 166,
       "tier": "solid"
     },
     {
-      "modelId": "yi-lightning-lite",
-      "modelName": "Yi-Lightning-lite",
-      "vendor": "01 AI",
+      "modelId": "athene-70b",
+      "modelName": "Athene-70B",
+      "vendor": "NexusFlow",
       "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 12.86,
-          "raw": 1286
+          "value": 12.74,
+          "raw": 1274
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1286
+        "raw": 1274
       },
-      "composite": 44.2,
-      "rank": 164,
-      "tier": "solid"
-    },
-    {
-      "modelId": "v4-flash",
-      "modelName": "V4 Flash",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "arena-agent": {
-          "value": 0.04650000000000001,
-          "raw": 4.65,
-          "stderr": 1.75
-        }
-      },
-      "best": {
-        "benchmark": "arena-agent",
-        "raw": 4.65
-      },
-      "composite": 43.8,
-      "rank": 165,
+      "composite": 42.8,
+      "rank": 167,
       "tier": "solid"
     },
     {
@@ -10814,8 +10852,8 @@
         "benchmark": "arena-coding",
         "raw": 1391
       },
-      "composite": 43.4,
-      "rank": 166,
+      "composite": 42.1,
+      "rank": 168,
       "tier": "solid"
     },
     {
@@ -10837,27 +10875,27 @@
         "benchmark": "arena-coding",
         "raw": 1312
       },
-      "composite": 43.4,
-      "rank": 167,
+      "composite": 42.1,
+      "rank": 169,
       "tier": "solid"
     },
     {
-      "modelId": "grok-2-mini-08-13",
-      "modelName": "Grok-2-mini-08-13",
-      "vendor": "xAI",
+      "modelId": "qwen-plus-0828",
+      "modelName": "Qwen-Plus-0828",
+      "vendor": "Alibaba",
       "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 12.79,
-          "raw": 1279
+          "value": 12.63,
+          "raw": 1263
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1279
+        "raw": 1263
       },
-      "composite": 43.3,
-      "rank": 168,
+      "composite": 41.7,
+      "rank": 170,
       "tier": "solid"
     },
     {
@@ -10879,27 +10917,65 @@
         "benchmark": "arena-coding",
         "raw": 1350
       },
-      "composite": 43,
-      "rank": 169,
+      "composite": 41.6,
+      "rank": 171,
       "tier": "solid"
     },
     {
-      "modelId": "athene-70b",
-      "modelName": "Athene-70B",
-      "vendor": "NexusFlow",
+      "modelId": "gpt-4-0125-preview",
+      "modelName": "GPT-4-0125-preview",
+      "vendor": "OpenAI",
       "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 12.74,
-          "raw": 1274
+          "value": 12.61,
+          "raw": 1261
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1274
+        "raw": 1261
       },
-      "composite": 42.8,
-      "rank": 170,
+      "composite": 41.5,
+      "rank": 172,
+      "tier": "solid"
+    },
+    {
+      "modelId": "deepseek-v2-api-0628",
+      "modelName": "Deepseek-v2-API-0628",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.6,
+          "raw": 1260
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1260
+      },
+      "composite": 41.4,
+      "rank": 173,
+      "tier": "solid"
+    },
+    {
+      "modelId": "deepseek-coder-v2-instruct",
+      "modelName": "DeepSeek-Coder-V2-Instruct",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.59,
+          "raw": 1259
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1259
+      },
+      "composite": 41.2,
+      "rank": 174,
       "tier": "solid"
     },
     {
@@ -10925,8 +11001,8 @@
         "benchmark": "arena-coding",
         "raw": 1419
       },
-      "composite": 42.6,
-      "rank": 171,
+      "composite": 41.1,
+      "rank": 175,
       "tier": "solid"
     },
     {
@@ -10948,8 +11024,27 @@
         "benchmark": "arena-coding",
         "raw": 1307
       },
-      "composite": 42.6,
-      "rank": 172,
+      "composite": 41.1,
+      "rank": 176,
+      "tier": "solid"
+    },
+    {
+      "modelId": "llama-3-1-tulu-3-70b",
+      "modelName": "Llama-3.1-Tulu-3-70B",
+      "vendor": "Ai2",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.51,
+          "raw": 1251
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1251
+      },
+      "composite": 40.8,
+      "rank": 177,
       "tier": "solid"
     },
     {
@@ -10971,8 +11066,68 @@
         "benchmark": "arena-coding",
         "raw": 1309
       },
-      "composite": 42.2,
-      "rank": 173,
+      "composite": 40.7,
+      "rank": 178,
+      "tier": "solid"
+    },
+    {
+      "modelId": "qwen-3-7-max",
+      "modelName": "Qwen 3.7 Max",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "stratix-cup": {
+          "value": 0.096,
+          "raw": 9.6
+        }
+      },
+      "best": {
+        "benchmark": "stratix-cup",
+        "raw": 9.6
+      },
+      "composite": 40.6,
+      "rank": 179,
+      "tier": "solid"
+    },
+    {
+      "modelId": "hunyuan-standard-256k",
+      "modelName": "Hunyuan-Standard-256K",
+      "vendor": "Tencent",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.44,
+          "raw": 1244
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1244
+      },
+      "composite": 40.5,
+      "rank": 180,
+      "tier": "solid"
+    },
+    {
+      "modelId": "minimax-m2",
+      "modelName": "MiniMax M2",
+      "vendor": "MiniMax",
+      "openWeight": true,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.3,
+          "raw": 30,
+          "date": "2025-11-01",
+          "stderr": 2.7
+        }
+      },
+      "best": {
+        "benchmark": "terminal-bench",
+        "raw": 30,
+        "harnessId": "terminus-2"
+      },
+      "composite": 40.3,
+      "rank": 181,
       "tier": "solid"
     },
     {
@@ -10998,8 +11153,8 @@
         "benchmark": "arena-coding",
         "raw": 1371
       },
-      "composite": 41.9,
-      "rank": 174,
+      "composite": 40.3,
+      "rank": 182,
       "tier": "solid"
     },
     {
@@ -11021,8 +11176,8 @@
         "benchmark": "arena-coding",
         "raw": 1290
       },
-      "composite": 41.8,
-      "rank": 175,
+      "composite": 40.2,
+      "rank": 183,
       "tier": "solid"
     },
     {
@@ -11044,46 +11199,31 @@
         "benchmark": "arena-coding",
         "raw": 1302
       },
-      "composite": 41.7,
-      "rank": 176,
+      "composite": 40.1,
+      "rank": 184,
       "tier": "solid"
     },
     {
-      "modelId": "qwen-plus-0828",
-      "modelName": "Qwen-Plus-0828",
-      "vendor": "Alibaba",
-      "openWeight": false,
+      "modelId": "llama-3-1-405b-instruct-bf16",
+      "modelName": "Llama-3.1-405B-Instruct-bf16",
+      "vendor": "Meta",
+      "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 12.63,
-          "raw": 1263
+          "value": 12.99,
+          "raw": 1299
+        },
+        "artificial-analysis": {
+          "value": 0.27,
+          "raw": 27
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1263
+        "raw": 1299
       },
-      "composite": 41.7,
-      "rank": 177,
-      "tier": "solid"
-    },
-    {
-      "modelId": "gpt-4-0125-preview",
-      "modelName": "GPT-4-0125-preview",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.61,
-          "raw": 1261
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1261
-      },
-      "composite": 41.5,
-      "rank": 178,
+      "composite": 39.7,
+      "rank": 185,
       "tier": "solid"
     },
     {
@@ -11109,69 +11249,27 @@
         "benchmark": "arena-coding",
         "raw": 1396
       },
-      "composite": 41.4,
-      "rank": 179,
+      "composite": 39.6,
+      "rank": 186,
       "tier": "solid"
     },
     {
-      "modelId": "llama-3-1-405b-instruct-bf16",
-      "modelName": "Llama-3.1-405B-Instruct-bf16",
-      "vendor": "Meta",
-      "openWeight": true,
+      "modelId": "glm-4-0520",
+      "modelName": "GLM-4-0520",
+      "vendor": "Z.ai",
+      "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 12.99,
-          "raw": 1299
-        },
-        "artificial-analysis": {
-          "value": 0.27,
-          "raw": 27
+          "value": 12.37,
+          "raw": 1237
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1299
+        "raw": 1237
       },
-      "composite": 41.4,
-      "rank": 180,
-      "tier": "solid"
-    },
-    {
-      "modelId": "deepseek-v2-api-0628",
-      "modelName": "Deepseek-v2-API-0628",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.6,
-          "raw": 1260
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1260
-      },
-      "composite": 41.4,
-      "rank": 181,
-      "tier": "solid"
-    },
-    {
-      "modelId": "deepseek-coder-v2-instruct",
-      "modelName": "DeepSeek-Coder-V2-Instruct",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.59,
-          "raw": 1259
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1259
-      },
-      "composite": 41.2,
-      "rank": 182,
+      "composite": 39.6,
+      "rank": 187,
       "tier": "solid"
     },
     {
@@ -11197,55 +11295,28 @@
         "raw": 35.7,
         "harnessId": "terminus-2"
       },
-      "composite": 41.1,
-      "rank": 183,
+      "composite": 39.3,
+      "rank": 188,
       "tier": "solid"
     },
     {
-      "modelId": "llama-3-1-tulu-3-70b",
-      "modelName": "Llama-3.1-Tulu-3-70B",
-      "vendor": "Ai2",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.51,
-          "raw": 1251
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1251
-      },
-      "composite": 40.8,
-      "rank": 184,
-      "tier": "solid"
-    },
-    {
-      "modelId": "claude-sonnet-3-7",
-      "modelName": "Claude Sonnet 3.7",
-      "vendor": "Anthropic",
+      "modelId": "o3",
+      "modelName": "o3",
+      "vendor": "OpenAI",
       "openWeight": false,
       "scores": {
         "swe-bench": {
-          "value": 0.528,
-          "raw": 52.8,
-          "date": "2025-02-19"
-        },
-        "arena-coding": {
-          "value": 13.41,
-          "raw": 1341
-        },
-        "artificial-analysis": {
-          "value": 0.35,
-          "raw": 35
+          "value": 0.584,
+          "raw": 58.4,
+          "date": "2025-04-16"
         }
       },
       "best": {
-        "benchmark": "arena-coding",
-        "raw": 1341
+        "benchmark": "swe-bench",
+        "raw": 58.4
       },
-      "composite": 40.7,
-      "rank": 185,
+      "composite": 38.9,
+      "rank": 189,
       "tier": "solid"
     },
     {
@@ -11273,8 +11344,55 @@
         "benchmark": "arena-coding",
         "raw": 1371
       },
-      "composite": 40.7,
-      "rank": 186,
+      "composite": 38.9,
+      "rank": 190,
+      "tier": "solid"
+    },
+    {
+      "modelId": "llama-3-1-nemotron-51b-instruct",
+      "modelName": "Llama-3.1-Nemotron-51B-Instruct",
+      "vendor": "NVIDIA",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.27,
+          "raw": 1227
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1227
+      },
+      "composite": 38.9,
+      "rank": 191,
+      "tier": "solid"
+    },
+    {
+      "modelId": "claude-sonnet-3-7",
+      "modelName": "Claude Sonnet 3.7",
+      "vendor": "Anthropic",
+      "openWeight": false,
+      "scores": {
+        "swe-bench": {
+          "value": 0.528,
+          "raw": 52.8,
+          "date": "2025-02-19"
+        },
+        "arena-coding": {
+          "value": 13.41,
+          "raw": 1341
+        },
+        "artificial-analysis": {
+          "value": 0.35,
+          "raw": 35
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1341
+      },
+      "composite": 38.8,
+      "rank": 192,
       "tier": "solid"
     },
     {
@@ -11300,31 +11418,8 @@
         "benchmark": "arena-coding",
         "raw": 1355
       },
-      "composite": 40.7,
-      "rank": 187,
-      "tier": "solid"
-    },
-    {
-      "modelId": "llama-3-1-405b-instruct-fp8",
-      "modelName": "Llama-3.1-405B-Instruct-fp8",
-      "vendor": "Meta",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.92,
-          "raw": 1292
-        },
-        "artificial-analysis": {
-          "value": 0.27,
-          "raw": 27
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1292
-      },
-      "composite": 40.7,
-      "rank": 188,
+      "composite": 38.8,
+      "rank": 193,
       "tier": "solid"
     },
     {
@@ -11346,27 +11441,50 @@
         "benchmark": "arena-coding",
         "raw": 1316
       },
-      "composite": 40.6,
-      "rank": 189,
+      "composite": 38.8,
+      "rank": 194,
       "tier": "solid"
     },
     {
-      "modelId": "qwen-3-7-max",
-      "modelName": "Qwen 3.7 Max",
-      "vendor": "Alibaba",
+      "modelId": "llama-3-1-405b-instruct-fp8",
+      "modelName": "Llama-3.1-405B-Instruct-fp8",
+      "vendor": "Meta",
       "openWeight": true,
       "scores": {
-        "stratix-cup": {
-          "value": 0.096,
-          "raw": 9.6
+        "arena-coding": {
+          "value": 12.92,
+          "raw": 1292
+        },
+        "artificial-analysis": {
+          "value": 0.27,
+          "raw": 27
         }
       },
       "best": {
-        "benchmark": "stratix-cup",
-        "raw": 9.6
+        "benchmark": "arena-coding",
+        "raw": 1292
       },
-      "composite": 40.6,
-      "rank": 190,
+      "composite": 38.8,
+      "rank": 195,
+      "tier": "solid"
+    },
+    {
+      "modelId": "reka-core-20240722",
+      "modelName": "Reka-Core-20240722",
+      "vendor": "Reka AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.26,
+          "raw": 1226
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1226
+      },
+      "composite": 38.7,
+      "rank": 196,
       "tier": "solid"
     },
     {
@@ -11388,50 +11506,90 @@
         "benchmark": "arena-coding",
         "raw": 1298
       },
-      "composite": 40.5,
-      "rank": 191,
+      "composite": 38.6,
+      "rank": 197,
       "tier": "solid"
     },
     {
-      "modelId": "hunyuan-standard-256k",
-      "modelName": "Hunyuan-Standard-256K",
-      "vendor": "Tencent",
-      "openWeight": false,
+      "modelId": "pixtral-large-2411",
+      "modelName": "Pixtral-Large-2411",
+      "vendor": "Mistral AI",
+      "openWeight": true,
       "scores": {
-        "arena-coding": {
-          "value": 12.44,
-          "raw": 1244
+        "artificial-analysis": {
+          "value": 0.24,
+          "raw": 24
         }
       },
       "best": {
-        "benchmark": "arena-coding",
-        "raw": 1244
+        "benchmark": "artificial-analysis",
+        "raw": 24
       },
-      "composite": 40.5,
-      "rank": 192,
-      "tier": "solid"
+      "composite": 38.6,
+      "rank": 198,
+      "tier": "iffy"
     },
     {
-      "modelId": "minimax-m2",
-      "modelName": "MiniMax M2",
-      "vendor": "MiniMax",
+      "modelId": "llama-3-3-70b",
+      "modelName": "Llama 3.3 70B",
+      "vendor": "Meta",
+      "openWeight": true,
+      "scores": {
+        "ensemble-runs": {
+          "value": 0.16699999999999998,
+          "raw": 16.7,
+          "date": "2026-06-21"
+        }
+      },
+      "best": {
+        "benchmark": "ensemble-runs",
+        "raw": 16.7,
+        "harnessId": "claude-code"
+      },
+      "composite": 38.6,
+      "rank": 199,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "kimi-k2-instruct",
+      "modelName": "Kimi K2 Instruct",
+      "vendor": "Moonshot AI",
       "openWeight": true,
       "scores": {
         "terminal-bench": {
-          "value": 0.3,
-          "raw": 30,
+          "value": 0.278,
+          "raw": 27.8,
           "date": "2025-11-01",
-          "stderr": 2.7
+          "stderr": 2.5
         }
       },
       "best": {
         "benchmark": "terminal-bench",
-        "raw": 30,
+        "raw": 27.8,
         "harnessId": "terminus-2"
       },
-      "composite": 40.3,
-      "rank": 193,
-      "tier": "solid"
+      "composite": 38.4,
+      "rank": 200,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "nemotron-4-340b-instruct",
+      "modelName": "Nemotron-4-340B-Instruct",
+      "vendor": "NVIDIA",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.2,
+          "raw": 1220
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1220
+      },
+      "composite": 38.4,
+      "rank": 201,
+      "tier": "iffy"
     },
     {
       "modelId": "gemma-3-12b-it",
@@ -11452,9 +11610,31 @@
         "benchmark": "arena-coding",
         "raw": 1310
       },
-      "composite": 39.9,
-      "rank": 194,
-      "tier": "solid"
+      "composite": 37.9,
+      "rank": 202,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen-3-coder-480b",
+      "modelName": "Qwen 3 Coder 480B",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.272,
+          "raw": 27.2,
+          "date": "2025-12-28",
+          "stderr": 2.6
+        }
+      },
+      "best": {
+        "benchmark": "terminal-bench",
+        "raw": 27.2,
+        "harnessId": "dakou-agent"
+      },
+      "composite": 37.7,
+      "rank": 203,
+      "tier": "iffy"
     },
     {
       "modelId": "amazon-nova-pro-1-0",
@@ -11475,28 +11655,28 @@
         "benchmark": "arena-coding",
         "raw": 1282
       },
-      "composite": 39.7,
-      "rank": 195,
-      "tier": "solid"
+      "composite": 37.7,
+      "rank": 204,
+      "tier": "iffy"
     },
     {
-      "modelId": "glm-4-0520",
-      "modelName": "GLM-4-0520",
-      "vendor": "Z.ai",
-      "openWeight": false,
+      "modelId": "gemma-2-9b-it-simpo",
+      "modelName": "Gemma-2-9B-it-SimPO",
+      "vendor": "Princeton",
+      "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 12.37,
-          "raw": 1237
+          "value": 12.11,
+          "raw": 1211
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1237
+        "raw": 1211
       },
-      "composite": 39.6,
-      "rank": 196,
-      "tier": "solid"
+      "composite": 37.7,
+      "rank": 205,
+      "tier": "iffy"
     },
     {
       "modelId": "o1-mini",
@@ -11521,9 +11701,47 @@
         "benchmark": "arena-coding",
         "raw": 1366
       },
-      "composite": 39.5,
-      "rank": 197,
-      "tier": "solid"
+      "composite": 37.4,
+      "rank": 206,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "glm-4-0116",
+      "modelName": "GLM-4-0116",
+      "vendor": "Z.ai",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.09,
+          "raw": 1209
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1209
+      },
+      "composite": 37.3,
+      "rank": 207,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen-max-0428",
+      "modelName": "Qwen-Max-0428",
+      "vendor": "Alibaba",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.08,
+          "raw": 1208
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1208
+      },
+      "composite": 37.1,
+      "rank": 208,
+      "tier": "iffy"
     },
     {
       "modelId": "gpt-4o-mini-2024-07-18",
@@ -11544,28 +11762,8 @@
         "benchmark": "arena-coding",
         "raw": 1300
       },
-      "composite": 39,
-      "rank": 198,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "o3",
-      "modelName": "o3",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "swe-bench": {
-          "value": 0.584,
-          "raw": 58.4,
-          "date": "2025-04-16"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 58.4
-      },
-      "composite": 38.9,
-      "rank": 199,
+      "composite": 36.8,
+      "rank": 209,
       "tier": "iffy"
     },
     {
@@ -11587,27 +11785,8 @@
         "benchmark": "arena-coding",
         "raw": 1289
       },
-      "composite": 38.9,
-      "rank": 200,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "llama-3-1-nemotron-51b-instruct",
-      "modelName": "Llama-3.1-Nemotron-51B-Instruct",
-      "vendor": "NVIDIA",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.27,
-          "raw": 1227
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1227
-      },
-      "composite": 38.9,
-      "rank": 201,
+      "composite": 36.7,
+      "rank": 210,
       "tier": "iffy"
     },
     {
@@ -11629,199 +11808,7 @@
         "benchmark": "arena-coding",
         "raw": 1280
       },
-      "composite": 38.8,
-      "rank": 202,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "reka-core-20240722",
-      "modelName": "Reka-Core-20240722",
-      "vendor": "Reka AI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.26,
-          "raw": 1226
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1226
-      },
-      "composite": 38.7,
-      "rank": 203,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "pixtral-large-2411",
-      "modelName": "Pixtral-Large-2411",
-      "vendor": "Mistral AI",
-      "openWeight": true,
-      "scores": {
-        "artificial-analysis": {
-          "value": 0.24,
-          "raw": 24
-        }
-      },
-      "best": {
-        "benchmark": "artificial-analysis",
-        "raw": 24
-      },
-      "composite": 38.6,
-      "rank": 204,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "llama-3-3-70b",
-      "modelName": "Llama 3.3 70B",
-      "vendor": "Meta",
-      "openWeight": true,
-      "scores": {
-        "ensemble-runs": {
-          "value": 0.16699999999999998,
-          "raw": 16.7,
-          "date": "2026-06-21"
-        }
-      },
-      "best": {
-        "benchmark": "ensemble-runs",
-        "raw": 16.7,
-        "harnessId": "claude-code"
-      },
-      "composite": 38.6,
-      "rank": 205,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "mistral-large-2411",
-      "modelName": "Mistral-Large-2411",
-      "vendor": "Mistral AI",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.84,
-          "raw": 1284
-        },
-        "artificial-analysis": {
-          "value": 0.25,
-          "raw": 25
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1284
-      },
-      "composite": 38.5,
-      "rank": 206,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "kimi-k2-instruct",
-      "modelName": "Kimi K2 Instruct",
-      "vendor": "Moonshot AI",
-      "openWeight": true,
-      "scores": {
-        "terminal-bench": {
-          "value": 0.278,
-          "raw": 27.8,
-          "date": "2025-11-01",
-          "stderr": 2.5
-        }
-      },
-      "best": {
-        "benchmark": "terminal-bench",
-        "raw": 27.8,
-        "harnessId": "terminus-2"
-      },
-      "composite": 38.4,
-      "rank": 207,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "nemotron-4-340b-instruct",
-      "modelName": "Nemotron-4-340B-Instruct",
-      "vendor": "NVIDIA",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.2,
-          "raw": 1220
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1220
-      },
-      "composite": 38.4,
-      "rank": 208,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gemini-1-5-flash-002",
-      "modelName": "Gemini-1.5-Flash-002",
-      "vendor": "Google",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.73,
-          "raw": 1273
-        },
-        "artificial-analysis": {
-          "value": 0.26,
-          "raw": 26
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1273
-      },
-      "composite": 38.3,
-      "rank": 209,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "deepseek-v2-5",
-      "modelName": "Deepseek-v2.5",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 13.06,
-          "raw": 1306
-        },
-        "artificial-analysis": {
-          "value": 0.21,
-          "raw": 21
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1306
-      },
-      "composite": 38.3,
-      "rank": 210,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "mistral-small-3-1-24b-instruct-2503",
-      "modelName": "Mistral-Small-3.1-24B-Instruct-2503",
-      "vendor": "Mistral AI",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.95,
-          "raw": 1295
-        },
-        "artificial-analysis": {
-          "value": 0.22,
-          "raw": 22
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1295
-      },
-      "composite": 38.3,
+      "composite": 36.6,
       "rank": 211,
       "tier": "iffy"
     },
@@ -11859,68 +11846,318 @@
         "benchmark": "arena-coding",
         "raw": 1420
       },
-      "composite": 38.2,
+      "composite": 36.3,
       "rank": 212,
       "tier": "iffy"
     },
     {
-      "modelId": "qwen-3-coder-480b",
-      "modelName": "Qwen 3 Coder 480B",
-      "vendor": "Alibaba",
-      "openWeight": true,
+      "modelId": "reka-flash-20240722",
+      "modelName": "Reka-Flash-20240722",
+      "vendor": "Reka AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.01,
+          "raw": 1201
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1201
+      },
+      "composite": 36.3,
+      "rank": 213,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "grok-code-fast-1",
+      "modelName": "Grok Code Fast 1",
+      "vendor": "xAI",
+      "openWeight": false,
       "scores": {
         "terminal-bench": {
-          "value": 0.272,
-          "raw": 27.2,
-          "date": "2025-12-28",
+          "value": 0.258,
+          "raw": 25.8,
+          "date": "2025-11-03",
           "stderr": 2.6
         }
       },
       "best": {
         "benchmark": "terminal-bench",
-        "raw": 27.2,
-        "harnessId": "dakou-agent"
+        "raw": 25.8,
+        "harnessId": "mini-swe-agent"
       },
-      "composite": 37.7,
-      "rank": 213,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gemma-2-9b-it-simpo",
-      "modelName": "Gemma-2-9B-it-SimPO",
-      "vendor": "Princeton",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.11,
-          "raw": 1211
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1211
-      },
-      "composite": 37.7,
+      "composite": 36.2,
       "rank": 214,
       "tier": "iffy"
     },
     {
-      "modelId": "glm-4-0116",
-      "modelName": "GLM-4-0116",
-      "vendor": "Z.ai",
-      "openWeight": false,
+      "modelId": "mistral-large-2411",
+      "modelName": "Mistral-Large-2411",
+      "vendor": "Mistral AI",
+      "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 12.09,
-          "raw": 1209
+          "value": 12.84,
+          "raw": 1284
+        },
+        "artificial-analysis": {
+          "value": 0.25,
+          "raw": 25
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1209
+        "raw": 1284
       },
-      "composite": 37.3,
+      "composite": 36.2,
       "rank": 215,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "mistral-small-3-1-24b-instruct-2503",
+      "modelName": "Mistral-Small-3.1-24B-Instruct-2503",
+      "vendor": "Mistral AI",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.95,
+          "raw": 1295
+        },
+        "artificial-analysis": {
+          "value": 0.22,
+          "raw": 22
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1295
+      },
+      "composite": 36,
+      "rank": 216,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gemini-1-5-flash-002",
+      "modelName": "Gemini-1.5-Flash-002",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.73,
+          "raw": 1273
+        },
+        "artificial-analysis": {
+          "value": 0.26,
+          "raw": 26
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1273
+      },
+      "composite": 35.9,
+      "rank": 217,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "deepseek-v2-5",
+      "modelName": "Deepseek-v2.5",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 13.06,
+          "raw": 1306
+        },
+        "artificial-analysis": {
+          "value": 0.21,
+          "raw": 21
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1306
+      },
+      "composite": 35.9,
+      "rank": 218,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "llama-3-1-tulu-3-8b",
+      "modelName": "Llama-3.1-Tulu-3-8B",
+      "vendor": "Ai2",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.97,
+          "raw": 1197
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1197
+      },
+      "composite": 35.9,
+      "rank": 219,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "jamba-1-5-mini",
+      "modelName": "Jamba-1.5-Mini",
+      "vendor": "AI21 Labs",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.97,
+          "raw": 1197
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1197
+      },
+      "composite": 35.9,
+      "rank": 220,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "glm-5-1-z-ai",
+      "modelName": "GLM-5.1 Z.ai ·",
+      "vendor": "MIT",
+      "openWeight": false,
+      "scores": {
+        "arena-agent": {
+          "value": 0.015700000000000002,
+          "raw": 1.57,
+          "stderr": 0.86
+        }
+      },
+      "best": {
+        "benchmark": "arena-agent",
+        "raw": 1.57
+      },
+      "composite": 35.9,
+      "rank": 221,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen3-coder-30b-a3b-instruct",
+      "modelName": "Qwen3-Coder-30B-A3B-Instruct",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "swe-bench": {
+          "value": 0.516,
+          "raw": 51.6,
+          "date": "2025-07-30"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 51.6
+      },
+      "composite": 35.7,
+      "rank": 222,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "granite-3-1-8b-instruct",
+      "modelName": "Granite-3.1-8B-Instruct",
+      "vendor": "IBM",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.91,
+          "raw": 1191
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1191
+      },
+      "composite": 35.2,
+      "rank": 223,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen3-6-35b-a3b",
+      "modelName": "Qwen3.6-35B-A3B",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.24600000000000002,
+          "raw": 24.6,
+          "date": "2026-05-14",
+          "stderr": 3.2
+        }
+      },
+      "best": {
+        "benchmark": "terminal-bench",
+        "raw": 24.6,
+        "harnessId": "little-coder"
+      },
+      "composite": 35.1,
+      "rank": 224,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "llama-3-2-90b-vision-instruct",
+      "modelName": "Llama-3.2-90B-Vision-Instruct",
+      "vendor": "Meta",
+      "openWeight": true,
+      "scores": {
+        "artificial-analysis": {
+          "value": 0.2,
+          "raw": 20
+        }
+      },
+      "best": {
+        "benchmark": "artificial-analysis",
+        "raw": 20
+      },
+      "composite": 35.1,
+      "rank": 225,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gpt-4-1",
+      "modelName": "GPT-4.1",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "swe-bench": {
+          "value": 0.486,
+          "raw": 48.6,
+          "date": "2025-04-14"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 48.6
+      },
+      "composite": 34.8,
+      "rank": 226,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "yi-1-5-34b-chat",
+      "modelName": "Yi-1.5-34B-Chat",
+      "vendor": "01 AI",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.81,
+          "raw": 1181
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1181
+      },
+      "composite": 34.7,
+      "rank": 227,
       "tier": "iffy"
     },
     {
@@ -11942,73 +12179,8 @@
         "benchmark": "arena-coding",
         "raw": 1269
       },
-      "composite": 37.1,
-      "rank": 216,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "qwen-max-0428",
-      "modelName": "Qwen-Max-0428",
-      "vendor": "Alibaba",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.08,
-          "raw": 1208
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1208
-      },
-      "composite": 37.1,
-      "rank": 217,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "claude-haiku-3-5-20241022",
-      "modelName": "Claude Haiku 3.5 (20241022)",
-      "vendor": "Anthropic",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.87,
-          "raw": 1287
-        },
-        "artificial-analysis": {
-          "value": 0.21,
-          "raw": 21
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1287
-      },
-      "composite": 36.6,
-      "rank": 218,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "phi-4",
-      "modelName": "Phi-4",
-      "vendor": "Microsoft",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.42,
-          "raw": 1242
-        },
-        "artificial-analysis": {
-          "value": 0.26,
-          "raw": 26
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1242
-      },
-      "composite": 36.6,
-      "rank": 219,
+      "composite": 34.5,
+      "rank": 228,
       "tier": "iffy"
     },
     {
@@ -12045,8 +12217,112 @@
         "benchmark": "artificial-analysis",
         "raw": 52
       },
-      "composite": 36.5,
-      "rank": 220,
+      "composite": 34.4,
+      "rank": 229,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "internlm2-5-20b-chat",
+      "modelName": "InternLM2.5-20B-chat",
+      "vendor": "InternLM",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 11.79,
+          "raw": 1179
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1179
+      },
+      "composite": 34.3,
+      "rank": 230,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen1-5-72b-chat",
+      "modelName": "Qwen1.5-72B-Chat",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.75,
+          "raw": 1175
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1175
+      },
+      "composite": 34.2,
+      "rank": 231,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "o4-mini",
+      "modelName": "o4-mini",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "swe-bench": {
+          "value": 0.45,
+          "raw": 45,
+          "date": "2025-04-16"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 45
+      },
+      "composite": 34,
+      "rank": 232,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "claude-haiku-3-5-20241022",
+      "modelName": "Claude Haiku 3.5 (20241022)",
+      "vendor": "Anthropic",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.87,
+          "raw": 1287
+        },
+        "artificial-analysis": {
+          "value": 0.21,
+          "raw": 21
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1287
+      },
+      "composite": 33.9,
+      "rank": 233,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "phi-4",
+      "modelName": "Phi-4",
+      "vendor": "Microsoft",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.42,
+          "raw": 1242
+        },
+        "artificial-analysis": {
+          "value": 0.26,
+          "raw": 26
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1242
+      },
+      "composite": 33.9,
+      "rank": 234,
       "tier": "iffy"
     },
     {
@@ -12068,49 +12344,27 @@
         "benchmark": "arena-coding",
         "raw": 1269
       },
-      "composite": 36.4,
-      "rank": 221,
+      "composite": 33.7,
+      "rank": 235,
       "tier": "iffy"
     },
     {
-      "modelId": "reka-flash-20240722",
-      "modelName": "Reka-Flash-20240722",
-      "vendor": "Reka AI",
-      "openWeight": false,
+      "modelId": "granite-3-1-2b-instruct",
+      "modelName": "Granite-3.1-2B-Instruct",
+      "vendor": "IBM",
+      "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 12.01,
-          "raw": 1201
+          "value": 11.66,
+          "raw": 1166
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1201
+        "raw": 1166
       },
-      "composite": 36.3,
-      "rank": 222,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "grok-code-fast-1",
-      "modelName": "Grok Code Fast 1",
-      "vendor": "xAI",
-      "openWeight": false,
-      "scores": {
-        "terminal-bench": {
-          "value": 0.258,
-          "raw": 25.8,
-          "date": "2025-11-03",
-          "stderr": 2.6
-        }
-      },
-      "best": {
-        "benchmark": "terminal-bench",
-        "raw": 25.8,
-        "harnessId": "mini-swe-agent"
-      },
-      "composite": 36.2,
-      "rank": 223,
+      "composite": 33.6,
+      "rank": 236,
       "tier": "iffy"
     },
     {
@@ -12132,8 +12386,8 @@
         "benchmark": "arena-coding",
         "raw": 1268
       },
-      "composite": 36.2,
-      "rank": 224,
+      "composite": 33.4,
+      "rank": 237,
       "tier": "iffy"
     },
     {
@@ -12155,8 +12409,8 @@
         "benchmark": "arena-coding",
         "raw": 1253
       },
-      "composite": 36.1,
-      "rank": 225,
+      "composite": 33.3,
+      "rank": 238,
       "tier": "iffy"
     },
     {
@@ -12178,86 +12432,66 @@
         "benchmark": "arena-coding",
         "raw": 1297
       },
-      "composite": 36,
-      "rank": 226,
+      "composite": 33.2,
+      "rank": 239,
       "tier": "iffy"
     },
     {
-      "modelId": "llama-3-1-tulu-3-8b",
-      "modelName": "Llama-3.1-Tulu-3-8B",
-      "vendor": "Ai2",
+      "modelId": "qwen1-5-32b-chat",
+      "modelName": "Qwen1.5-32B-Chat",
+      "vendor": "Alibaba",
       "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 11.97,
-          "raw": 1197
+          "value": 11.63,
+          "raw": 1163
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1197
+        "raw": 1163
       },
-      "composite": 35.9,
-      "rank": 227,
+      "composite": 33.1,
+      "rank": 240,
       "tier": "iffy"
     },
     {
-      "modelId": "jamba-1-5-mini",
-      "modelName": "Jamba-1.5-Mini",
-      "vendor": "AI21 Labs",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.97,
-          "raw": 1197
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1197
-      },
-      "composite": 35.9,
-      "rank": 228,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "glm-5-1-z-ai",
-      "modelName": "GLM-5.1 Z.ai ·",
-      "vendor": "MIT",
+      "modelId": "claude-1",
+      "modelName": "Claude-1",
+      "vendor": "Anthropic",
       "openWeight": false,
       "scores": {
+        "arena-coding": {
+          "value": 11.61,
+          "raw": 1161
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1161
+      },
+      "composite": 32.9,
+      "rank": 241,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "v4-pro",
+      "modelName": "V4 Pro",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
         "arena-agent": {
-          "value": 0.015700000000000002,
-          "raw": 1.57,
-          "stderr": 0.86
+          "value": 0.0083,
+          "raw": 0.83,
+          "stderr": 1.86
         }
       },
       "best": {
         "benchmark": "arena-agent",
-        "raw": 1.57
+        "raw": 0.83
       },
-      "composite": 35.9,
-      "rank": 229,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "qwen3-coder-30b-a3b-instruct",
-      "modelName": "Qwen3-Coder-30B-A3B-Instruct",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "swe-bench": {
-          "value": 0.516,
-          "raw": 51.6,
-          "date": "2025-07-30"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 51.6
-      },
-      "composite": 35.7,
-      "rank": 230,
+      "composite": 32.8,
+      "rank": 242,
       "tier": "iffy"
     },
     {
@@ -12279,68 +12513,65 @@
         "benchmark": "arena-coding",
         "raw": 1251
       },
-      "composite": 35.4,
-      "rank": 231,
+      "composite": 32.4,
+      "rank": 243,
       "tier": "iffy"
     },
     {
-      "modelId": "granite-3-1-8b-instruct",
-      "modelName": "Granite-3.1-8B-Instruct",
-      "vendor": "IBM",
+      "modelId": "starling-lm-7b-beta",
+      "modelName": "Starling-LM-7B-beta",
+      "vendor": "Nexusflow",
       "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 11.91,
-          "raw": 1191
+          "value": 11.51,
+          "raw": 1151
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1191
+        "raw": 1151
       },
-      "composite": 35.2,
-      "rank": 232,
+      "composite": 32.4,
+      "rank": 244,
       "tier": "iffy"
     },
     {
-      "modelId": "qwen3-6-35b-a3b",
-      "modelName": "Qwen3.6-35B-A3B",
+      "modelId": "zephyr-orpo-141b-a35b-v0-1",
+      "modelName": "Zephyr-ORPO-141b-A35b-v0.1",
+      "vendor": "HuggingFace",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.44,
+          "raw": 1144
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1144
+      },
+      "composite": 32,
+      "rank": 245,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen1-5-14b-chat",
+      "modelName": "Qwen1.5-14B-Chat",
       "vendor": "Alibaba",
       "openWeight": true,
       "scores": {
-        "terminal-bench": {
-          "value": 0.24600000000000002,
-          "raw": 24.6,
-          "date": "2026-05-14",
-          "stderr": 3.2
+        "arena-coding": {
+          "value": 11.44,
+          "raw": 1144
         }
       },
       "best": {
-        "benchmark": "terminal-bench",
-        "raw": 24.6,
-        "harnessId": "little-coder"
+        "benchmark": "arena-coding",
+        "raw": 1144
       },
-      "composite": 35.1,
-      "rank": 233,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "llama-3-2-90b-vision-instruct",
-      "modelName": "Llama-3.2-90B-Vision-Instruct",
-      "vendor": "Meta",
-      "openWeight": true,
-      "scores": {
-        "artificial-analysis": {
-          "value": 0.2,
-          "raw": 20
-        }
-      },
-      "best": {
-        "benchmark": "artificial-analysis",
-        "raw": 20
-      },
-      "composite": 35.1,
-      "rank": 234,
+      "composite": 32,
+      "rank": 246,
       "tier": "iffy"
     },
     {
@@ -12366,423 +12597,8 @@
         "benchmark": "arena-coding",
         "raw": 1311
       },
-      "composite": 34.9,
-      "rank": 235,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gpt-4-1",
-      "modelName": "GPT-4.1",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "swe-bench": {
-          "value": 0.486,
-          "raw": 48.6,
-          "date": "2025-04-14"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 48.6
-      },
-      "composite": 34.8,
-      "rank": 236,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "deepseek-coder-v2-0724",
-      "modelName": "Deepseek-Coder-v2-0724",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.86,
-          "raw": 1286
-        },
-        "artificial-analysis": {
-          "value": 0.15,
-          "raw": 15
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1286
-      },
-      "composite": 34.8,
-      "rank": 237,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "yi-1-5-34b-chat",
-      "modelName": "Yi-1.5-34B-Chat",
-      "vendor": "01 AI",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.81,
-          "raw": 1181
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1181
-      },
-      "composite": 34.7,
-      "rank": 238,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "internlm2-5-20b-chat",
-      "modelName": "InternLM2.5-20B-chat",
-      "vendor": "InternLM",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 11.79,
-          "raw": 1179
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1179
-      },
-      "composite": 34.3,
-      "rank": 239,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "qwen1-5-72b-chat",
-      "modelName": "Qwen1.5-72B-Chat",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.75,
-          "raw": 1175
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1175
-      },
-      "composite": 34.2,
-      "rank": 240,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "o4-mini",
-      "modelName": "o4-mini",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "swe-bench": {
-          "value": 0.45,
-          "raw": 45,
-          "date": "2025-04-16"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 45
-      },
-      "composite": 34,
-      "rank": 241,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "granite-3-1-2b-instruct",
-      "modelName": "Granite-3.1-2B-Instruct",
-      "vendor": "IBM",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.66,
-          "raw": 1166
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1166
-      },
-      "composite": 33.6,
-      "rank": 242,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "reka-core-20240904",
-      "modelName": "Reka-Core-20240904",
-      "vendor": "Reka AI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.38,
-          "raw": 1238
-        },
-        "artificial-analysis": {
-          "value": 0.2,
-          "raw": 20
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1238
-      },
-      "composite": 33.4,
-      "rank": 243,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "qwen1-5-32b-chat",
-      "modelName": "Qwen1.5-32B-Chat",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.63,
-          "raw": 1163
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1163
-      },
-      "composite": 33.1,
-      "rank": 244,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "claude-1",
-      "modelName": "Claude-1",
-      "vendor": "Anthropic",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 11.61,
-          "raw": 1161
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1161
-      },
-      "composite": 32.9,
-      "rank": 245,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "v4-pro",
-      "modelName": "V4 Pro",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "arena-agent": {
-          "value": 0.0083,
-          "raw": 0.83,
-          "stderr": 1.86
-        }
-      },
-      "best": {
-        "benchmark": "arena-agent",
-        "raw": 0.83
-      },
-      "composite": 32.8,
-      "rank": 246,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "jamba-1-5-large",
-      "modelName": "Jamba-1.5-Large",
-      "vendor": "AI21 Labs",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.44,
-          "raw": 1244
-        },
-        "artificial-analysis": {
-          "value": 0.16,
-          "raw": 16
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1244
-      },
-      "composite": 32.6,
-      "rank": 247,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gemma-3-4b-it",
-      "modelName": "Gemma-3-4B-it",
-      "vendor": "Google",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.65,
-          "raw": 1265
-        },
-        "artificial-analysis": {
-          "value": 0.12,
-          "raw": 12
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1265
-      },
-      "composite": 32.5,
-      "rank": 248,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "starling-lm-7b-beta",
-      "modelName": "Starling-LM-7B-beta",
-      "vendor": "Nexusflow",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.51,
-          "raw": 1151
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1151
-      },
-      "composite": 32.4,
-      "rank": 249,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "amazon-nova-micro-1-0",
-      "modelName": "Amazon Nova Micro 1.0",
-      "vendor": "Amazon",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.28,
-          "raw": 1228
-        },
-        "artificial-analysis": {
-          "value": 0.18,
-          "raw": 18
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1228
-      },
-      "composite": 32.3,
-      "rank": 250,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gemini-1-5-flash-8b-001",
-      "modelName": "Gemini-1.5-Flash-8B-001",
-      "vendor": "Google",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.28,
-          "raw": 1228
-        },
-        "artificial-analysis": {
-          "value": 0.17,
-          "raw": 17
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1228
-      },
-      "composite": 32,
-      "rank": 251,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "zephyr-orpo-141b-a35b-v0-1",
-      "modelName": "Zephyr-ORPO-141b-A35b-v0.1",
-      "vendor": "HuggingFace",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.44,
-          "raw": 1144
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1144
-      },
-      "composite": 32,
-      "rank": 252,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "qwen1-5-14b-chat",
-      "modelName": "Qwen1.5-14B-Chat",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.44,
-          "raw": 1144
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1144
-      },
-      "composite": 32,
-      "rank": 253,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gemma-2-27b-it",
-      "modelName": "Gemma-2-27B-it",
-      "vendor": "Google",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.26,
-          "raw": 1226
-        },
-        "artificial-analysis": {
-          "value": 0.18,
-          "raw": 18
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1226
-      },
       "composite": 31.9,
-      "rank": 254,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "yi-large",
-      "modelName": "Yi-Large",
-      "vendor": "01 AI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.38,
-          "raw": 1238
-        },
-        "artificial-analysis": {
-          "value": 0.14,
-          "raw": 14
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1238
-      },
-      "composite": 31.8,
-      "rank": 255,
+      "rank": 247,
       "tier": "iffy"
     },
     {
@@ -12804,7 +12620,30 @@
         "harnessId": "bash-agent"
       },
       "composite": 31.7,
-      "rank": 256,
+      "rank": 248,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "deepseek-coder-v2-0724",
+      "modelName": "Deepseek-Coder-v2-0724",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.86,
+          "raw": 1286
+        },
+        "artificial-analysis": {
+          "value": 0.15,
+          "raw": 15
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1286
+      },
+      "composite": 31.7,
+      "rank": 249,
       "tier": "iffy"
     },
     {
@@ -12823,53 +12662,7 @@
         "raw": 1141
       },
       "composite": 31.7,
-      "rank": 257,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "reka-flash-20240904",
-      "modelName": "Reka-Flash-20240904",
-      "vendor": "Reka AI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.08,
-          "raw": 1208
-        },
-        "artificial-analysis": {
-          "value": 0.2,
-          "raw": 20
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1208
-      },
-      "composite": 31.5,
-      "rank": 258,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "claude-sonnet-3",
-      "modelName": "Claude Sonnet 3",
-      "vendor": "Anthropic",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 12.32,
-          "raw": 1232
-        },
-        "artificial-analysis": {
-          "value": 0.14,
-          "raw": 14
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1232
-      },
-      "composite": 31.5,
-      "rank": 259,
+      "rank": 250,
       "tier": "iffy"
     },
     {
@@ -12888,7 +12681,7 @@
         "raw": 1136
       },
       "composite": 31.3,
-      "rank": 260,
+      "rank": 251,
       "tier": "iffy"
     },
     {
@@ -12907,7 +12700,7 @@
         "raw": 11
       },
       "composite": 31.3,
-      "rank": 261,
+      "rank": 252,
       "tier": "iffy"
     },
     {
@@ -12927,7 +12720,7 @@
         "raw": 0.43
       },
       "composite": 31.3,
-      "rank": 262,
+      "rank": 253,
       "tier": "iffy"
     },
     {
@@ -12946,7 +12739,7 @@
         "raw": 0
       },
       "composite": 31.3,
-      "rank": 263,
+      "rank": 254,
       "tier": "iffy"
     },
     {
@@ -12965,30 +12758,7 @@
         "raw": 1130
       },
       "composite": 30.8,
-      "rank": 264,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "qwen2-72b-instruct",
-      "modelName": "Qwen2-72B-Instruct",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 12.06,
-          "raw": 1206
-        },
-        "artificial-analysis": {
-          "value": 0.19,
-          "raw": 19
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1206
-      },
-      "composite": 30.7,
-      "rank": 265,
+      "rank": 255,
       "tier": "iffy"
     },
     {
@@ -13010,7 +12780,7 @@
         "harnessId": "terminus-2"
       },
       "composite": 30.6,
-      "rank": 266,
+      "rank": 256,
       "tier": "iffy"
     },
     {
@@ -13029,7 +12799,721 @@
         "raw": 1129
       },
       "composite": 30.6,
+      "rank": 257,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gemini-1-0-pro-001",
+      "modelName": "Gemini-1.0-Pro-001",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 11.25,
+          "raw": 1125
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1125
+      },
+      "composite": 30.5,
+      "rank": 258,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "phi-3-small-8k-instruct",
+      "modelName": "Phi-3-Small-8k-Instruct",
+      "vendor": "Microsoft",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.23,
+          "raw": 1123
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1123
+      },
+      "composite": 30.3,
+      "rank": 259,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "tulu-2-dpo-70b",
+      "modelName": "Tulu-2-DPO-70B",
+      "vendor": "Ai2",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 11.2,
+          "raw": 1120
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1120
+      },
+      "composite": 30.1,
+      "rank": 260,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "reka-core-20240904",
+      "modelName": "Reka-Core-20240904",
+      "vendor": "Reka AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.38,
+          "raw": 1238
+        },
+        "artificial-analysis": {
+          "value": 0.2,
+          "raw": 20
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1238
+      },
+      "composite": 30,
+      "rank": 261,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gpt-4-1-mini",
+      "modelName": "GPT-4.1 mini",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "swe-bench": {
+          "value": 0.239,
+          "raw": 23.9,
+          "date": "2025-04-14"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 23.9
+      },
+      "composite": 29.9,
+      "rank": 262,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "openchat-3-5-0106",
+      "modelName": "OpenChat-3.5-0106",
+      "vendor": "OpenChat",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.19,
+          "raw": 1119
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1119
+      },
+      "composite": 29.9,
+      "rank": 263,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "pixtral-12b-2409",
+      "modelName": "Pixtral-12B-2409",
+      "vendor": "Mistral AI",
+      "openWeight": true,
+      "scores": {
+        "artificial-analysis": {
+          "value": 0.09,
+          "raw": 9
+        }
+      },
+      "best": {
+        "benchmark": "artificial-analysis",
+        "raw": 9
+      },
+      "composite": 29.9,
+      "rank": 264,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "granite-3-0-8b-instruct",
+      "modelName": "Granite-3.0-8B-Instruct",
+      "vendor": "IBM",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.15,
+          "raw": 1115
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1115
+      },
+      "composite": 29.8,
+      "rank": 265,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen1-5-7b-chat",
+      "modelName": "Qwen1.5-7B-Chat",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.1,
+          "raw": 1110
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1110
+      },
+      "composite": 29.6,
+      "rank": 266,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "jamba-1-5-large",
+      "modelName": "Jamba-1.5-Large",
+      "vendor": "AI21 Labs",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.44,
+          "raw": 1244
+        },
+        "artificial-analysis": {
+          "value": 0.16,
+          "raw": 16
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1244
+      },
+      "composite": 29.2,
       "rank": 267,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gemma-1-1-7b-it",
+      "modelName": "Gemma-1.1-7B-it",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 11.05,
+          "raw": 1105
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1105
+      },
+      "composite": 29.2,
+      "rank": 268,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gpt-4o",
+      "modelName": "GPT-4o",
+      "vendor": "OpenAI",
+      "openWeight": false,
+      "scores": {
+        "swe-bench": {
+          "value": 0.21600000000000003,
+          "raw": 21.6,
+          "date": "2024-11-20"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 21.6
+      },
+      "composite": 29.1,
+      "rank": 269,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gemma-3-4b-it",
+      "modelName": "Gemma-3-4B-it",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.65,
+          "raw": 1265
+        },
+        "artificial-analysis": {
+          "value": 0.12,
+          "raw": 12
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1265
+      },
+      "composite": 29,
+      "rank": 270,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "starling-lm-7b-alpha",
+      "modelName": "Starling-LM-7B-alpha",
+      "vendor": "UC Berkeley",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 11.04,
+          "raw": 1104
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1104
+      },
+      "composite": 29,
+      "rank": 271,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "granite-3-0-2b-instruct",
+      "modelName": "Granite-3.0-2B-Instruct",
+      "vendor": "IBM",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.04,
+          "raw": 1104
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1104
+      },
+      "composite": 29,
+      "rank": 272,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "amazon-nova-micro-1-0",
+      "modelName": "Amazon Nova Micro 1.0",
+      "vendor": "Amazon",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.28,
+          "raw": 1228
+        },
+        "artificial-analysis": {
+          "value": 0.18,
+          "raw": 18
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1228
+      },
+      "composite": 28.7,
+      "rank": 273,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "nous-hermes-2-mixtral-8x7b-dpo",
+      "modelName": "Nous-Hermes-2-Mixtral-8x7B-DPO",
+      "vendor": "NousResearch",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.03,
+          "raw": 1103
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1103
+      },
+      "composite": 28.7,
+      "rank": 274,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "phi-3-mini-4k-instruct",
+      "modelName": "Phi-3-Mini-4k-Instruct",
+      "vendor": "Microsoft",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.02,
+          "raw": 1102
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1102
+      },
+      "composite": 28.5,
+      "rank": 275,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gemini-1-5-flash-8b-001",
+      "modelName": "Gemini-1.5-Flash-8B-001",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.28,
+          "raw": 1228
+        },
+        "artificial-analysis": {
+          "value": 0.17,
+          "raw": 17
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1228
+      },
+      "composite": 28.4,
+      "rank": 276,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "llama-4-maverick-instruct",
+      "modelName": "Llama 4 Maverick Instruct",
+      "vendor": "Meta",
+      "openWeight": true,
+      "scores": {
+        "swe-bench": {
+          "value": 0.21,
+          "raw": 21,
+          "date": "2025-04-05"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 21
+      },
+      "composite": 28.3,
+      "rank": 277,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gemma-2-27b-it",
+      "modelName": "Gemma-2-27B-it",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.26,
+          "raw": 1226
+        },
+        "artificial-analysis": {
+          "value": 0.18,
+          "raw": 18
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1226
+      },
+      "composite": 28.3,
+      "rank": 278,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "snowflake-arctic-instruct",
+      "modelName": "Snowflake Arctic Instruct",
+      "vendor": "Snowflake",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 11.01,
+          "raw": 1101
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1101
+      },
+      "composite": 28.3,
+      "rank": 279,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "yi-large",
+      "modelName": "Yi-Large",
+      "vendor": "01 AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.38,
+          "raw": 1238
+        },
+        "artificial-analysis": {
+          "value": 0.14,
+          "raw": 14
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1238
+      },
+      "composite": 28.2,
+      "rank": 280,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gemini-3-1-pro-preview",
+      "modelName": "Gemini 3.1 Pro Preview",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "arena-agent": {
+          "value": 0.0017000000000000001,
+          "raw": 0.17,
+          "stderr": 0.7
+        }
+      },
+      "best": {
+        "benchmark": "arena-agent",
+        "raw": 0.17
+      },
+      "composite": 28.1,
+      "rank": 281,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "phi-3-mini-4k-instruct-june-24",
+      "modelName": "Phi-3-Mini-4K-Instruct-June-24",
+      "vendor": "Microsoft",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 10.98,
+          "raw": 1098
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1098
+      },
+      "composite": 28,
+      "rank": 282,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "reka-flash-20240904",
+      "modelName": "Reka-Flash-20240904",
+      "vendor": "Reka AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.08,
+          "raw": 1208
+        },
+        "artificial-analysis": {
+          "value": 0.2,
+          "raw": 20
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1208
+      },
+      "composite": 27.8,
+      "rank": 283,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "claude-sonnet-3",
+      "modelName": "Claude Sonnet 3",
+      "vendor": "Anthropic",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 12.32,
+          "raw": 1232
+        },
+        "artificial-analysis": {
+          "value": 0.14,
+          "raw": 14
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1232
+      },
+      "composite": 27.7,
+      "rank": 284,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "gemini-2-0-flash",
+      "modelName": "Gemini 2.0 Flash",
+      "vendor": "Google",
+      "openWeight": false,
+      "scores": {
+        "swe-bench": {
+          "value": 0.135,
+          "raw": 13.5,
+          "date": "2025-02-05"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 13.5
+      },
+      "composite": 27.5,
+      "rank": 285,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "wizardlm-70b-v1-0",
+      "modelName": "WizardLM-70B-v1.0",
+      "vendor": "Microsoft",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 10.93,
+          "raw": 1093
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1093
+      },
+      "composite": 27.5,
+      "rank": 286,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "vicuna-33b",
+      "modelName": "Vicuna-33B",
+      "vendor": "LMSYS",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 10.91,
+          "raw": 1091
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1091
+      },
+      "composite": 27.3,
+      "rank": 287,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "openhermes-2-5-mistral-7b",
+      "modelName": "OpenHermes-2.5-Mistral-7B",
+      "vendor": "NousResearch",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 10.83,
+          "raw": 1083
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1083
+      },
+      "composite": 27.1,
+      "rank": 288,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen3-5-9b",
+      "modelName": "Qwen3.5-9B",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "terminal-bench": {
+          "value": 0.092,
+          "raw": 9.2,
+          "date": "2026-05-14",
+          "stderr": 2.4
+        }
+      },
+      "best": {
+        "benchmark": "terminal-bench",
+        "raw": 9.2,
+        "harnessId": "little-coder"
+      },
+      "composite": 26.9,
+      "rank": 289,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "openchat-3-5",
+      "modelName": "OpenChat-3.5",
+      "vendor": "OpenChat",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 10.77,
+          "raw": 1077
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1077
+      },
+      "composite": 26.9,
+      "rank": 290,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "qwen2-72b-instruct",
+      "modelName": "Qwen2-72B-Instruct",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 12.06,
+          "raw": 1206
+        },
+        "artificial-analysis": {
+          "value": 0.19,
+          "raw": 19
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1206
+      },
+      "composite": 26.8,
+      "rank": 291,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "llama-4-scout-instruct",
+      "modelName": "Llama 4 Scout Instruct",
+      "vendor": "Meta",
+      "openWeight": true,
+      "scores": {
+        "swe-bench": {
+          "value": 0.091,
+          "raw": 9.1,
+          "date": "2025-04-05"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 9.1
+      },
+      "composite": 26.6,
+      "rank": 292,
       "tier": "iffy"
     },
     {
@@ -13051,27 +13535,27 @@
         "benchmark": "arena-coding",
         "raw": 1216
       },
-      "composite": 30.5,
-      "rank": 268,
+      "composite": 26.6,
+      "rank": 293,
       "tier": "iffy"
     },
     {
-      "modelId": "gemini-1-0-pro-001",
-      "modelName": "Gemini-1.0-Pro-001",
-      "vendor": "Google",
+      "modelId": "solar-10-7b-instruct-v1-0",
+      "modelName": "SOLAR-10.7B-Instruct-v1.0",
+      "vendor": "Upstage AI",
       "openWeight": false,
       "scores": {
         "arena-coding": {
-          "value": 11.25,
-          "raw": 1125
+          "value": 10.73,
+          "raw": 1073
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1125
+        "raw": 1073
       },
-      "composite": 30.5,
-      "rank": 269,
+      "composite": 26.6,
+      "rank": 294,
       "tier": "iffy"
     },
     {
@@ -13093,238 +13577,141 @@
         "benchmark": "arena-coding",
         "raw": 1215
       },
-      "composite": 30.4,
-      "rank": 270,
+      "composite": 26.5,
+      "rank": 295,
       "tier": "iffy"
     },
     {
-      "modelId": "phi-3-small-8k-instruct",
-      "modelName": "Phi-3-Small-8k-Instruct",
+      "modelId": "codellama-34b-instruct",
+      "modelName": "CodeLlama-34B-instruct",
+      "vendor": "Meta",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 10.65,
+          "raw": 1065
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1065
+      },
+      "composite": 26.4,
+      "rank": 296,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "pplx-70b-online",
+      "modelName": "pplx-70B-online",
+      "vendor": "Perplexity AI",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 10.55,
+          "raw": 1055
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1055
+      },
+      "composite": 26.1,
+      "rank": 297,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "mpt-30b-chat",
+      "modelName": "MPT-30B-chat",
+      "vendor": "MosaicML",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 10.55,
+          "raw": 1055
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1055
+      },
+      "composite": 26.1,
+      "rank": 298,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "zephyr-7b-beta",
+      "modelName": "Zephyr-7B-beta",
+      "vendor": "HuggingFace",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 10.53,
+          "raw": 1053
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1053
+      },
+      "composite": 25.7,
+      "rank": 299,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "dolphin-2-2-1-mistral-7b",
+      "modelName": "Dolphin-2.2.1-Mistral-7B",
+      "vendor": "Cognitive",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 10.49,
+          "raw": 1049
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1049
+      },
+      "composite": 25.5,
+      "rank": 300,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "wizardlm-13b-v1-2",
+      "modelName": "WizardLM-13b-v1.2",
       "vendor": "Microsoft",
       "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 11.23,
-          "raw": 1123
+          "value": 10.48,
+          "raw": 1048
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1123
+        "raw": 1048
       },
-      "composite": 30.3,
-      "rank": 271,
+      "composite": 25.4,
+      "rank": 301,
       "tier": "iffy"
     },
     {
-      "modelId": "tulu-2-dpo-70b",
-      "modelName": "Tulu-2-DPO-70B",
-      "vendor": "Ai2",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 11.2,
-          "raw": 1120
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1120
-      },
-      "composite": 30.1,
-      "rank": 272,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gpt-4-1-mini",
-      "modelName": "GPT-4.1 mini",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "swe-bench": {
-          "value": 0.239,
-          "raw": 23.9,
-          "date": "2025-04-14"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 23.9
-      },
-      "composite": 29.9,
-      "rank": 273,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "openchat-3-5-0106",
-      "modelName": "OpenChat-3.5-0106",
-      "vendor": "OpenChat",
+      "modelId": "nv-llama2-70b-steerlm-chat",
+      "modelName": "NV-Llama2-70B-SteerLM-Chat",
+      "vendor": "NVIDIA",
       "openWeight": true,
       "scores": {
         "arena-coding": {
-          "value": 11.19,
-          "raw": 1119
+          "value": 10.47,
+          "raw": 1047
         }
       },
       "best": {
         "benchmark": "arena-coding",
-        "raw": 1119
+        "raw": 1047
       },
-      "composite": 29.9,
-      "rank": 274,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "pixtral-12b-2409",
-      "modelName": "Pixtral-12B-2409",
-      "vendor": "Mistral AI",
-      "openWeight": true,
-      "scores": {
-        "artificial-analysis": {
-          "value": 0.09,
-          "raw": 9
-        }
-      },
-      "best": {
-        "benchmark": "artificial-analysis",
-        "raw": 9
-      },
-      "composite": 29.9,
-      "rank": 275,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "granite-3-0-8b-instruct",
-      "modelName": "Granite-3.0-8B-Instruct",
-      "vendor": "IBM",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.15,
-          "raw": 1115
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1115
-      },
-      "composite": 29.8,
-      "rank": 276,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "qwen1-5-7b-chat",
-      "modelName": "Qwen1.5-7B-Chat",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.1,
-          "raw": 1110
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1110
-      },
-      "composite": 29.6,
-      "rank": 277,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gemma-1-1-7b-it",
-      "modelName": "Gemma-1.1-7B-it",
-      "vendor": "Google",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 11.05,
-          "raw": 1105
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1105
-      },
-      "composite": 29.2,
-      "rank": 278,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gpt-4o",
-      "modelName": "GPT-4o",
-      "vendor": "OpenAI",
-      "openWeight": false,
-      "scores": {
-        "swe-bench": {
-          "value": 0.21600000000000003,
-          "raw": 21.6,
-          "date": "2024-11-20"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 21.6
-      },
-      "composite": 29.1,
-      "rank": 279,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "starling-lm-7b-alpha",
-      "modelName": "Starling-LM-7B-alpha",
-      "vendor": "UC Berkeley",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 11.04,
-          "raw": 1104
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1104
-      },
-      "composite": 29,
-      "rank": 280,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "granite-3-0-2b-instruct",
-      "modelName": "Granite-3.0-2B-Instruct",
-      "vendor": "IBM",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.04,
-          "raw": 1104
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1104
-      },
-      "composite": 29,
-      "rank": 281,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "nous-hermes-2-mixtral-8x7b-dpo",
-      "modelName": "Nous-Hermes-2-Mixtral-8x7B-DPO",
-      "vendor": "NousResearch",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.03,
-          "raw": 1103
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1103
-      },
-      "composite": 28.7,
-      "rank": 282,
+      "composite": 25.2,
+      "rank": 302,
       "tier": "iffy"
     },
     {
@@ -13351,8 +13738,8 @@
         "benchmark": "arena-coding",
         "raw": 1279
       },
-      "composite": 28.6,
-      "rank": 283,
+      "composite": 24.4,
+      "rank": 303,
       "tier": "iffy"
     },
     {
@@ -13374,66 +13761,8 @@
         "benchmark": "arena-coding",
         "raw": 1208
       },
-      "composite": 28.5,
-      "rank": 284,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "phi-3-mini-4k-instruct",
-      "modelName": "Phi-3-Mini-4k-Instruct",
-      "vendor": "Microsoft",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.02,
-          "raw": 1102
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1102
-      },
-      "composite": 28.5,
-      "rank": 285,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "llama-4-maverick-instruct",
-      "modelName": "Llama 4 Maverick Instruct",
-      "vendor": "Meta",
-      "openWeight": true,
-      "scores": {
-        "swe-bench": {
-          "value": 0.21,
-          "raw": 21,
-          "date": "2025-04-05"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 21
-      },
-      "composite": 28.3,
-      "rank": 286,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "snowflake-arctic-instruct",
-      "modelName": "Snowflake Arctic Instruct",
-      "vendor": "Snowflake",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 11.01,
-          "raw": 1101
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1101
-      },
-      "composite": 28.3,
-      "rank": 287,
+      "composite": 24.2,
+      "rank": 304,
       "tier": "iffy"
     },
     {
@@ -13455,8 +13784,8 @@
         "benchmark": "arena-coding",
         "raw": 1219
       },
-      "composite": 28.1,
-      "rank": 288,
+      "composite": 23.8,
+      "rank": 305,
       "tier": "iffy"
     },
     {
@@ -13478,47 +13807,8 @@
         "benchmark": "arena-coding",
         "raw": 1203
       },
-      "composite": 28.1,
-      "rank": 289,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gemini-3-1-pro-preview",
-      "modelName": "Gemini 3.1 Pro Preview",
-      "vendor": "Google",
-      "openWeight": false,
-      "scores": {
-        "arena-agent": {
-          "value": 0.0017000000000000001,
-          "raw": 0.17,
-          "stderr": 0.7
-        }
-      },
-      "best": {
-        "benchmark": "arena-agent",
-        "raw": 0.17
-      },
-      "composite": 28.1,
-      "rank": 290,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "phi-3-mini-4k-instruct-june-24",
-      "modelName": "Phi-3-Mini-4K-Instruct-June-24",
-      "vendor": "Microsoft",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.98,
-          "raw": 1098
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1098
-      },
-      "composite": 28,
-      "rank": 291,
+      "composite": 23.7,
+      "rank": 306,
       "tier": "iffy"
     },
     {
@@ -13540,47 +13830,8 @@
         "benchmark": "arena-coding",
         "raw": 1192
       },
-      "composite": 27.8,
-      "rank": 292,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "gemini-2-0-flash",
-      "modelName": "Gemini 2.0 Flash",
-      "vendor": "Google",
-      "openWeight": false,
-      "scores": {
-        "swe-bench": {
-          "value": 0.135,
-          "raw": 13.5,
-          "date": "2025-02-05"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 13.5
-      },
-      "composite": 27.5,
-      "rank": 293,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "wizardlm-70b-v1-0",
-      "modelName": "WizardLM-70B-v1.0",
-      "vendor": "Microsoft",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.93,
-          "raw": 1093
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1093
-      },
-      "composite": 27.5,
-      "rank": 294,
+      "composite": 23.4,
+      "rank": 307,
       "tier": "iffy"
     },
     {
@@ -13602,27 +13853,8 @@
         "benchmark": "arena-coding",
         "raw": 1175
       },
-      "composite": 27.3,
-      "rank": 295,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "vicuna-33b",
-      "modelName": "Vicuna-33B",
-      "vendor": "LMSYS",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 10.91,
-          "raw": 1091
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1091
-      },
-      "composite": 27.3,
-      "rank": 296,
+      "composite": 22.8,
+      "rank": 308,
       "tier": "iffy"
     },
     {
@@ -13644,107 +13876,8 @@
         "benchmark": "arena-coding",
         "raw": 1211
       },
-      "composite": 27.2,
-      "rank": 297,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "openhermes-2-5-mistral-7b",
-      "modelName": "OpenHermes-2.5-Mistral-7B",
-      "vendor": "NousResearch",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.83,
-          "raw": 1083
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1083
-      },
-      "composite": 27.1,
-      "rank": 298,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "qwen3-5-9b",
-      "modelName": "Qwen3.5-9B",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "terminal-bench": {
-          "value": 0.092,
-          "raw": 9.2,
-          "date": "2026-05-14",
-          "stderr": 2.4
-        }
-      },
-      "best": {
-        "benchmark": "terminal-bench",
-        "raw": 9.2,
-        "harnessId": "little-coder"
-      },
-      "composite": 26.9,
-      "rank": 299,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "openchat-3-5",
-      "modelName": "OpenChat-3.5",
-      "vendor": "OpenChat",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.77,
-          "raw": 1077
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1077
-      },
-      "composite": 26.9,
-      "rank": 300,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "llama-4-scout-instruct",
-      "modelName": "Llama 4 Scout Instruct",
-      "vendor": "Meta",
-      "openWeight": true,
-      "scores": {
-        "swe-bench": {
-          "value": 0.091,
-          "raw": 9.1,
-          "date": "2025-04-05"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 9.1
-      },
-      "composite": 26.6,
-      "rank": 301,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "solar-10-7b-instruct-v1-0",
-      "modelName": "SOLAR-10.7B-Instruct-v1.0",
-      "vendor": "Upstage AI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 10.73,
-          "raw": 1073
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1073
-      },
-      "composite": 26.6,
-      "rank": 302,
+      "composite": 22.6,
+      "rank": 309,
       "tier": "iffy"
     },
     {
@@ -13766,8 +13899,8 @@
         "benchmark": "arena-coding",
         "raw": 1200
       },
-      "composite": 26.4,
-      "rank": 303,
+      "composite": 21.7,
+      "rank": 310,
       "tier": "iffy"
     },
     {
@@ -13789,65 +13922,8 @@
         "benchmark": "arena-coding",
         "raw": 1194
       },
-      "composite": 26.4,
-      "rank": 304,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "codellama-34b-instruct",
-      "modelName": "CodeLlama-34B-instruct",
-      "vendor": "Meta",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.65,
-          "raw": 1065
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1065
-      },
-      "composite": 26.4,
-      "rank": 305,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "pplx-70b-online",
-      "modelName": "pplx-70B-online",
-      "vendor": "Perplexity AI",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 10.55,
-          "raw": 1055
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1055
-      },
-      "composite": 26.1,
-      "rank": 306,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "mpt-30b-chat",
-      "modelName": "MPT-30B-chat",
-      "vendor": "MosaicML",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 10.55,
-          "raw": 1055
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1055
-      },
-      "composite": 26.1,
-      "rank": 307,
+      "composite": 21.6,
+      "rank": 311,
       "tier": "iffy"
     },
     {
@@ -13869,8 +13945,8 @@
         "benchmark": "arena-coding",
         "raw": 1172
       },
-      "composite": 25.8,
-      "rank": 308,
+      "composite": 21,
+      "rank": 312,
       "tier": "iffy"
     },
     {
@@ -13892,27 +13968,8 @@
         "benchmark": "arena-coding",
         "raw": 1146
       },
-      "composite": 25.7,
-      "rank": 309,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "zephyr-7b-beta",
-      "modelName": "Zephyr-7B-beta",
-      "vendor": "HuggingFace",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.53,
-          "raw": 1053
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1053
-      },
-      "composite": 25.7,
-      "rank": 310,
+      "composite": 20.8,
+      "rank": 313,
       "tier": "iffy"
     },
     {
@@ -13934,8 +13991,8 @@
         "benchmark": "arena-coding",
         "raw": 1164
       },
-      "composite": 25.6,
-      "rank": 311,
+      "composite": 20.7,
+      "rank": 314,
       "tier": "iffy"
     },
     {
@@ -13957,27 +14014,8 @@
         "benchmark": "arena-coding",
         "raw": 1158
       },
-      "composite": 25.5,
-      "rank": 312,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "dolphin-2-2-1-mistral-7b",
-      "modelName": "Dolphin-2.2.1-Mistral-7B",
-      "vendor": "Cognitive",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.49,
-          "raw": 1049
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1049
-      },
-      "composite": 25.5,
-      "rank": 313,
+      "composite": 20.6,
+      "rank": 315,
       "tier": "iffy"
     },
     {
@@ -13999,45 +14037,7 @@
         "benchmark": "arena-coding",
         "raw": 1184
       },
-      "composite": 25.4,
-      "rank": 314,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "wizardlm-13b-v1-2",
-      "modelName": "WizardLM-13b-v1.2",
-      "vendor": "Microsoft",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.48,
-          "raw": 1048
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1048
-      },
-      "composite": 25.4,
-      "rank": 315,
-      "tier": "iffy"
-    },
-    {
-      "modelId": "nv-llama2-70b-steerlm-chat",
-      "modelName": "NV-Llama2-70B-SteerLM-Chat",
-      "vendor": "NVIDIA",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 10.47,
-          "raw": 1047
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1047
-      },
-      "composite": 25.2,
+      "composite": 20.5,
       "rank": 316,
       "tier": "iffy"
     },
@@ -14060,7 +14060,7 @@
         "benchmark": "arena-coding",
         "raw": 1160
       },
-      "composite": 25.1,
+      "composite": 20.1,
       "rank": 317,
       "tier": "iffy"
     },
@@ -14083,7 +14083,7 @@
         "benchmark": "arena-coding",
         "raw": 1164
       },
-      "composite": 24.6,
+      "composite": 19.6,
       "rank": 318,
       "tier": "iffy"
     },
@@ -14106,7 +14106,7 @@
         "benchmark": "arena-coding",
         "raw": 1184
       },
-      "composite": 24.3,
+      "composite": 19.2,
       "rank": 319,
       "tier": "iffy"
     },
@@ -14129,7 +14129,7 @@
         "benchmark": "arena-coding",
         "raw": 1136
       },
-      "composite": 22,
+      "composite": 16.4,
       "rank": 320,
       "tier": "iffy"
     },
@@ -14152,7 +14152,7 @@
         "benchmark": "arena-coding",
         "raw": 1136
       },
-      "composite": 21.7,
+      "composite": 16,
       "rank": 321,
       "tier": "iffy"
     },
@@ -14175,7 +14175,7 @@
         "benchmark": "arena-coding",
         "raw": 1106
       },
-      "composite": 21.6,
+      "composite": 16,
       "rank": 322,
       "tier": "iffy"
     },
@@ -14198,7 +14198,7 @@
         "benchmark": "arena-coding",
         "raw": 1099
       },
-      "composite": 20.8,
+      "composite": 15,
       "rank": 323,
       "tier": "iffy"
     },
@@ -14221,7 +14221,7 @@
         "benchmark": "artificial-analysis",
         "raw": 6
       },
-      "composite": 20,
+      "composite": 14,
       "rank": 324,
       "tier": "iffy"
     },
@@ -14244,7 +14244,7 @@
         "benchmark": "arena-coding",
         "raw": 1097
       },
-      "composite": 19.8,
+      "composite": 13.8,
       "rank": 325,
       "tier": "iffy"
     },
@@ -14267,7 +14267,7 @@
         "benchmark": "arena-coding",
         "raw": 1094
       },
-      "composite": 19.2,
+      "composite": 13.1,
       "rank": 326,
       "tier": "iffy"
     },
@@ -14290,7 +14290,7 @@
         "benchmark": "arena-coding",
         "raw": 1063
       },
-      "composite": 18.3,
+      "composite": 11.9,
       "rank": 327,
       "tier": "iffy"
     }
@@ -14299,7 +14299,7 @@
     {
       "vendor": "Anthropic",
       "rank": 1,
-      "score": 91.9,
+      "score": 97.6,
       "tier": "excellent",
       "bestModelId": "claude-fable-5",
       "bestModelName": "Claude Fable 5",
@@ -14309,17 +14309,17 @@
     {
       "vendor": "OpenAI",
       "rank": 2,
-      "score": 88.9,
+      "score": 94.9,
       "tier": "excellent",
-      "bestModelId": "gpt-5-5",
-      "bestModelName": "GPT-5.5",
+      "bestModelId": "gpt-5-6-sol",
+      "bestModelName": "GPT-5.6 Sol",
       "modelCount": 40,
       "openWeight": false
     },
     {
       "vendor": "xAI",
       "rank": 3,
-      "score": 81.1,
+      "score": 87.3,
       "tier": "excellent",
       "bestModelId": "grok-4-5",
       "bestModelName": "Grok 4.5",
@@ -14329,7 +14329,7 @@
     {
       "vendor": "Google",
       "rank": 4,
-      "score": 81.1,
+      "score": 85.3,
       "tier": "excellent",
       "bestModelId": "gemini-3-1-pro",
       "bestModelName": "Gemini 3.1 Pro",
@@ -14337,19 +14337,9 @@
       "openWeight": false
     },
     {
-      "vendor": "Z.ai",
-      "rank": 5,
-      "score": 81,
-      "tier": "excellent",
-      "bestModelId": "glm-5-2",
-      "bestModelName": "GLM-5.2",
-      "modelCount": 11,
-      "openWeight": true
-    },
-    {
       "vendor": "SpaceXAI",
-      "rank": 6,
-      "score": 79.2,
+      "rank": 5,
+      "score": 85,
       "tier": "excellent",
       "bestModelId": "grok-4-3",
       "bestModelName": "Grok 4.3",
@@ -14358,8 +14348,8 @@
     },
     {
       "vendor": "NVIDIA",
-      "rank": 7,
-      "score": 79.1,
+      "rank": 6,
+      "score": 84.9,
       "tier": "excellent",
       "bestModelId": "nemotron-3-ultra-550b-a55b",
       "bestModelName": "nemotron-3-ultra-550b-a55b",
@@ -14367,9 +14357,19 @@
       "openWeight": true
     },
     {
+      "vendor": "Z.ai",
+      "rank": 7,
+      "score": 84.7,
+      "tier": "excellent",
+      "bestModelId": "glm-5-2",
+      "bestModelName": "GLM-5.2",
+      "modelCount": 11,
+      "openWeight": true
+    },
+    {
       "vendor": "Baidu",
       "rank": 8,
-      "score": 78.1,
+      "score": 83.7,
       "tier": "excellent",
       "bestModelId": "ernie-5-1",
       "bestModelName": "ERNIE-5.1",
@@ -14379,7 +14379,7 @@
     {
       "vendor": "Meta",
       "rank": 9,
-      "score": 77.8,
+      "score": 83.4,
       "tier": "excellent",
       "bestModelId": "muse-spark",
       "bestModelName": "Muse Spark",
@@ -14389,7 +14389,7 @@
     {
       "vendor": "Moonshot AI",
       "rank": 10,
-      "score": 77.8,
+      "score": 83.4,
       "tier": "excellent",
       "bestModelId": "kimi-k2-6-thinking",
       "bestModelName": "Kimi-K2.6-Thinking ✅",
@@ -14399,7 +14399,7 @@
     {
       "vendor": "DeepSeek",
       "rank": 11,
-      "score": 77.5,
+      "score": 83,
       "tier": "excellent",
       "bestModelId": "deepseek-v4-pro",
       "bestModelName": "DeepSeek-V4-Pro ✅",
@@ -14409,7 +14409,7 @@
     {
       "vendor": "ByteDance",
       "rank": 12,
-      "score": 76.8,
+      "score": 82.2,
       "tier": "excellent",
       "bestModelId": "seed2-0-pro",
       "bestModelName": "Seed2.0 Pro",
@@ -14419,7 +14419,7 @@
     {
       "vendor": "Alibaba",
       "rank": 13,
-      "score": 76.6,
+      "score": 81.9,
       "tier": "solid",
       "bestModelId": "qwen3-5-max",
       "bestModelName": "Qwen3.5-Max",
@@ -14429,7 +14429,7 @@
     {
       "vendor": "MiniMax",
       "rank": 14,
-      "score": 74.7,
+      "score": 78.5,
       "tier": "solid",
       "bestModelId": "minimax-m2-7",
       "bestModelName": "MiniMax M2.7",
@@ -14439,7 +14439,7 @@
     {
       "vendor": "StepFun",
       "rank": 15,
-      "score": 72.3,
+      "score": 76.7,
       "tier": "solid",
       "bestModelId": "step-3-5-flash",
       "bestModelName": "step-3.5-flash",
@@ -14447,19 +14447,9 @@
       "openWeight": true
     },
     {
-      "vendor": "Mistral AI",
-      "rank": 16,
-      "score": 70.4,
-      "tier": "solid",
-      "bestModelId": "mistral-small-4-119b-2603",
-      "bestModelName": "mistral-small-4-119b-2603",
-      "modelCount": 16,
-      "openWeight": true
-    },
-    {
       "vendor": "Xiaomi",
-      "rank": 17,
-      "score": 69.7,
+      "rank": 16,
+      "score": 73.6,
       "tier": "solid",
       "bestModelId": "mimo-v2-pro",
       "bestModelName": "MiMo-V2-Pro",
@@ -14468,8 +14458,8 @@
     },
     {
       "vendor": "Tencent",
-      "rank": 18,
-      "score": 68.7,
+      "rank": 17,
+      "score": 72.5,
       "tier": "solid",
       "bestModelId": "hunyuan-hy3",
       "bestModelName": "Hunyuan-Hy3",
@@ -14477,9 +14467,19 @@
       "openWeight": false
     },
     {
+      "vendor": "Mistral AI",
+      "rank": 18,
+      "score": 70.4,
+      "tier": "solid",
+      "bestModelId": "mistral-small-4-119b-2603",
+      "bestModelName": "mistral-small-4-119b-2603",
+      "modelCount": 16,
+      "openWeight": true
+    },
+    {
       "vendor": "Amazon",
       "rank": 19,
-      "score": 64.1,
+      "score": 66.9,
       "tier": "solid",
       "bestModelId": "amazon-nova-chat-11-10",
       "bestModelName": "Amazon-Nova-Chat-11-10",
@@ -14489,7 +14489,7 @@
     {
       "vendor": "Meituan",
       "rank": 20,
-      "score": 63.5,
+      "score": 66.2,
       "tier": "solid",
       "bestModelId": "longcat-flash-chat",
       "bestModelName": "LongCat-Flash-Chat",
@@ -14549,7 +14549,7 @@
     {
       "vendor": "Ai2",
       "rank": 26,
-      "score": 46.3,
+      "score": 45.5,
       "tier": "solid",
       "bestModelId": "olmo-3-32b-think",
       "bestModelName": "OLMo-3-32b-think",
@@ -14559,7 +14559,7 @@
     {
       "vendor": "Cohere",
       "rank": 27,
-      "score": 44.8,
+      "score": 43.8,
       "tier": "solid",
       "bestModelId": "command-a-03-2025",
       "bestModelName": "Command A (03-2025)",
@@ -14749,19 +14749,9 @@
   ],
   "labsOpen": [
     {
-      "vendor": "Z.ai",
-      "rank": 1,
-      "score": 81,
-      "tier": "excellent",
-      "bestModelId": "glm-5-2",
-      "bestModelName": "GLM-5.2",
-      "modelCount": 7,
-      "openWeight": true
-    },
-    {
       "vendor": "NVIDIA",
-      "rank": 2,
-      "score": 79.1,
+      "rank": 1,
+      "score": 84.9,
       "tier": "excellent",
       "bestModelId": "nemotron-3-ultra-550b-a55b",
       "bestModelName": "nemotron-3-ultra-550b-a55b",
@@ -14769,9 +14759,19 @@
       "openWeight": true
     },
     {
+      "vendor": "Z.ai",
+      "rank": 2,
+      "score": 84.7,
+      "tier": "excellent",
+      "bestModelId": "glm-5-2",
+      "bestModelName": "GLM-5.2",
+      "modelCount": 7,
+      "openWeight": true
+    },
+    {
       "vendor": "Moonshot AI",
       "rank": 3,
-      "score": 77.8,
+      "score": 83.4,
       "tier": "excellent",
       "bestModelId": "kimi-k2-6-thinking",
       "bestModelName": "Kimi-K2.6-Thinking ✅",
@@ -14781,7 +14781,7 @@
     {
       "vendor": "DeepSeek",
       "rank": 4,
-      "score": 77.5,
+      "score": 83,
       "tier": "excellent",
       "bestModelId": "deepseek-v4-pro",
       "bestModelName": "DeepSeek-V4-Pro ✅",
@@ -14791,7 +14791,7 @@
     {
       "vendor": "MiniMax",
       "rank": 5,
-      "score": 74.7,
+      "score": 78.5,
       "tier": "excellent",
       "bestModelId": "minimax-m2-7",
       "bestModelName": "MiniMax M2.7",
@@ -14801,7 +14801,7 @@
     {
       "vendor": "StepFun",
       "rank": 6,
-      "score": 72.3,
+      "score": 76.7,
       "tier": "excellent",
       "bestModelId": "step-3-5-flash",
       "bestModelName": "step-3.5-flash",
@@ -14809,20 +14809,10 @@
       "openWeight": true
     },
     {
-      "vendor": "Mistral AI",
-      "rank": 7,
-      "score": 70.4,
-      "tier": "excellent",
-      "bestModelId": "mistral-small-4-119b-2603",
-      "bestModelName": "mistral-small-4-119b-2603",
-      "modelCount": 12,
-      "openWeight": true
-    },
-    {
       "vendor": "Alibaba",
-      "rank": 8,
-      "score": 69.5,
-      "tier": "solid",
+      "rank": 7,
+      "score": 73.3,
+      "tier": "excellent",
       "bestModelId": "qwen3-next-80b-a3b-instruct",
       "bestModelName": "qwen3-next-80b-a3b-instruct",
       "modelCount": 28,
@@ -14830,8 +14820,8 @@
     },
     {
       "vendor": "Google",
-      "rank": 9,
-      "score": 68.8,
+      "rank": 8,
+      "score": 72.6,
       "tier": "solid",
       "bestModelId": "gemma-4-31b-it",
       "bestModelName": "Gemma-4-31B-it",
@@ -14840,8 +14830,8 @@
     },
     {
       "vendor": "Xiaomi",
-      "rank": 10,
-      "score": 67.5,
+      "rank": 9,
+      "score": 70.6,
       "tier": "solid",
       "bestModelId": "mimo-v2-5-pro",
       "bestModelName": "MiMo-V2.5-Pro",
@@ -14849,9 +14839,19 @@
       "openWeight": true
     },
     {
+      "vendor": "Mistral AI",
+      "rank": 10,
+      "score": 70.4,
+      "tier": "solid",
+      "bestModelId": "mistral-small-4-119b-2603",
+      "bestModelName": "mistral-small-4-119b-2603",
+      "modelCount": 12,
+      "openWeight": true
+    },
+    {
       "vendor": "Meituan",
       "rank": 11,
-      "score": 63.5,
+      "score": 66.2,
       "tier": "solid",
       "bestModelId": "longcat-flash-chat",
       "bestModelName": "LongCat-Flash-Chat",
@@ -14859,23 +14859,23 @@
       "openWeight": true
     },
     {
-      "vendor": "OpenAI",
-      "rank": 12,
-      "score": 57.7,
-      "tier": "solid",
-      "bestModelId": "gpt-oss-120b",
-      "bestModelName": "gpt-oss-120b",
-      "modelCount": 2,
-      "openWeight": true
-    },
-    {
       "vendor": "Meta",
-      "rank": 13,
-      "score": 57.5,
+      "rank": 12,
+      "score": 59,
       "tier": "solid",
       "bestModelId": "llama-4-maverick-17b-128e-instruct",
       "bestModelName": "llama-4-maverick-17b-128e-instruct",
       "modelCount": 19,
+      "openWeight": true
+    },
+    {
+      "vendor": "OpenAI",
+      "rank": 13,
+      "score": 58.9,
+      "tier": "solid",
+      "bestModelId": "gpt-oss-120b",
+      "bestModelName": "gpt-oss-120b",
+      "modelCount": 2,
       "openWeight": true
     },
     {
@@ -14891,7 +14891,7 @@
     {
       "vendor": "Ai2",
       "rank": 15,
-      "score": 46.3,
+      "score": 45.5,
       "tier": "solid",
       "bestModelId": "olmo-3-32b-think",
       "bestModelName": "OLMo-3-32b-think",
@@ -14909,20 +14909,10 @@
       "openWeight": true
     },
     {
-      "vendor": "Microsoft",
-      "rank": 17,
-      "score": 36.6,
-      "tier": "solid",
-      "bestModelId": "phi-4",
-      "bestModelName": "Phi-4",
-      "modelCount": 7,
-      "openWeight": true
-    },
-    {
       "vendor": "AI21 Labs",
-      "rank": 18,
+      "rank": 17,
       "score": 35.9,
-      "tier": "iffy",
+      "tier": "solid",
       "bestModelId": "jamba-1-5-mini",
       "bestModelName": "Jamba-1.5-Mini",
       "modelCount": 2,
@@ -14930,7 +14920,7 @@
     },
     {
       "vendor": "IBM",
-      "rank": 19,
+      "rank": 18,
       "score": 35.2,
       "tier": "iffy",
       "bestModelId": "granite-3-1-8b-instruct",
@@ -14940,12 +14930,22 @@
     },
     {
       "vendor": "01 AI",
-      "rank": 20,
+      "rank": 19,
       "score": 34.7,
       "tier": "iffy",
       "bestModelId": "yi-1-5-34b-chat",
       "bestModelName": "Yi-1.5-34B-Chat",
       "modelCount": 1,
+      "openWeight": true
+    },
+    {
+      "vendor": "Microsoft",
+      "rank": 20,
+      "score": 33.9,
+      "tier": "iffy",
+      "bestModelId": "phi-4",
+      "bestModelName": "Phi-4",
+      "modelCount": 7,
       "openWeight": true
     },
     {

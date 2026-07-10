@@ -169,12 +169,14 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
       const p = pctByBench[bid](s.cell.raw);
       if (p > bestPct) { bestPct = p; best = { benchmark: bid, raw: s.cell.raw, harnessId: s.harnessId }; }
     }
-    // Evidence-weighted composite: average percentile with ONE phantom median
-    // observation (Bayesian shrinkage, k=1). A perfect score on a single
-    // benchmark caps at ~75, so thin evidence can't outrank broad excellence —
-    // fixes e.g. a one-benchmark model at percentile 1.0 ranking #1 overall.
+    // Evidence-weighted composite: average percentile shrunk toward the median
+    // by a prior whose weight DECAYS with coverage (1/n). One benchmark — even a
+    // perfect tie-top — caps at ~75; by n≥3 the penalty is negligible, so a new
+    // flagship that tops 3 major benchmarks (GPT-5.6 Sol) isn't dragged below
+    // broad-but-weaker veterans, while single-benchmark artifacts stay buried.
     const ps = Object.entries(scores).map(([bid, c]) => pctByBench[bid](c.raw));
-    const composite = ps.length ? round1((100 * (ps.reduce((a, b) => a + b, 0) + 0.5)) / (ps.length + 1)) : 0;
+    const n = ps.length;
+    const composite = n ? round1((100 * (ps.reduce((a, b) => a + b, 0) + 0.5 / n)) / (n + 1 / n)) : 0;
     return { modelId: e.modelId, modelName: e.modelName, vendor: e.vendor, openWeight: e.openWeight, scores, best, composite, rank: 0, tier: "solid" as Tier };
   });
   models.sort((a, b) => b.composite - a.composite);
