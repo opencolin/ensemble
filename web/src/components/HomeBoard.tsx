@@ -48,6 +48,7 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
 
   const board = boardByHarness(lb, hid); // undefined for a known-but-unbenchmarked harness
   const harness = getHarness(lb, hid)!;
+  const topModel = lb.models[0];
   const topLab = lb.labs[0];
   const topAgent = lb.agents[0];
   const topAgentH = getHarness(lb, topAgent.harnessId);
@@ -108,11 +109,36 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
 
       {/* cross-ranking highlights */}
       <section className="mx-auto max-w-6xl px-5 py-2">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {topModel && <HighlightCard href={`/models/${slugFor(topModel.modelId)}`} eyebrow="Top model" title={topModel.modelName} sub={`${Object.keys(topModel.scores).length} benchmarks`} stat={`${topModel.composite.toFixed(0)}`} />}
           {topLab && <HighlightCard href={`/team/${slugFor(topLab.vendor)}`} eyebrow="Top team" title={topLab.vendor} sub={topLab.bestModelName} stat={`#1`} />}
           {topAgentH && <HighlightCard href={`/agents/${topAgent.harnessId}`} eyebrow="Top agent" title={topAgentH.name} sub={topAgent.bestModelName} stat={`${topAgent.score.toFixed(0)}`} />}
           {bestOpen && <HighlightCard href={`/models/${slugFor(bestOpen.modelId)}`} eyebrow="Best open-weight" title={bestOpen.modelName} sub={bestOpen.vendor} stat={`#${bestOpen.rank}`} />}
           {board?.models[0] && <HighlightCard href={`/models/${slugFor(board.models[0].modelId)}`} eyebrow={`#1 on ${harness.name}`} title={board.models[0].modelName} sub={board.models[0].vendor} stat={`${board.models[0].composite.toFixed(0)}`} />}
+        </div>
+      </section>
+
+      {/* overall model ranking — every benchmark, evidence-weighted */}
+      <section className="mx-auto max-w-6xl px-5 py-6">
+        <div className="mb-3 flex items-baseline justify-between gap-3">
+          <h2 className="font-display text-lg font-semibold tracking-tight">
+            Top models
+            <span className="ml-2 font-mono text-sm font-normal text-faint">· across every benchmark</span>
+          </h2>
+          <span className="shrink-0 font-mono text-xs text-faint">composite of {lb.meta.benchmarkCount} benchmarks · breadth-weighted</span>
+        </div>
+        <div className="overflow-x-auto rounded-xl border border-edge bg-surface/40">
+          <div className="min-w-[560px] divide-y divide-edge/50">
+            {lb.models.slice(0, 10).map((m) => (
+              <Link key={m.modelId} href={`/models/${slugFor(m.modelId)}`} className="grid grid-cols-[2.5rem_minmax(10rem,1fr)_8rem_6.5rem_3.5rem] items-center gap-x-3 px-4 py-2.5 transition-colors hover:bg-surface/70">
+                <span className={`font-display text-sm font-semibold ${m.rank <= 3 ? "text-accent" : "text-faint"}`}>#{m.rank}</span>
+                <span className="truncate font-display text-[14px] font-medium text-ink">{m.modelName}</span>
+                <span className="truncate font-mono text-[11px] text-faint">{m.vendor}</span>
+                <span className="font-mono text-[11px] text-faint">{Object.keys(m.scores).length} benchmarks</span>
+                <span className="tnum text-right font-display text-[15px] font-semibold text-ink">{m.composite.toFixed(0)}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

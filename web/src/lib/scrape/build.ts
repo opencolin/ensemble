@@ -169,7 +169,12 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
       const p = pctByBench[bid](s.cell.raw);
       if (p > bestPct) { bestPct = p; best = { benchmark: bid, raw: s.cell.raw, harnessId: s.harnessId }; }
     }
-    const composite = blend(scores);
+    // Evidence-weighted composite: average percentile with ONE phantom median
+    // observation (Bayesian shrinkage, k=1). A perfect score on a single
+    // benchmark caps at ~75, so thin evidence can't outrank broad excellence —
+    // fixes e.g. a one-benchmark model at percentile 1.0 ranking #1 overall.
+    const ps = Object.entries(scores).map(([bid, c]) => pctByBench[bid](c.raw));
+    const composite = ps.length ? round1((100 * (ps.reduce((a, b) => a + b, 0) + 0.5)) / (ps.length + 1)) : 0;
     return { modelId: e.modelId, modelName: e.modelName, vendor: e.vendor, openWeight: e.openWeight, scores, best, composite, rank: 0, tier: "solid" as Tier };
   });
   models.sort((a, b) => b.composite - a.composite);
