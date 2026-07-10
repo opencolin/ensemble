@@ -71,6 +71,16 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
   };
   const arrow = (key: string) => (sortKey === key ? (dir === "desc" ? "↓" : "↑") : "");
 
+  // Tier (bar/dot color) follows the ranking the table actually displays: in
+  // overall mode, re-bucket by current standing (top 25% excellent, bottom 40%
+  // iffy) instead of the stale per-board tier computed from the old sort.
+  const displayTier = (m: DisplayRow): ModelEntry["tier"] => {
+    if (!overall) return m.tier;
+    const i = (rankMap.get(m.modelId) ?? models.length) - 1;
+    const n = Math.max(1, models.length);
+    return i / n < 0.25 ? "excellent" : i / n >= 0.6 ? "iffy" : "solid";
+  };
+
   const grid = `2.5rem minmax(10rem,1fr) ${benches.map(() => "4.5rem").join(" ")} 8.5rem`;
   const minW = 360 + benches.length * 72 + 180;
 
@@ -125,7 +135,7 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
                   <div className="flex items-center gap-2">
                     <span className="truncate font-display text-[15px] font-medium text-ink">{m.modelName}</span>
                     {m.measured ? (
-                      <span className={`size-1.5 shrink-0 rounded-full ${TIER_CLASS[m.tier].bar}`} />
+                      <span className={`size-1.5 shrink-0 rounded-full ${TIER_CLASS[displayTier(m)].bar}`} />
                     ) : (
                       <span className="shrink-0 rounded border border-edge px-1.5 py-px font-mono text-[9px] uppercase tracking-wider text-faint" title={`No benchmark has paired this model with ${harness.name} yet — ranked by its overall score`}>
                         not run on {harness.name}
@@ -153,7 +163,7 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
                 })}
                 <div className="flex items-center gap-2.5">
                   <div className="hidden flex-1 sm:block">
-                    <StatBar value={Math.max(0, main(m)) / 100} tone={m.measured ? m.tier : "solid"} />
+                    <StatBar value={Math.max(0, main(m)) / 100} tone={displayTier(m)} />
                   </div>
                   <span className="tnum w-12 shrink-0 text-right font-display text-base font-semibold text-ink">
                     {main(m) >= 0 ? main(m).toFixed(0) : "—"}
