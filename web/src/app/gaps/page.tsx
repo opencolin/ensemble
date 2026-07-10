@@ -36,6 +36,7 @@ export default async function GapsPage() {
   const missing = total - filled;
   const claudeMissing = models.filter((m) => !tested("claude-code", m.modelId));
   const codexMissing = models.filter((m) => !tested("codex-cli", m.modelId));
+  const miniMissing = models.filter((m) => !tested("mini-swe-agent", m.modelId));
 
   const grid = `10rem repeat(${models.length}, 2.4rem)`;
 
@@ -82,7 +83,7 @@ export default async function GapsPage() {
               </div>
               {harnesses.map((h) => {
                 const n = models.filter((m) => tested(h.id, m.modelId)).length;
-                const hot = h.id === "claude-code" || h.id === "codex-cli";
+                const hot = h.id === "claude-code" || h.id === "codex-cli" || h.id === "mini-swe-agent";
                 return (
                   <div key={h.id} className="grid items-center gap-x-1 border-t border-edge/50 py-1.5" style={{ gridTemplateColumns: grid }}>
                     <Link href={`/agents/${h.id}`} className={`truncate pr-2 font-mono text-[12px] hover:text-accent ${hot ? "text-ink" : "text-dim"}`} title={h.name}>
@@ -103,7 +104,7 @@ export default async function GapsPage() {
           </div>
           <div className="mt-3 flex items-center gap-4 font-mono text-[11px] text-faint">
             <span className="flex items-center gap-1.5"><span className="size-3 rounded-sm bg-excellent/80" /> tested</span>
-            <span className="flex items-center gap-1.5"><span className="size-3 rounded-sm bg-iffy/25 ring-1 ring-inset ring-iffy/40" /> gap (Claude Code / Codex)</span>
+            <span className="flex items-center gap-1.5"><span className="size-3 rounded-sm bg-iffy/25 ring-1 ring-inset ring-iffy/40" /> gap (priority rows)</span>
             <span className="flex items-center gap-1.5"><span className="size-3 rounded-sm bg-edge" /> untested</span>
           </div>
         </section>
@@ -114,15 +115,18 @@ export default async function GapsPage() {
           <p className="mt-1 text-[13px] text-faint">
             The highest-value runs: pair a top harness with a top open model nobody has benchmarked.
           </p>
-          <div className="mt-5 grid gap-3 lg:grid-cols-2">
-            <GapCard title="Claude Code × open models" sub={`${claudeMissing.length} of ${models.length} untested — Claude Code is benchmarked only with Claude.`} models={claudeMissing.map((m) => m.modelName)} />
+          <div className="mt-5 grid gap-3 lg:grid-cols-3">
+            <GapCard title="mini-SWE-agent × open models" sub={`${miniMissing.length} of ${models.length} untested — our own runner, so these are one command away.`} models={miniMissing.map((m) => m.modelName)} />
+            <GapCard title="Claude Code × open models" sub={`${claudeMissing.length} of ${models.length} untested — public benchmarks pair it only with Claude.`} models={claudeMissing.map((m) => m.modelName)} />
             <GapCard title="Codex × open models" sub={`${codexMissing.length} of ${models.length} untested.`} models={codexMissing.map((m) => m.modelName)} />
           </div>
           <p className="mt-6 max-w-2xl font-mono text-[11px] leading-relaxed text-faint">
-            Green in the Claude Code row is our own{" "}
-            <span className="text-dim">ixio runs</span>{" "}
-            source — claude-code-proxy → Nebius, measured here. Codex is pending: Nebius doesn&apos;t
-            expose the Responses API current Codex requires. The remaining red cells are the next runs.
+            Green cells in our rows come from{" "}
+            <span className="text-dim">ixio runs</span>: mini-SWE-agent drives the model inside an
+            isolated microVM (ConTree or Tenki Sandbox), graded against hidden tests — models served
+            by Token Factory or the Vercel AI Gateway, so any model on either can fill a cell. The
+            Claude Code row&apos;s green came from our earlier claude-code-proxy runs. Red cells are
+            the queue.
           </p>
         </section>
       </main>

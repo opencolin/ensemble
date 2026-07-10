@@ -17,7 +17,6 @@ export function Mark({ className = "" }: { className?: string }) {
 const NAV = [
   { href: "/", label: "Model" },
   { href: "/agents", label: "Agent" },
-  { href: "/team", label: "Team" },
   { href: "/code-review", label: "Code Review" },
   { href: "/sandbox", label: "Sandbox" },
   { href: "/storage", label: "Storage" },
