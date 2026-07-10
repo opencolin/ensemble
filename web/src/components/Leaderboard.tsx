@@ -10,34 +10,60 @@ import { OpenFilter, type Weights } from "@/components/OpenFilter";
 export interface OverallRef { rank: number; composite: number }
 export interface UnmeasuredRow { modelId: string; modelName: string; vendor: string; rank: number; composite: number; openWeight: boolean }
 
+/** One display row: a measured board entry, or a top-overall model not yet run on this harness. */
+interface DisplayRow {
+  modelId: string; modelName: string; vendor: string; openWeight: boolean;
+  scores: ModelEntry["scores"]; tier: ModelEntry["tier"]; measured: boolean;
+  harnessComposite: number; overallComposite: number;
+}
+
 export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }: {
   board: HarnessBoard; harness: Harness; benchmarks: Benchmark[];
-  /** modelId -> all-benchmark rank+composite; adds an "Overall" column and breaks score ties. */
+  /** modelId -> all-benchmark rank+composite. When set, the board ranks by THIS
+   *  (the headline score), hides the saturated ixio-runs column, and folds
+   *  `unmeasured` models into the table as ranked rows with empty cells. */
   overall?: Record<string, OverallRef>;
-  /** Top overall models with no row on this board — shown as unranked ghost rows. */
   unmeasured?: UnmeasuredRow[];
 }) {
-  const benches = board.benchmarks.map((id) => benchmarks.find((b) => b.id === id)!).filter(Boolean);
+  const benches = board.benchmarks
+    .map((id) => benchmarks.find((b) => b.id === id)!)
+    .filter(Boolean)
+    .filter((b) => !overall || b.id !== "ensemble-runs");
   const [sortKey, setSortKey] = useState<string>("score"); // "score" | benchmarkId
   const [dir, setDir] = useState<"desc" | "asc">("desc");
   const [weights, setWeights] = useState<Weights>("all");
 
-  const models = weights === "open" ? board.models.filter((m) => m.openWeight) : board.models;
-  const ov = (m: ModelEntry) => overall?.[m.modelId]?.composite ?? -1;
-  // Display rank = standing by composite within the active (filtered) set;
-  // overall composite breaks ties so saturated 100-clusters still order meaningfully.
+  const all = useMemo<DisplayRow[]>(() => {
+    const measured: DisplayRow[] = board.models.map((m) => ({
+      modelId: m.modelId, modelName: m.modelName, vendor: m.vendor, openWeight: m.openWeight,
+      scores: m.scores, tier: m.tier, measured: true,
+      harnessComposite: m.composite, overallComposite: overall?.[m.modelId]?.composite ?? -1,
+    }));
+    const ghosts: DisplayRow[] = (overall ? (unmeasured ?? []) : []).map((g) => ({
+      modelId: g.modelId, modelName: g.modelName, vendor: g.vendor, openWeight: g.openWeight,
+      scores: {}, tier: "solid", measured: false,
+      harnessComposite: -1, overallComposite: g.composite,
+    }));
+    return [...measured, ...ghosts];
+  }, [board.models, overall, unmeasured]);
+
+  const models = weights === "open" ? all.filter((m) => m.openWeight) : all;
+  // Headline metric: overall composite when provided (harness composite breaks
+  // ties), else the harness composite (legacy mode, e.g. agent detail pages).
+  const main = (m: DisplayRow) => (overall ? m.overallComposite : m.harnessComposite);
+  const tie = (m: DisplayRow) => (overall ? m.harnessComposite : m.overallComposite);
   const rankMap = useMemo(() => {
     const map = new Map<string, number>();
-    [...models].sort((a, b) => (b.composite - a.composite) || (ov(b) - ov(a))).forEach((x, i) => map.set(x.modelId, i + 1));
+    [...models].sort((a, b) => (main(b) - main(a)) || (tie(b) - tie(a))).forEach((x, i) => map.set(x.modelId, i + 1));
     return map;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [models, overall]);
+  }, [models]);
   const rows = useMemo(() => {
-    const val = (m: ModelEntry) => (sortKey === "score" ? m.composite : (m.scores[sortKey]?.raw ?? -1));
+    const val = (m: DisplayRow) => (sortKey === "score" ? main(m) : (m.scores[sortKey]?.raw ?? -1));
     // Sort in-direction (not asc-then-reverse) so tied rows keep their rank order.
-    return [...models].sort((a, b) => (dir === "desc" ? (val(b) - val(a)) || (ov(b) - ov(a)) : (val(a) - val(b)) || (ov(a) - ov(b))));
+    return [...models].sort((a, b) => (dir === "desc" ? (val(b) - val(a)) || (tie(b) - tie(a)) : (val(a) - val(b)) || (tie(a) - tie(b))));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [models, sortKey, dir, overall]);
+  }, [models, sortKey, dir]);
 
   const sort = (key: string) => {
     if (key === sortKey) setDir((d) => (d === "desc" ? "asc" : "desc"));
@@ -45,9 +71,8 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
   };
   const arrow = (key: string) => (sortKey === key ? (dir === "desc" ? "↓" : "↑") : "");
 
-  const ghosts = (unmeasured ?? []).filter((g) => weights === "all" || g.openWeight);
-  const grid = `2.5rem minmax(10rem,1fr) ${benches.map(() => "4.5rem").join(" ")} ${overall ? "5.5rem " : ""}8.5rem`;
-  const minW = 360 + benches.length * 72 + 180 + (overall ? 88 : 0);
+  const grid = `2.5rem minmax(10rem,1fr) ${benches.map(() => "4.5rem").join(" ")} 8.5rem`;
+  const minW = 360 + benches.length * 72 + 180;
 
   return (
     <section id="leaderboard" className="mx-auto max-w-6xl px-5 py-8">
@@ -75,43 +100,16 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
                 {shortBench(b.name)} {arrow(b.id)}
               </button>
             ))}
-            {overall && (
-              <span className="text-right" title="Rank · composite across every benchmark we track (breadth-weighted)">
-                Overall
-              </span>
-            )}
-            <button onClick={() => sort("score")} title={`Percentile-blended across ${harness.name}'s benchmarks (0–100)`} className="text-right hover:text-dim">
-              Score {arrow("score")}
+            <button
+              onClick={() => sort("score")}
+              title={overall
+                ? "Breadth-weighted composite across every benchmark we track (0–100)"
+                : `Percentile-blended across ${harness.name}'s benchmarks (0–100)`}
+              className="text-right hover:text-dim"
+            >
+              {overall ? "Overall" : "Score"} {arrow("score")}
             </button>
           </div>
-
-          {/* top overall models nobody has measured on THIS harness — lead the board, unranked */}
-          {ghosts.length > 0 && (
-            <div className="border-b border-dashed border-edge/70 pb-1">
-              <div className="px-3 pt-2 pb-1 font-mono text-[10px] uppercase tracking-wider text-faint">
-                Top overall · not measured with {harness.name} yet
-              </div>
-              {ghosts.map((g) => (
-                <Link
-                  key={g.modelId}
-                  href={`/models/${slugFor(g.modelId)}`}
-                  className="grid items-center gap-x-3 rounded-lg px-3 py-2.5 opacity-70 transition-opacity hover:opacity-100"
-                  style={{ gridTemplateColumns: grid }}
-                >
-                  <span className="text-center font-mono text-[13px] text-faint">–</span>
-                  <div className="flex min-w-0 items-center gap-2">
-                    <span className="truncate font-display text-[15px] font-medium text-dim">{g.modelName}</span>
-                    <span className="truncate font-mono text-[11px] text-faint">{g.vendor}</span>
-                  </div>
-                  {benches.map((b) => (
-                    <span key={b.id} className="text-right font-mono text-[13px] text-faint">·</span>
-                  ))}
-                  <span className="tnum text-right font-mono text-[12px] text-faint">#{g.rank} <span className="text-dim">· {g.composite.toFixed(0)}</span></span>
-                  <span className="text-right font-mono text-[11px] text-faint">unmeasured</span>
-                </Link>
-              ))}
-            </div>
-          )}
 
           {/* rows */}
           <div className="divide-y divide-edge/50">
@@ -119,14 +117,20 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
               <Link
                 key={m.modelId}
                 href={`/models/${slugFor(m.modelId)}`}
-                className="rise grid items-center gap-x-3 rounded-lg px-3 py-3 transition-colors hover:bg-surface/70"
+                className={`rise grid items-center gap-x-3 rounded-lg px-3 py-3 transition-colors hover:bg-surface/70 ${m.measured ? "" : "opacity-75"}`}
                 style={{ gridTemplateColumns: grid, animationDelay: `${Math.min(i, 12) * 30}ms` }}
               >
-                <Rank rank={rankMap.get(m.modelId) ?? m.rank} />
+                <Rank rank={rankMap.get(m.modelId) ?? i + 1} />
                 <div className="flex min-w-0 flex-col gap-1">
                   <div className="flex items-center gap-2">
                     <span className="truncate font-display text-[15px] font-medium text-ink">{m.modelName}</span>
-                    <span className={`size-1.5 shrink-0 rounded-full ${TIER_CLASS[m.tier].bar}`} />
+                    {m.measured ? (
+                      <span className={`size-1.5 shrink-0 rounded-full ${TIER_CLASS[m.tier].bar}`} />
+                    ) : (
+                      <span className="shrink-0 rounded border border-edge px-1.5 py-px font-mono text-[9px] uppercase tracking-wider text-faint" title={`No benchmark has paired this model with ${harness.name} yet — ranked by its overall score`}>
+                        not run on {harness.name}
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center gap-2 font-mono text-[11px] text-faint">
                     <span className="truncate">{m.vendor}</span>
@@ -147,17 +151,12 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
                     </span>
                   );
                 })}
-                {overall && (
-                  <span className="tnum text-right font-mono text-[12px] text-faint">
-                    {overall[m.modelId] ? <>#{overall[m.modelId].rank} <span className="text-dim">· {overall[m.modelId].composite.toFixed(0)}</span></> : "—"}
-                  </span>
-                )}
                 <div className="flex items-center gap-2.5">
                   <div className="hidden flex-1 sm:block">
-                    <StatBar value={m.composite / 100} tone={m.tier} />
+                    <StatBar value={Math.max(0, main(m)) / 100} tone={m.measured ? m.tier : "solid"} />
                   </div>
                   <span className="tnum w-12 shrink-0 text-right font-display text-base font-semibold text-ink">
-                    {m.composite.toFixed(0)}
+                    {main(m) >= 0 ? main(m).toFixed(0) : "—"}
                   </span>
                 </div>
               </Link>
