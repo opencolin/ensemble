@@ -25,9 +25,6 @@ function MetaChip({ k, v }: { k: string; v: string }) {
 export default async function CodeReviewPage() {
   const lb = await getLeaderboard();
   const cr = CODE_REVIEW;
-  const topF1 = [...cr.reviewers].sort((a, b) => b.f1 - a.f1)[0];
-  const topRecall = [...cr.reviewers].sort((a, b) => b.recall - a.recall)[0];
-  const topPrec = [...cr.reviewers].sort((a, b) => b.precision - a.precision)[0];
 
   return (
     <>
@@ -55,25 +52,6 @@ export default async function CodeReviewPage() {
             <MetaChip k="PRs · repos" v={`${cr.prs} · ${cr.repos}`} />
             <MetaChip k="LLM judges" v={`${cr.judges}`} />
             <MetaChip k="Updated" v={cr.updated} />
-          </div>
-        </section>
-
-        {/* the honest caveat — front and center */}
-        <section className="mx-auto max-w-6xl px-5 py-2">
-          <div className="rounded-xl border border-iffy/30 bg-iffy/[0.06] px-5 py-4">
-            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-iffy">
-              <span>⚠</span> read the ranking honestly
-            </div>
-            <p className="mt-2 max-w-3xl text-[13px] leading-relaxed text-dim">
-              This is <span className="text-ink">{cr.author}&apos;s own benchmark</span>, and {cr.author}{" "}
-              ranks itself #1 — on <span className="text-ink">recall</span>. It catches the most bugs
-              ({topRecall.recall}%) by commenting the most, but ~{(100 - topRecall.precision).toFixed(0)}% of its
-              comments are noise ({topRecall.precision}% precision). Rank by{" "}
-              <span className="text-ink">F1</span> — which balances catching bugs against crying wolf — and
-              it&apos;s a near three-way tie ({topF1.f1}, {[...cr.reviewers].sort((a, b) => b.f1 - a.f1)[1].name}{" "}
-              {[...cr.reviewers].sort((a, b) => b.f1 - a.f1)[1].f1}). {topPrec.name} is the most precise
-              ({topPrec.precision}%). We default the table to F1 — sort by precision to see it flip.
-            </p>
           </div>
         </section>
 
