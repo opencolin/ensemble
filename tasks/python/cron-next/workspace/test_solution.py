@@ -116,16 +116,14 @@ def test_result_has_zero_seconds_and_microseconds():
 # --- Day-of-week only (dom is '*') -----------------------------------------
 
 
-@pytest.mark.parametrize(
-    "cron, expected",
-    [
-        # 2026-01-01 is a Thursday; next Saturday is 2026-01-03 noon.
-        ("0 12 * * 1-5", D(2026, 1, 2, 12, 0)),  # weekdays only; Fri is next
-    ],
-)
-def test_weekday_range_from_thursday(cron, expected):
-    # From Thu 2026-01-01 08:00, "0 12 * * 1-5" fires Fri 2026-01-02 12:00.
-    assert next_fire(cron, D(2026, 1, 1, 8, 0)) == expected
+def test_weekday_range_same_weekday_later_time():
+    # Thu 2026-01-01 08:00 -> same day 12:00 (Thursday is within Mon-Fri).
+    assert next_fire("0 12 * * 1-5", D(2026, 1, 1, 8, 0)) == D(2026, 1, 1, 12, 0)
+
+
+def test_weekday_range_on_the_minute_advances_to_next_weekday():
+    # Thu 2026-01-01 12:00 exactly -> strictly after -> Fri 2026-01-02 12:00.
+    assert next_fire("0 12 * * 1-5", D(2026, 1, 1, 12, 0)) == D(2026, 1, 2, 12, 0)
 
 
 def test_weekday_range_saturday_noon_to_monday_noon():

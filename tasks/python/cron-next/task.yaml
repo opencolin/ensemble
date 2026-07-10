@@ -1,0 +1,79 @@
+id: py-cron-next
+language: python
+category: feature
+maxTurns: 30
+prompt: |
+  Implement `next_fire(cron: str, after: datetime) -> datetime` in `solution.py`.
+  It returns the earliest datetime STRICTLY AFTER `after` that matches the
+  five-field cron expression `cron`.
+
+  The five whitespace-separated fields are, in order:
+      minute  hour  day-of-month  month  day-of-week
+  A cron string with any number of fields other than five is malformed.
+  Work with naive `datetime` objects only — no timezones, no daylight-saving.
+
+  Field domains:
+  - minute: 0-59
+  - hour: 0-23
+  - day-of-month (dom): 1-31
+  - month: 1-12
+  - day-of-week (dow): 0-7, where BOTH 0 and 7 mean Sunday
+    (Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6).
+
+  Field syntax (each field is parsed independently):
+  - `*` — every value in that field's domain.
+  - a single number, e.g. `5`.
+  - a comma-separated list, e.g. `1,5,20` (each item may be any form below).
+  - an inclusive range `a-b`, e.g. `8-11` == 8,9,10,11.
+  - a step `*/n` — every n-th value starting from the FIRST value of the
+    field's domain. So `*/n` starts at 0 for minute and hour, but at 1 for
+    day-of-month and month.
+  - a stepped range `a-b/n` — start at `a`, every n-th value, up to and
+    including `b` (e.g. `10-40/7` == 10,17,24,31,38).
+  - list items may mix these forms, e.g. `1,5-10/2,50` == {1,5,7,9,50}.
+  Month and day-of-week NAMES (JAN, SUN, ...) are NOT supported. Any malformed
+  field, or any value outside its domain, must raise `ValueError`.
+
+  Matching a datetime:
+  - It matches when its minute, hour, month, AND day all match. Minute, hour
+    and month use simple membership.
+  - Day-of-month vs day-of-week follows the classic cron rule:
+      * If BOTH the dom and dow fields are restricted (neither is `*`), the day
+        matches when EITHER the day-of-month matches OR the day-of-week matches
+        (a union / OR).
+      * If only ONE of them is restricted (the other is `*`), only the
+        restricted field has to match.
+      * If both are `*`, every day matches.
+    For example `0 0 13 * 5` fires at 00:00 on the 13th of any month OR on any
+    Friday.
+
+  Strictly-after and granularity:
+  - The seconds and microseconds of `after` are irrelevant to matching. The
+    returned datetime always has `second == 0` and `microsecond == 0`.
+  - The result must be strictly after `after` at minute granularity: if `after`
+    lands exactly on a matching minute (no matter its seconds), return the NEXT
+    matching minute — never the same one.
+
+  Nonexistent dates and the search bound:
+  - A day-of-month that does not exist in a month simply never matches in that
+    month (February has no 30th/31st; April/June/September/November have no
+    31st). The search continues into later months/years until a real matching
+    date is found — e.g. `0 0 31 2,8 *` never fires in February and next fires
+    on August 31.
+  - Cap the search at 5 years past `after`. If nothing matches in that window,
+    raise `ValueError` (e.g. `0 0 30 2 *` never fires).
+
+  Examples:
+      next_fire("*/15 * * * *", datetime(2026,1,1,10,7))  == datetime(2026,1,1,10,15)
+      next_fire("*/15 * * * *", datetime(2026,1,1,10,15)) == datetime(2026,1,1,10,30)  # strictly after
+      next_fire("0 0 */10 * *", datetime(2026,1,1,0,0))   == datetime(2026,1,11,0,0)   # dom step starts at 1
+      next_fire("0 0 13 * 5",  datetime(2026,1,1,0,0))    == datetime(2026,1,2,0,0)    # union: next Friday
+      next_fire("0 0 13 * 5",  datetime(2026,1,10,0,0))   == datetime(2026,1,13,0,0)   # union: the 13th (a Tue)
+      next_fire("0 12 * * 1-5", datetime(2026,1,3,12,0))  == datetime(2026,1,5,12,0)   # Sat noon -> Mon noon
+      next_fire("0 0 * * 7",   datetime(2026,1,1,0,0))    == datetime(2026,1,4,0,0)    # dow 7 == Sunday
+
+  Implement `solution.py` to this specification. It is graded against a hidden
+  test suite you never see, so handle every rule and edge case described above.
+acceptance: 'python3 -m pytest -q'
+hiddenTests:
+  - test_solution.py

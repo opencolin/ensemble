@@ -39,6 +39,8 @@ MODELS = {
     "anthropic/claude-fable-5": ("Claude Fable 5", "Anthropic"),
     "openai/gpt-5.6-sol": ("GPT-5.6 Sol", "OpenAI"),
     "anthropic/claude-opus-4-8": ("Claude Opus 4.8", "Anthropic"),
+    "openai/gpt-5.5": ("GPT-5.5", "OpenAI"),
+    "xai/grok-4.5": ("Grok 4.5", "xAI"),
 }
 
 INSTALL_CC = "sudo npm install -g @anthropic-ai/claude-code >/dev/null 2>&1 && claude --version"
