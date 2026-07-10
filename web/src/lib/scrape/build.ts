@@ -68,9 +68,9 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
 
   // ---- canonicalize ----
   interface CRec { harnessId?: string; modelId: string; modelName: string; vendor: string; openWeight: boolean; benchmark: string; score: number; date?: string; stderr?: number; anchor?: boolean; runs?: number }
-  // Models announced but not actually available — dropped from every board (some
-  // scraped leaderboards list them before release).
-  const EXCLUDE_MODEL_IDS = new Set(["claude-fable-5", "fable-5"]);
+  // Models to drop from every board (e.g. announced but not actually available).
+  // Empty right now — Fable 5 was excluded pre-release, reinstated once usable.
+  const EXCLUDE_MODEL_IDS = new Set<string>([]);
   const harnesses = new Map<string, Harness>();
   const recs: CRec[] = records.map((r) => {
     const m = canonModel(r.modelName, r.modelOrg, r.license);
