@@ -2,7 +2,7 @@
   "meta": {
     "title": "ixio — best models for coding agents",
     "status": "live",
-    "scrapedAt": "2026-07-10T01:54:38.827Z",
+    "scrapedAt": "2026-07-10T01:58:25.816Z",
     "defaultHarnessId": "claude-code",
     "sources": [
       {
@@ -45,7 +45,7 @@
         "name": "ixio runs",
         "url": "https://github.com/opencolin/ensemble/tree/main/runner",
         "ok": true,
-        "entries": 10
+        "entries": 11
       },
       {
         "id": "stratix-cup",
@@ -62,7 +62,7 @@
         "entries": 2
       }
     ],
-    "totalEntries": 951,
+    "totalEntries": 952,
     "harnessCount": 45,
     "modelCount": 327,
     "benchmarkCount": 10,
@@ -4830,7 +4830,7 @@
               "date": "2026-06-21"
             }
           },
-          "composite": 60,
+          "composite": 54.5,
           "rank": 7,
           "tier": "solid"
         },
@@ -4846,7 +4846,7 @@
               "date": "2026-06-21"
             }
           },
-          "composite": 60,
+          "composite": 54.5,
           "rank": 8,
           "tier": "solid"
         },
@@ -4879,7 +4879,7 @@
               "date": "2026-06-21"
             }
           },
-          "composite": 40,
+          "composite": 36.4,
           "rank": 10,
           "tier": "iffy"
         },
@@ -4912,7 +4912,7 @@
               "date": "2026-06-21"
             }
           },
-          "composite": 30,
+          "composite": 27.3,
           "rank": 12,
           "tier": "iffy"
         },
@@ -4928,7 +4928,7 @@
               "date": "2026-06-21"
             }
           },
-          "composite": 30,
+          "composite": 27.3,
           "rank": 13,
           "tier": "iffy"
         },
@@ -4944,7 +4944,7 @@
               "date": "2026-06-21"
             }
           },
-          "composite": 30,
+          "composite": 27.3,
           "rank": 14,
           "tier": "iffy"
         },
@@ -5099,6 +5099,22 @@
       "harnessId": "mini-swe-agent",
       "models": [
         {
+          "modelId": "claude-fable-5",
+          "modelName": "Claude Fable 5",
+          "vendor": "Anthropic",
+          "openWeight": false,
+          "scores": {
+            "ensemble-runs": {
+              "value": 1,
+              "raw": 100,
+              "date": "2026-07-09"
+            }
+          },
+          "composite": 100,
+          "rank": 1,
+          "tier": "excellent"
+        },
+        {
           "modelId": "claude-sonnet-4-5",
           "modelName": "Claude Sonnet 4.5",
           "vendor": "Anthropic",
@@ -5112,7 +5128,7 @@
             }
           },
           "composite": 45.5,
-          "rank": 1,
+          "rank": 2,
           "tier": "excellent"
         },
         {
@@ -5129,7 +5145,7 @@
             }
           },
           "composite": 44,
-          "rank": 2,
+          "rank": 3,
           "tier": "excellent"
         },
         {
@@ -5146,7 +5162,7 @@
             }
           },
           "composite": 36.6,
-          "rank": 3,
+          "rank": 4,
           "tier": "excellent"
         },
         {
@@ -5163,8 +5179,8 @@
             }
           },
           "composite": 34.3,
-          "rank": 4,
-          "tier": "excellent"
+          "rank": 5,
+          "tier": "solid"
         },
         {
           "modelId": "claude-haiku-4-5",
@@ -5180,7 +5196,7 @@
             }
           },
           "composite": 29.9,
-          "rank": 5,
+          "rank": 6,
           "tier": "solid"
         },
         {
@@ -5197,7 +5213,7 @@
             }
           },
           "composite": 23.1,
-          "rank": 6,
+          "rank": 7,
           "tier": "solid"
         },
         {
@@ -5214,7 +5230,7 @@
             }
           },
           "composite": 22.4,
-          "rank": 7,
+          "rank": 8,
           "tier": "solid"
         },
         {
@@ -5231,7 +5247,7 @@
             }
           },
           "composite": 21.6,
-          "rank": 8,
+          "rank": 9,
           "tier": "solid"
         },
         {
@@ -5248,7 +5264,7 @@
             }
           },
           "composite": 15.7,
-          "rank": 9,
+          "rank": 10,
           "tier": "iffy"
         },
         {
@@ -5265,7 +5281,7 @@
             }
           },
           "composite": 11.9,
-          "rank": 10,
+          "rank": 11,
           "tier": "iffy"
         },
         {
@@ -5282,7 +5298,7 @@
             }
           },
           "composite": 7.5,
-          "rank": 11,
+          "rank": 12,
           "tier": "iffy"
         },
         {
@@ -5299,7 +5315,7 @@
             }
           },
           "composite": 2.2,
-          "rank": 12,
+          "rank": 13,
           "tier": "iffy"
         },
         {
@@ -5316,11 +5332,12 @@
             }
           },
           "composite": 1.5,
-          "rank": 13,
+          "rank": 14,
           "tier": "iffy"
         }
       ],
       "benchmarks": [
+        "ensemble-runs",
         "terminal-bench"
       ]
     },
@@ -5644,23 +5661,8 @@
       ]
     },
     {
-      "harnessId": "claude-code",
-      "rank": 17,
-      "score": 84,
-      "tier": "solid",
-      "bestModelId": "glm-5-2",
-      "bestModelName": "GLM-5.2",
-      "bestScore": 100,
-      "medianScore": 60,
-      "modelsTested": 15,
-      "benchmarks": [
-        "ensemble-runs",
-        "terminal-bench"
-      ]
-    },
-    {
       "harnessId": "deep-agents",
-      "rank": 18,
+      "rank": 17,
       "score": 83.6,
       "tier": "solid",
       "bestModelId": "gpt-5-2-codex",
@@ -5674,7 +5676,7 @@
     },
     {
       "harnessId": "crush",
-      "rank": 19,
+      "rank": 18,
       "score": 82.6,
       "tier": "solid",
       "bestModelId": "nemotron-3-super-120b-a12b",
@@ -5688,7 +5690,7 @@
     },
     {
       "harnessId": "clnkr",
-      "rank": 20,
+      "rank": 19,
       "score": 82.1,
       "tier": "solid",
       "bestModelId": "gpt-5-5",
@@ -5697,6 +5699,21 @@
       "medianScore": 82.1,
       "modelsTested": 1,
       "benchmarks": [
+        "terminal-bench"
+      ]
+    },
+    {
+      "harnessId": "claude-code",
+      "rank": 20,
+      "score": 81.8,
+      "tier": "solid",
+      "bestModelId": "glm-5-2",
+      "bestModelName": "GLM-5.2",
+      "bestScore": 100,
+      "medianScore": 54.5,
+      "modelsTested": 15,
+      "benchmarks": [
+        "ensemble-runs",
         "terminal-bench"
       ]
     },
@@ -5843,8 +5860,23 @@
       ]
     },
     {
-      "harnessId": "letta-code",
+      "harnessId": "mini-swe-agent",
       "rank": 31,
+      "score": 69.1,
+      "tier": "iffy",
+      "bestModelId": "claude-fable-5",
+      "bestModelName": "Claude Fable 5",
+      "bestScore": 100,
+      "medianScore": 22.8,
+      "modelsTested": 14,
+      "benchmarks": [
+        "ensemble-runs",
+        "terminal-bench"
+      ]
+    },
+    {
+      "harnessId": "letta-code",
+      "rank": 32,
       "score": 68,
       "tier": "iffy",
       "bestModelId": "claude-opus-4-5",
@@ -5858,7 +5890,7 @@
     },
     {
       "harnessId": "spoox-o-m",
-      "rank": 32,
+      "rank": 33,
       "score": 66.7,
       "tier": "iffy",
       "bestModelId": "gpt-5-3-codex",
@@ -5872,7 +5904,7 @@
     },
     {
       "harnessId": "grok-cli",
-      "rank": 33,
+      "rank": 34,
       "score": 66.4,
       "tier": "iffy",
       "bestModelId": "grok-4-20",
@@ -5886,7 +5918,7 @@
     },
     {
       "harnessId": "goose",
-      "rank": 34,
+      "rank": 35,
       "score": 65.2,
       "tier": "iffy",
       "bestModelId": "gpt-oss-120b",
@@ -5901,7 +5933,7 @@
     },
     {
       "harnessId": "terminus-2",
-      "rank": 35,
+      "rank": 36,
       "score": 62.9,
       "tier": "iffy",
       "bestModelId": "gpt-5-3-codex",
@@ -5915,7 +5947,7 @@
     },
     {
       "harnessId": "simplai-agent",
-      "rank": 36,
+      "rank": 37,
       "score": 61.9,
       "tier": "iffy",
       "bestModelId": "claude-sonnet-4-6",
@@ -5929,7 +5961,7 @@
     },
     {
       "harnessId": "plandex",
-      "rank": 37,
+      "rank": 38,
       "score": 59.5,
       "tier": "iffy",
       "bestModelId": "gpt-oss-120b",
@@ -5943,7 +5975,7 @@
     },
     {
       "harnessId": "gemini-cli",
-      "rank": 38,
+      "rank": 39,
       "score": 58.4,
       "tier": "iffy",
       "bestModelId": "gemini-3-1-pro",
@@ -5957,7 +5989,7 @@
     },
     {
       "harnessId": "camel-ai",
-      "rank": 39,
+      "rank": 40,
       "score": 55.2,
       "tier": "iffy",
       "bestModelId": "claude-sonnet-4-5",
@@ -5971,7 +6003,7 @@
     },
     {
       "harnessId": "harness-agent",
-      "rank": 40,
+      "rank": 41,
       "score": 49.3,
       "tier": "iffy",
       "bestModelId": "minimax-m2-7-highspeed",
@@ -5985,7 +6017,7 @@
     },
     {
       "harnessId": "cchuter",
-      "rank": 41,
+      "rank": 42,
       "score": 47.8,
       "tier": "iffy",
       "bestModelId": "minimax-m2-5",
@@ -5993,20 +6025,6 @@
       "bestScore": 47.8,
       "medianScore": 47.8,
       "modelsTested": 1,
-      "benchmarks": [
-        "terminal-bench"
-      ]
-    },
-    {
-      "harnessId": "mini-swe-agent",
-      "rank": 42,
-      "score": 36.3,
-      "tier": "iffy",
-      "bestModelId": "claude-sonnet-4-5",
-      "bestModelName": "Claude Sonnet 4.5",
-      "bestScore": 45.5,
-      "medianScore": 22.4,
-      "modelsTested": 13,
       "benchmarks": [
         "terminal-bench"
       ]
@@ -6098,22 +6116,8 @@
       ]
     },
     {
-      "harnessId": "claude-code",
-      "rank": 4,
-      "score": 84,
-      "tier": "excellent",
-      "bestModelId": "glm-5-2",
-      "bestModelName": "GLM-5.2",
-      "bestScore": 100,
-      "medianScore": 60,
-      "modelsTested": 10,
-      "benchmarks": [
-        "ensemble-runs"
-      ]
-    },
-    {
       "harnessId": "crush",
-      "rank": 5,
+      "rank": 4,
       "score": 82.6,
       "tier": "excellent",
       "bestModelId": "nemotron-3-super-120b-a12b",
@@ -6123,6 +6127,20 @@
       "modelsTested": 14,
       "benchmarks": [
         "coding-agent-bench"
+      ]
+    },
+    {
+      "harnessId": "claude-code",
+      "rank": 5,
+      "score": 81.8,
+      "tier": "excellent",
+      "bestModelId": "glm-5-2",
+      "bestModelName": "GLM-5.2",
+      "bestScore": 100,
+      "medianScore": 54.5,
+      "modelsTested": 10,
+      "benchmarks": [
+        "ensemble-runs"
       ]
     },
     {
@@ -6414,13 +6432,18 @@
           "value": 0.141,
           "raw": 14.1,
           "stderr": 1.56
+        },
+        "ensemble-runs": {
+          "value": 1,
+          "raw": 100,
+          "date": "2026-07-09"
         }
       },
       "best": {
         "benchmark": "arena-coding",
         "raw": 1566
       },
-      "composite": 98.7,
+      "composite": 98.9,
       "rank": 3,
       "tier": "excellent"
     },
@@ -8353,6 +8376,25 @@
       "tier": "excellent"
     },
     {
+      "modelId": "hunyuan-t1-20250711",
+      "modelName": "Hunyuan-T1-20250711",
+      "vendor": "Tencent",
+      "openWeight": false,
+      "scores": {
+        "arena-coding": {
+          "value": 14.09,
+          "raw": 1409
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1409
+      },
+      "composite": 66.5,
+      "rank": 72,
+      "tier": "excellent"
+    },
+    {
       "modelId": "qwen3-5-397b-a17b",
       "modelName": "qwen3.5-397b-a17b",
       "vendor": "Alibaba",
@@ -8385,26 +8427,7 @@
         "raw": 92,
         "harnessId": "qwen-code"
       },
-      "composite": 66.8,
-      "rank": 72,
-      "tier": "excellent"
-    },
-    {
-      "modelId": "hunyuan-t1-20250711",
-      "modelName": "Hunyuan-T1-20250711",
-      "vendor": "Tencent",
-      "openWeight": false,
-      "scores": {
-        "arena-coding": {
-          "value": 14.09,
-          "raw": 1409
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1409
-      },
-      "composite": 66.5,
+      "composite": 66.3,
       "rank": 73,
       "tier": "excellent"
     },
@@ -8969,6 +8992,80 @@
       "tier": "solid"
     },
     {
+      "modelId": "llama-4-maverick-17b-128e-instruct",
+      "modelName": "llama-4-maverick-17b-128e-instruct",
+      "vendor": "Meta",
+      "openWeight": true,
+      "scores": {
+        "coding-agent-bench": {
+          "value": 0.76,
+          "raw": 76
+        },
+        "arena-coding": {
+          "value": 13.12,
+          "raw": 1312
+        },
+        "artificial-analysis": {
+          "value": 0.4,
+          "raw": 40
+        }
+      },
+      "best": {
+        "benchmark": "coding-agent-bench",
+        "raw": 76,
+        "harnessId": "aider"
+      },
+      "composite": 60,
+      "rank": 94,
+      "tier": "solid"
+    },
+    {
+      "modelId": "qwen3-30b-a3b-instruct-2507",
+      "modelName": "Qwen3-30B-A3B-Instruct-2507",
+      "vendor": "Alibaba",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 14.25,
+          "raw": 1425
+        },
+        "artificial-analysis": {
+          "value": 0.44,
+          "raw": 44
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1425
+      },
+      "composite": 59.7,
+      "rank": 95,
+      "tier": "solid"
+    },
+    {
+      "modelId": "kimi-k2-0711-preview",
+      "modelName": "Kimi-K2-0711-Preview",
+      "vendor": "Moonshot AI",
+      "openWeight": true,
+      "scores": {
+        "arena-coding": {
+          "value": 14.02,
+          "raw": 1402
+        },
+        "artificial-analysis": {
+          "value": 0.47,
+          "raw": 47
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1402
+      },
+      "composite": 59.4,
+      "rank": 96,
+      "tier": "solid"
+    },
+    {
       "modelId": "gpt-oss-120b",
       "modelName": "gpt-oss-120b",
       "vendor": "OpenAI",
@@ -9003,81 +9100,7 @@
         "raw": 96,
         "harnessId": "aider"
       },
-      "composite": 60.4,
-      "rank": 94,
-      "tier": "solid"
-    },
-    {
-      "modelId": "llama-4-maverick-17b-128e-instruct",
-      "modelName": "llama-4-maverick-17b-128e-instruct",
-      "vendor": "Meta",
-      "openWeight": true,
-      "scores": {
-        "coding-agent-bench": {
-          "value": 0.76,
-          "raw": 76
-        },
-        "arena-coding": {
-          "value": 13.12,
-          "raw": 1312
-        },
-        "artificial-analysis": {
-          "value": 0.4,
-          "raw": 40
-        }
-      },
-      "best": {
-        "benchmark": "coding-agent-bench",
-        "raw": 76,
-        "harnessId": "aider"
-      },
-      "composite": 60,
-      "rank": 95,
-      "tier": "solid"
-    },
-    {
-      "modelId": "qwen3-30b-a3b-instruct-2507",
-      "modelName": "Qwen3-30B-A3B-Instruct-2507",
-      "vendor": "Alibaba",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.25,
-          "raw": 1425
-        },
-        "artificial-analysis": {
-          "value": 0.44,
-          "raw": 44
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1425
-      },
-      "composite": 59.7,
-      "rank": 96,
-      "tier": "solid"
-    },
-    {
-      "modelId": "kimi-k2-0711-preview",
-      "modelName": "Kimi-K2-0711-Preview",
-      "vendor": "Moonshot AI",
-      "openWeight": true,
-      "scores": {
-        "arena-coding": {
-          "value": 14.02,
-          "raw": 1402
-        },
-        "artificial-analysis": {
-          "value": 0.47,
-          "raw": 47
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1402
-      },
-      "composite": 59.4,
+      "composite": 59.3,
       "rank": 97,
       "tier": "solid"
     },
@@ -9200,31 +9223,6 @@
       "tier": "solid"
     },
     {
-      "modelId": "deepseek-v4",
-      "modelName": "DeepSeek-V4",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "swe-bench": {
-          "value": 0.762,
-          "raw": 76.2,
-          "date": "2026-04-23"
-        },
-        "ensemble-runs": {
-          "value": 0.5,
-          "raw": 50,
-          "date": "2026-06-21"
-        }
-      },
-      "best": {
-        "benchmark": "swe-bench",
-        "raw": 76.2
-      },
-      "composite": 57.7,
-      "rank": 102,
-      "tier": "solid"
-    },
-    {
       "modelId": "claude-sonnet-4-thinking-32k",
       "modelName": "Claude Sonnet 4 (thinking-32k)",
       "vendor": "Anthropic",
@@ -9248,7 +9246,7 @@
         "raw": 1412
       },
       "composite": 57.7,
-      "rank": 103,
+      "rank": 102,
       "tier": "solid"
     },
     {
@@ -9271,7 +9269,7 @@
         "raw": 51
       },
       "composite": 57.5,
-      "rank": 104,
+      "rank": 103,
       "tier": "solid"
     },
     {
@@ -9294,7 +9292,7 @@
         "raw": 1434
       },
       "composite": 57.3,
-      "rank": 105,
+      "rank": 104,
       "tier": "solid"
     },
     {
@@ -9317,7 +9315,7 @@
         "raw": 1394
       },
       "composite": 57,
-      "rank": 106,
+      "rank": 105,
       "tier": "solid"
     },
     {
@@ -9345,6 +9343,31 @@
         "raw": 1448
       },
       "composite": 56.5,
+      "rank": 106,
+      "tier": "solid"
+    },
+    {
+      "modelId": "deepseek-v4",
+      "modelName": "DeepSeek-V4",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
+        "swe-bench": {
+          "value": 0.762,
+          "raw": 76.2,
+          "date": "2026-04-23"
+        },
+        "ensemble-runs": {
+          "value": 0.5,
+          "raw": 50,
+          "date": "2026-06-21"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 76.2
+      },
+      "composite": 55.9,
       "rank": 107,
       "tier": "solid"
     },
@@ -9372,38 +9395,6 @@
       "tier": "solid"
     },
     {
-      "modelId": "kimi-k2-5",
-      "modelName": "Kimi K2.5",
-      "vendor": "Moonshot AI",
-      "openWeight": true,
-      "scores": {
-        "swe-bench": {
-          "value": 0.708,
-          "raw": 70.8,
-          "date": "2026-01-26"
-        },
-        "terminal-bench": {
-          "value": 0.43200000000000005,
-          "raw": 43.2,
-          "date": "2026-02-04",
-          "stderr": 2.9
-        },
-        "ensemble-runs": {
-          "value": 0.833,
-          "raw": 83.3,
-          "date": "2026-06-21"
-        }
-      },
-      "best": {
-        "benchmark": "ensemble-runs",
-        "raw": 83.3,
-        "harnessId": "claude-code"
-      },
-      "composite": 55.7,
-      "rank": 109,
-      "tier": "solid"
-    },
-    {
       "modelId": "mistral-medium-3-1",
       "modelName": "Mistral Medium 3.1",
       "vendor": "Mistral AI",
@@ -9423,7 +9414,7 @@
         "raw": 1412
       },
       "composite": 54.9,
-      "rank": 110,
+      "rank": 109,
       "tier": "solid"
     },
     {
@@ -9442,7 +9433,7 @@
         "raw": 1361
       },
       "composite": 54.9,
-      "rank": 111,
+      "rank": 110,
       "tier": "solid"
     },
     {
@@ -9466,7 +9457,7 @@
         "raw": 11.87
       },
       "composite": 54.7,
-      "rank": 112,
+      "rank": 111,
       "tier": "solid"
     },
     {
@@ -9494,7 +9485,7 @@
         "harnessId": "aider"
       },
       "composite": 54.3,
-      "rank": 113,
+      "rank": 112,
       "tier": "solid"
     },
     {
@@ -9523,6 +9514,37 @@
         "raw": 1458
       },
       "composite": 54.3,
+      "rank": 113,
+      "tier": "solid"
+    },
+    {
+      "modelId": "kimi-k2-5",
+      "modelName": "Kimi K2.5",
+      "vendor": "Moonshot AI",
+      "openWeight": true,
+      "scores": {
+        "swe-bench": {
+          "value": 0.708,
+          "raw": 70.8,
+          "date": "2026-01-26"
+        },
+        "terminal-bench": {
+          "value": 0.43200000000000005,
+          "raw": 43.2,
+          "date": "2026-02-04",
+          "stderr": 2.9
+        },
+        "ensemble-runs": {
+          "value": 0.833,
+          "raw": 83.3,
+          "date": "2026-06-21"
+        }
+      },
+      "best": {
+        "benchmark": "swe-bench",
+        "raw": 70.8
+      },
+      "composite": 53.9,
       "rank": 114,
       "tier": "solid"
     },
@@ -9869,45 +9891,6 @@
       "tier": "solid"
     },
     {
-      "modelId": "deepseek-v3-2",
-      "modelName": "DeepSeek-V3.2",
-      "vendor": "DeepSeek",
-      "openWeight": true,
-      "scores": {
-        "swe-bench": {
-          "value": 0.7,
-          "raw": 70,
-          "date": "2025-12-01"
-        },
-        "terminal-bench": {
-          "value": 0.396,
-          "raw": 39.6,
-          "date": "2026-02-10",
-          "stderr": 2.8
-        },
-        "arena-coding": {
-          "value": 14.31,
-          "raw": 1431
-        },
-        "artificial-analysis": {
-          "value": 0.52,
-          "raw": 52
-        },
-        "ensemble-runs": {
-          "value": 0.16699999999999998,
-          "raw": 16.7,
-          "date": "2026-06-21"
-        }
-      },
-      "best": {
-        "benchmark": "arena-coding",
-        "raw": 1431
-      },
-      "composite": 49.9,
-      "rank": 129,
-      "tier": "solid"
-    },
-    {
       "modelId": "gemini-2-5-pro",
       "modelName": "Gemini 2.5 Pro",
       "vendor": "Google",
@@ -9942,6 +9925,45 @@
         "raw": 1465
       },
       "composite": 49.8,
+      "rank": 129,
+      "tier": "solid"
+    },
+    {
+      "modelId": "deepseek-v3-2",
+      "modelName": "DeepSeek-V3.2",
+      "vendor": "DeepSeek",
+      "openWeight": true,
+      "scores": {
+        "swe-bench": {
+          "value": 0.7,
+          "raw": 70,
+          "date": "2025-12-01"
+        },
+        "terminal-bench": {
+          "value": 0.396,
+          "raw": 39.6,
+          "date": "2026-02-10",
+          "stderr": 2.8
+        },
+        "arena-coding": {
+          "value": 14.31,
+          "raw": 1431
+        },
+        "artificial-analysis": {
+          "value": 0.52,
+          "raw": 52
+        },
+        "ensemble-runs": {
+          "value": 0.16699999999999998,
+          "raw": 16.7,
+          "date": "2026-06-21"
+        }
+      },
+      "best": {
+        "benchmark": "arena-coding",
+        "raw": 1431
+      },
+      "composite": 49.4,
       "rank": 130,
       "tier": "solid"
     },
@@ -11745,27 +11767,6 @@
       "tier": "iffy"
     },
     {
-      "modelId": "llama-3-3-70b",
-      "modelName": "Llama 3.3 70B",
-      "vendor": "Meta",
-      "openWeight": true,
-      "scores": {
-        "ensemble-runs": {
-          "value": 0.16699999999999998,
-          "raw": 16.7,
-          "date": "2026-06-21"
-        }
-      },
-      "best": {
-        "benchmark": "ensemble-runs",
-        "raw": 16.7,
-        "harnessId": "claude-code"
-      },
-      "composite": 30,
-      "rank": 207,
-      "tier": "iffy"
-    },
-    {
       "modelId": "claude-haiku-3-5-20241022",
       "modelName": "Claude Haiku 3.5 (20241022)",
       "vendor": "Anthropic",
@@ -11785,7 +11786,7 @@
         "raw": 1287
       },
       "composite": 29.9,
-      "rank": 208,
+      "rank": 207,
       "tier": "iffy"
     },
     {
@@ -11808,7 +11809,7 @@
         "raw": 1242
       },
       "composite": 29.9,
-      "rank": 209,
+      "rank": 208,
       "tier": "iffy"
     },
     {
@@ -11835,7 +11836,7 @@
         "raw": 1311
       },
       "composite": 29.8,
-      "rank": 210,
+      "rank": 209,
       "tier": "iffy"
     },
     {
@@ -11858,7 +11859,7 @@
         "raw": 1269
       },
       "composite": 29.6,
-      "rank": 211,
+      "rank": 210,
       "tier": "iffy"
     },
     {
@@ -11881,7 +11882,7 @@
         "raw": 1268
       },
       "composite": 29.3,
-      "rank": 212,
+      "rank": 211,
       "tier": "iffy"
     },
     {
@@ -11904,7 +11905,7 @@
         "raw": 1253
       },
       "composite": 29.2,
-      "rank": 213,
+      "rank": 212,
       "tier": "iffy"
     },
     {
@@ -11923,7 +11924,7 @@
         "raw": 1237
       },
       "composite": 29.2,
-      "rank": 214,
+      "rank": 213,
       "tier": "iffy"
     },
     {
@@ -11946,7 +11947,7 @@
         "raw": 1297
       },
       "composite": 29,
-      "rank": 215,
+      "rank": 214,
       "tier": "iffy"
     },
     {
@@ -11969,7 +11970,7 @@
         "raw": 1251
       },
       "composite": 28.1,
-      "rank": 216,
+      "rank": 215,
       "tier": "iffy"
     },
     {
@@ -11989,7 +11990,7 @@
         "raw": 58.4
       },
       "composite": 27.9,
-      "rank": 217,
+      "rank": 216,
       "tier": "iffy"
     },
     {
@@ -12008,7 +12009,7 @@
         "raw": 1227
       },
       "composite": 27.8,
-      "rank": 218,
+      "rank": 217,
       "tier": "iffy"
     },
     {
@@ -12027,6 +12028,27 @@
         "raw": 1226
       },
       "composite": 27.5,
+      "rank": 218,
+      "tier": "iffy"
+    },
+    {
+      "modelId": "llama-3-3-70b",
+      "modelName": "Llama 3.3 70B",
+      "vendor": "Meta",
+      "openWeight": true,
+      "scores": {
+        "ensemble-runs": {
+          "value": 0.16699999999999998,
+          "raw": 16.7,
+          "date": "2026-06-21"
+        }
+      },
+      "best": {
+        "benchmark": "ensemble-runs",
+        "raw": 16.7,
+        "harnessId": "claude-code"
+      },
+      "composite": 27.3,
       "rank": 219,
       "tier": "iffy"
     },
@@ -14297,7 +14319,7 @@
     {
       "vendor": "Anthropic",
       "rank": 3,
-      "score": 98.7,
+      "score": 98.9,
       "tier": "excellent",
       "bestModelId": "claude-fable-5",
       "bestModelName": "Claude Fable 5",
@@ -14837,23 +14859,23 @@
       "openWeight": true
     },
     {
-      "vendor": "OpenAI",
-      "rank": 12,
-      "score": 60.4,
-      "tier": "solid",
-      "bestModelId": "gpt-oss-120b",
-      "bestModelName": "gpt-oss-120b",
-      "modelCount": 2,
-      "openWeight": true
-    },
-    {
       "vendor": "Meta",
-      "rank": 13,
+      "rank": 12,
       "score": 60,
       "tier": "solid",
       "bestModelId": "llama-4-maverick-17b-128e-instruct",
       "bestModelName": "llama-4-maverick-17b-128e-instruct",
       "modelCount": 19,
+      "openWeight": true
+    },
+    {
+      "vendor": "OpenAI",
+      "rank": 13,
+      "score": 59.3,
+      "tier": "solid",
+      "bestModelId": "gpt-oss-120b",
+      "bestModelName": "gpt-oss-120b",
+      "modelCount": 2,
       "openWeight": true
     },
     {
@@ -15044,16 +15066,16 @@
       "source": "https://github.com/opencolin/ensemble/tree/main/runner",
       "homepage": "https://github.com/opencolin/ensemble/tree/main/runner",
       "rank": 3,
-      "score": 69.6,
+      "score": 69.9,
       "agentNative": 100,
-      "coverage": 7.1,
+      "coverage": 7.9,
       "realism": 90,
       "openness": 100,
-      "pairs": 10,
-      "evaluations": 10,
-      "entries": 10,
-      "harnessCount": 1,
-      "modelCount": 10
+      "pairs": 11,
+      "evaluations": 11,
+      "entries": 11,
+      "harnessCount": 2,
+      "modelCount": 11
     },
     {
       "id": "swe-bench",

@@ -46,9 +46,11 @@ class TenkiEnvironment:
 
     def execute(self, action: dict, cwd: str = "", *, timeout: int | None = None) -> dict:
         try:
+            # Tenki exec drops its cwd param (commands land in $HOME) — cd explicitly.
+            wd = cwd or self.cwd
             r = self.sandbox.exec(
-                "bash", "-lc", action.get("command") or "",
-                cwd=cwd or self.cwd, env=self.env or None, timeout=timeout or self.timeout,
+                "bash", "-lc", f"cd {wd} && {{ {action.get('command') or ''}\n}}",
+                env=self.env or None, timeout=timeout or self.timeout,
             )
             # CommandResult has no numeric exit code, only ok — 0/1 preserves the
             # only thing callers check (== 0).
@@ -102,5 +104,6 @@ def grade(sb: Sandbox, task, score_fn) -> float:
     """Reveal the hidden tests, run acceptance in WORK, return partial credit [0,1]."""
     for n in task.hidden_tests:
         sb.fs.write_bytes(f"{WORK}/{n}", (task.workspace / n).read_bytes())
-    r = sb.exec("bash", "-lc", task.acceptance, cwd=WORK, timeout=300)
+    # cd explicitly — exec's cwd param is unreliable (see TenkiEnvironment.execute).
+    r = sb.exec("bash", "-lc", f"cd {WORK} && {task.acceptance}", timeout=300)
     return score_fn(task.acceptance, r.stdout_text or "", r.stderr_text or "", 0 if r.ok else 1)

@@ -53,6 +53,7 @@ LANG = {
 
 # model id -> (display name, vendor, (base_url, key_env))
 MODELS = {
+    "anthropic/claude-fable-5": ("Claude Fable 5", "Anthropic", GATEWAY),
     "anthropic/claude-opus-4-8": ("Claude Opus 4.8", "Anthropic", GATEWAY),
     "zai-org/GLM-5.2": ("GLM-5.2", "Z.ai", TOKENFACTORY),
     "moonshotai/Kimi-K2.6": ("Kimi K2.6", "Moonshot AI", TOKENFACTORY),

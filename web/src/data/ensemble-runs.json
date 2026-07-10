@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22",
+  "generatedAt": "2026-07-09",
   "harness": "claude-code",
   "dryRun": false,
   "results": [
@@ -92,6 +92,15 @@
       "passRate": 100.0,
       "runs": 6,
       "date": "2026-06-22"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "anthropic/claude-fable-5",
+      "modelName": "Claude Fable 5",
+      "modelOrg": "Anthropic",
+      "passRate": 100.0,
+      "runs": 3,
+      "date": "2026-07-09"
     }
   ]
 }
