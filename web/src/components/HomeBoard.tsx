@@ -51,6 +51,13 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
   const topModel = lb.models[0];
   const topLab = lb.labs[0];
   const topAgent = lb.agents[0];
+  // Fused board inputs: every row gets its all-benchmark standing, and the top
+  // overall models with no row on this harness show as unranked ghost rows.
+  const overallById = Object.fromEntries(lb.models.map((m) => [m.modelId, { rank: m.rank, composite: m.composite }]));
+  const ghosts = board
+    ? lb.models.slice(0, 10).filter((m) => !board.models.some((x) => x.modelId === m.modelId)).slice(0, 3)
+        .map((m) => ({ modelId: m.modelId, modelName: m.modelName, vendor: m.vendor, rank: m.rank, composite: m.composite, openWeight: m.openWeight }))
+    : [];
   const topAgentH = getHarness(lb, topAgent.harnessId);
   const bestOpen = lb.models.find((m) => m.openWeight);
 
@@ -118,33 +125,9 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
         </div>
       </section>
 
-      {/* overall model ranking — every benchmark, evidence-weighted */}
-      <section className="mx-auto max-w-6xl px-5 py-6">
-        <div className="mb-3 flex items-baseline justify-between gap-3">
-          <h2 className="font-display text-lg font-semibold tracking-tight">
-            Top models
-            <span className="ml-2 font-mono text-sm font-normal text-faint">· across every benchmark</span>
-          </h2>
-          <span className="shrink-0 font-mono text-xs text-faint">composite of {lb.meta.benchmarkCount} benchmarks · breadth-weighted</span>
-        </div>
-        <div className="overflow-x-auto rounded-xl border border-edge bg-surface/40">
-          <div className="min-w-[560px] divide-y divide-edge/50">
-            {lb.models.slice(0, 10).map((m) => (
-              <Link key={m.modelId} href={`/models/${slugFor(m.modelId)}`} className="grid grid-cols-[2.5rem_minmax(10rem,1fr)_8rem_6.5rem_3.5rem] items-center gap-x-3 px-4 py-2.5 transition-colors hover:bg-surface/70">
-                <span className={`font-display text-sm font-semibold ${m.rank <= 3 ? "text-accent" : "text-faint"}`}>#{m.rank}</span>
-                <span className="truncate font-display text-[14px] font-medium text-ink">{m.modelName}</span>
-                <span className="truncate font-mono text-[11px] text-faint">{m.vendor}</span>
-                <span className="font-mono text-[11px] text-faint">{Object.keys(m.scores).length} benchmarks</span>
-                <span className="tnum text-right font-display text-[15px] font-semibold text-ink">{m.composite.toFixed(0)}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <div key={hid}>
         {board ? (
-          <Board board={board} harness={harness} benchmarks={lb.benchmarks} />
+          <Board board={board} harness={harness} benchmarks={lb.benchmarks} overall={overallById} unmeasured={ghosts} />
         ) : (
           <EmptyBoard harness={harness} />
         )}
