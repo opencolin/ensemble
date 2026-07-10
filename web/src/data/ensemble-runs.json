@@ -101,6 +101,24 @@
       "passRate": 100.0,
       "runs": 3,
       "date": "2026-07-09"
+    },
+    {
+      "harness": "Claude Code",
+      "model": "anthropic/claude-fable-5",
+      "modelName": "Claude Fable 5",
+      "modelOrg": "Anthropic",
+      "passRate": 100.0,
+      "runs": 3,
+      "date": "2026-07-09"
+    },
+    {
+      "harness": "Claude Code",
+      "model": "openai/gpt-5.6-sol",
+      "modelName": "GPT-5.6 Sol",
+      "modelOrg": "OpenAI",
+      "passRate": 100.0,
+      "runs": 3,
+      "date": "2026-07-09"
     }
   ]
 }

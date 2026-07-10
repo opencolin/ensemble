@@ -1,0 +1,135 @@
+id: ts-semver-range
+language: typescript
+category: feature
+maxTurns: 30
+prompt: |
+  Implement a semantic-version comparator and range matcher in `semver.mjs`. Use
+  ES module syntax (the file is `.mjs`) and `export` two named functions,
+  `compare` and `satisfies`. Do NOT use any third-party package (in particular
+  not the npm `semver` package); implement the rules below directly.
+
+  This is graded against a hidden test suite you never see, so implement every
+  rule and edge case exactly as written. Do not rely on familiarity with any
+  existing library — the spec below is complete and authoritative. Where it
+  differs from a library you happen to know, follow THIS spec.
+
+  ## Version strings
+
+  A version is `MAJOR.MINOR.PATCH` where each of the three parts is a
+  non-negative integer written in decimal with NO leading zeros (`0` is allowed,
+  but `00` and `01` are not). It may be followed, in this order, by:
+  - an optional prerelease: a `-` then one or more dot-separated identifiers.
+    Each identifier is non-empty and consists only of ASCII alphanumerics and
+    hyphens (`[0-9A-Za-z-]`). An identifier made of digits only is a "numeric
+    identifier"; any identifier containing a non-digit is "alphanumeric".
+  - an optional build-metadata section: a `+` then one or more dot-separated
+    `[0-9A-Za-z-]` identifiers. Build metadata is IGNORED for every comparison
+    and equality decision.
+
+  So the full shape is `MAJOR.MINOR.PATCH[-prerelease][+build]`.
+
+  A string is INVALID if it does not match this grammar. Examples of invalid
+  strings: `01.2.3` (leading zero in the core), `1.2` and `1` (missing parts),
+  `1.2.3.4` (too many parts), `v1.2.3` (a `v` prefix), `1.0.0-` (empty
+  prerelease), `1.0.0-alpha..1` (an empty identifier), the empty string `""`,
+  and `not-a-version`.
+
+  ## `compare(a, b)`
+
+  Both `a` and `b` are version strings. Return `-1` if `a` has lower precedence
+  than `b`, `1` if `a` has higher precedence, and `0` if they have equal
+  precedence. If EITHER argument is not a valid version string, THROW an `Error`.
+
+  Precedence rules (SemVer 2.0.0):
+  1. Compare MAJOR, then MINOR, then PATCH, each as an integer (numeric, not
+     string) comparison.
+  2. When the numeric core is equal, a version WITH a prerelease has LOWER
+     precedence than the same core WITHOUT one: `1.0.0-alpha` < `1.0.0`.
+  3. When both versions have a prerelease, compare identifiers left to right:
+     - two numeric identifiers compare numerically, so `2` < `11`;
+     - two alphanumeric identifiers compare by ASCII string order;
+     - a numeric identifier ALWAYS has lower precedence than an alphanumeric one;
+     - if every identifier compared so far is equal but one list is shorter and
+       is a prefix of the other, the SHORTER list has lower precedence:
+       `1.0.0-alpha` < `1.0.0-alpha.1`.
+  4. Build metadata never affects precedence, so two versions that differ only
+     in build metadata are EQUAL: `compare('1.0.0+a', '1.0.0+b') === 0`.
+
+  The canonical ordering, from lowest to highest, is:
+  `1.0.0-alpha` < `1.0.0-alpha.1` < `1.0.0-alpha.beta` < `1.0.0-beta` <
+  `1.0.0-beta.2` < `1.0.0-beta.11` < `1.0.0-rc.1` < `1.0.0`.
+
+  ## `satisfies(version, range)`
+
+  Return `true` iff `version` (a version string) satisfies `range` (a range
+  string), otherwise `false`. If `version` is not a valid version string, return
+  `false` (do NOT throw). If `range` is not a valid range, THROW an `Error`.
+
+  ### Range grammar
+
+  A range is one or more comparator sets separated by ` || ` (logical OR). A
+  version satisfies the range iff it satisfies AT LEAST ONE set. Within a set,
+  comparators are separated by spaces and ALL of them must hold (logical AND).
+  The building blocks:
+
+  - Primitive comparators: `=1.2.3` or a bare `1.2.3` (exact equality — build
+    metadata is still ignored), `>1.2.3`, `>=1.2.3`, `<1.2.3`, `<=1.2.3`. Each
+    uses the precedence rules above.
+  - Caret `^` — allows changes that do not modify the left-most NON-ZERO element
+    of `MAJOR.MINOR.PATCH`:
+    - `^1.2.3` := `>=1.2.3 <2.0.0`
+    - `^0.2.3` := `>=0.2.3 <0.3.0`
+    - `^0.0.3` := `>=0.0.3 <0.0.4`
+    A prerelease on the caret version becomes part of the lower bound:
+    `^1.2.3-0` := `>=1.2.3-0 <2.0.0`.
+  - Tilde `~` — allows patch-level changes when a minor is given, and
+    minor-level changes when only a major is given:
+    - `~1.2.3` := `>=1.2.3 <1.3.0`
+    - `~1.2`   := `>=1.2.0 <1.3.0`
+    - `~1`     := `>=1.0.0 <2.0.0`
+  - X-ranges — a trailing part that is missing or a wildcard (`x`, `X`, or `*`):
+    - `1.2.x` / `1.2.*` / `1.2` := `>=1.2.0 <1.3.0`
+    - `1` / `1.x`               := `>=1.0.0 <2.0.0`
+    - `*` or the empty string    := any (non-prerelease) version.
+  - Hyphen ranges — `A - B` (with spaces around the hyphen) is inclusive:
+    - `1.2.3 - 2.3.4` := `>=1.2.3 <=2.3.4`
+    - if the RIGHT side is partial it becomes an exclusive bound at the next
+      version: `1.2.3 - 2.3` := `>=1.2.3 <2.4.0`
+    - if the LEFT side is partial its missing parts are zero:
+      `1.2 - 2.3.4` := `>=1.2.0 <=2.3.4`
+
+  ### Prerelease handling (READ CAREFULLY — this is the crux)
+
+  A version with NO prerelease is tested purely by the precedence comparisons
+  above.
+
+  A version that HAS a prerelease (for example `1.2.3-alpha`) is far more
+  restricted. Within a single comparator set, such a version satisfies that set
+  only if BOTH of the following hold:
+  1. it passes every comparator in the set by the ordinary precedence
+     comparison; AND
+  2. at least one comparator in that SAME set is built from a version that
+     itself carries a prerelease AND has the identical `[MAJOR, MINOR, PATCH]`
+     tuple as the version being tested.
+
+  If no comparator in the set carries a prerelease on that exact
+  `[MAJOR, MINOR, PATCH]` tuple, the prerelease version does NOT satisfy the set,
+  even when it passes all of the ordinary comparisons. Each set is judged
+  independently, and the OR is taken across sets.
+
+  Consequently ALL of these must hold:
+  - `1.2.3-alpha` does NOT satisfy `^1.2.2`, does NOT satisfy `>=1.0.0`, and does
+    NOT satisfy `*`.
+  - `1.2.3-alpha` DOES satisfy `>=1.2.3-alpha` and DOES satisfy `^1.2.3-0`.
+  - `2.0.0-beta` does NOT satisfy `>=1.2.3-alpha <2.0.0`: it clears both
+    comparators numerically, but no comparator carries a prerelease on the
+    `[2,0,0]` tuple.
+  - `1.2.3-beta` DOES satisfy `>1.2.3-alpha`.
+  - `1.2.4-alpha` does NOT satisfy `>=1.2.3-alpha`: a prerelease comparator is
+    present, but on tuple `[1,2,3]`, not the version's `[1,2,4]`.
+
+  Implement `semver.mjs` to this specification. It is graded against a hidden
+  test suite you never see, so handle every rule and edge case above.
+acceptance: 'node --test'
+hiddenTests:
+  - test.mjs

@@ -85,6 +85,34 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
             </button>
           </div>
 
+          {/* top overall models nobody has measured on THIS harness — lead the board, unranked */}
+          {ghosts.length > 0 && (
+            <div className="border-b border-dashed border-edge/70 pb-1">
+              <div className="px-3 pt-2 pb-1 font-mono text-[10px] uppercase tracking-wider text-faint">
+                Top overall · not measured with {harness.name} yet
+              </div>
+              {ghosts.map((g) => (
+                <Link
+                  key={g.modelId}
+                  href={`/models/${slugFor(g.modelId)}`}
+                  className="grid items-center gap-x-3 rounded-lg px-3 py-2.5 opacity-70 transition-opacity hover:opacity-100"
+                  style={{ gridTemplateColumns: grid }}
+                >
+                  <span className="text-center font-mono text-[13px] text-faint">–</span>
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="truncate font-display text-[15px] font-medium text-dim">{g.modelName}</span>
+                    <span className="truncate font-mono text-[11px] text-faint">{g.vendor}</span>
+                  </div>
+                  {benches.map((b) => (
+                    <span key={b.id} className="text-right font-mono text-[13px] text-faint">·</span>
+                  ))}
+                  <span className="tnum text-right font-mono text-[12px] text-faint">#{g.rank} <span className="text-dim">· {g.composite.toFixed(0)}</span></span>
+                  <span className="text-right font-mono text-[11px] text-faint">unmeasured</span>
+                </Link>
+              ))}
+            </div>
+          )}
+
           {/* rows */}
           <div className="divide-y divide-edge/50">
             {rows.map((m, i) => (
@@ -141,33 +169,6 @@ export function Leaderboard({ board, harness, benchmarks, overall, unmeasured }:
             </p>
           )}
 
-          {/* top overall models nobody has measured on THIS harness — visible, unranked */}
-          {ghosts.length > 0 && (
-            <div className="mt-1 border-t border-dashed border-edge/70 pt-1">
-              <div className="px-3 pt-2 pb-1 font-mono text-[10px] uppercase tracking-wider text-faint">
-                Top overall · not measured with {harness.name} yet
-              </div>
-              {ghosts.map((g) => (
-                <Link
-                  key={g.modelId}
-                  href={`/models/${slugFor(g.modelId)}`}
-                  className="grid items-center gap-x-3 rounded-lg px-3 py-2.5 opacity-70 transition-opacity hover:opacity-100"
-                  style={{ gridTemplateColumns: grid }}
-                >
-                  <span className="text-center font-mono text-[13px] text-faint">–</span>
-                  <div className="flex min-w-0 items-center gap-2">
-                    <span className="truncate font-display text-[15px] font-medium text-dim">{g.modelName}</span>
-                    <span className="truncate font-mono text-[11px] text-faint">{g.vendor}</span>
-                  </div>
-                  {benches.map((b) => (
-                    <span key={b.id} className="text-right font-mono text-[13px] text-faint">·</span>
-                  ))}
-                  <span className="tnum text-right font-mono text-[12px] text-faint">#{g.rank} <span className="text-dim">· {g.composite.toFixed(0)}</span></span>
-                  <span className="text-right font-mono text-[11px] text-faint">unmeasured</span>
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
       </div>
 
