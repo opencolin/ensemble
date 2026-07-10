@@ -15,10 +15,13 @@ export function Mark({ className = "" }: { className?: string }) {
 }
 
 const NAV = [
-  { href: "/", label: "Top Model" },
-  { href: "/agents", label: "Top Agent" },
-  { href: "/team", label: "Top Team" },
+  { href: "/", label: "Model" },
+  { href: "/agents", label: "Agent" },
+  { href: "/team", label: "Team" },
   { href: "/code-review", label: "Code Review" },
+  { href: "/sandbox", label: "Sandbox" },
+  { href: "/storage", label: "Storage" },
+  { href: "/browser", label: "Browser" },
   { href: "/benchmarks", label: "Benchmarks" },
   { href: "/gaps", label: "Gaps" },
   { href: "/#method", label: "Method" },
@@ -33,7 +36,7 @@ export function SiteHeader() {
           <Mark className="size-5 text-accent transition-transform group-hover:scale-110" />
           <span className="font-display text-[15px] font-semibold tracking-tight">ixio</span>
         </Link>
-        <nav className="flex items-center gap-1 text-sm text-dim">
+        <nav className="flex items-center gap-1 overflow-x-auto whitespace-nowrap text-sm text-dim">
           {NAV.map((n) => {
             const active = n.href === "/" ? pathname === "/" : pathname.startsWith(n.href.replace(/#.*$/, "")) && n.href !== "/#method";
             return (

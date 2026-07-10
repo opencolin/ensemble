@@ -73,6 +73,33 @@ class TFEnv(ContreeEnvironment):
         return self.client.images.use(self.config.image)
 
 
+def run_one_tenki(task, model_id: str, log) -> dict:
+    """Same eval, but the sandbox is a Tenki Firecracker microVM (~2s provisioning)."""
+    import tenki_env as te  # lazy: only needed for --backend tenki
+
+    name, vendor, (base, key_env) = MODELS[model_id]
+    sb = te.create_task_sandbox(task, name=f"ixio-{task.id}")
+    try:
+        env = te.TenkiEnvironment(sb)
+        model = get_model("openai/" + model_id, config={"model_kwargs": {
+            "api_key": os.environ[key_env], "api_base": base, "max_tokens": 16000,
+            "tool_choice": "required", "drop_params": True}})
+        agent = DefaultAgent(model, env, system_template=SYS_T, instance_template=INST_T,
+                             step_limit=40, cost_limit=20.0)
+        try:
+            agent.run(task.prompt)
+        except Exception as exc:
+            log(f"    ({name} {task.id} agent: {str(exc)[:60]})")
+        score = te.grade(sb, task, runner.score_from_output)
+    finally:
+        try:
+            sb.terminate()
+        except Exception:
+            pass
+    log(f"  {name:18} {task.id:16} -> {score * 100:5.1f}%")
+    return {"model": model_id, "modelName": name, "vendor": vendor, "task": task.id, "score": score}
+
+
 def run_one(task, model_id: str, log) -> dict:
     name, vendor, (base, key_env) = MODELS[model_id]
     image, setup, lenv = LANG[task.language]
@@ -109,6 +136,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", default=list(MODELS))
     ap.add_argument("--tasks", nargs="*")
+    ap.add_argument("--backend", choices=["contree", "tenki"], default="contree",
+                    help="sandbox provider: ConTree (Token Factory) or Tenki (Firecracker)")
     ap.add_argument("--workers", type=int, default=5)
     ap.add_argument("--out", default=str(OUT))
     ap.add_argument("--merge", action="store_true", help="merge into existing --out by (harness, model)")
@@ -127,10 +156,11 @@ def main() -> int:
             print(m, flush=True)
 
     jobs = [(t, mid) for mid in a.models for t in tasks]
-    log(f"mini-SWE-agent: {len(jobs)} (model x task) across {len(a.models)} models, {len(tasks)} tasks…")
+    runner_fn = run_one_tenki if a.backend == "tenki" else run_one
+    log(f"mini-SWE-agent [{a.backend}]: {len(jobs)} (model x task) across {len(a.models)} models, {len(tasks)} tasks…")
     per = []
     with cf.ThreadPoolExecutor(max_workers=a.workers) as ex:
-        futs = {ex.submit(run_one, t, mid, log): (t, mid) for (t, mid) in jobs}
+        futs = {ex.submit(runner_fn, t, mid, log): (t, mid) for (t, mid) in jobs}
         for fut in cf.as_completed(futs):
             t, mid = futs[fut]
             try:
