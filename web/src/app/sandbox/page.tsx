@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getLeaderboard } from "@/lib/leaderboard";
-import { fetchSandboxBench, providerName, INFRA_SOURCE } from "@/lib/infraBench";
+import { fetchSandboxBench, INFRA_SOURCE } from "@/lib/infraBench";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Rank } from "@/components/bits";
@@ -9,7 +9,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: "Sandbox — ixio",
   description:
-    "Which sandbox spins up fastest for your agent? Providers ranked by median time-to-interactive across sequential, burst, and staggered creates — re-measured daily.",
+    "Which sandbox spins up fastest for your agent? Providers ranked by ComputeSDK's composite score — cold-start latency × reliability — re-measured daily.",
 };
 
 function MetaChip({ k, v }: { k: string; v: string }) {
@@ -25,7 +25,7 @@ const ms = (v: number | null) => (v == null ? "—" : v >= 1000 ? `${(v / 1000).
 
 export default async function SandboxPage() {
   const [lb, bench] = await Promise.all([getLeaderboard(), fetchSandboxBench()]);
-  const GRID = "grid-cols-[2.5rem_minmax(9rem,1fr)_5.4rem_5.4rem_5.6rem_4.6rem_5.6rem]";
+  const GRID = "grid-cols-[2.5rem_minmax(9rem,1fr)_5.6rem_5rem_4.6rem_5.4rem_5.6rem_4.6rem_4.6rem]";
 
   return (
     <>
@@ -41,13 +41,13 @@ export default async function SandboxPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-dim">
             Every coding agent needs an isolated box to execute in — and cold-start latency is the
-            tax on every task. This ranks sandbox providers by{" "}
-            <span className="text-ink">median time-to-interactive</span>: create a sandbox, run a
-            command, measure until it answers. Re-measured daily in ComputeSDK&apos;s open CI.
+            tax on every task. This ranks sandbox providers by ComputeSDK&apos;s{" "}
+            <span className="text-ink">composite score</span> — cold-start latency percentiles
+            blended with reliability — re-measured daily in their open CI.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-edge/70 pt-6 sm:grid-cols-4">
             <MetaChip k="Providers" v={`${bench?.rows.length ?? "—"}`} />
-            <MetaChip k="Runs per provider" v={`${bench?.iterations ?? "—"} × 3 modes`} />
+            <MetaChip k="Runs per provider" v={`${bench?.iterations ?? "—"} per mode`} />
             <MetaChip k="Measured" v={bench?.updated ?? "—"} />
             <MetaChip k="Cadence" v="daily · open CI" />
           </div>
@@ -57,7 +57,7 @@ export default async function SandboxPage() {
           <div className="mb-4 flex flex-wrap items-baseline justify-between gap-3">
             <h2 className="font-display text-lg font-semibold tracking-tight">
               Sandboxes
-              <span className="ml-2 font-mono text-sm font-normal text-faint">· ranked by sequential TTI</span>
+              <span className="ml-2 font-mono text-sm font-normal text-faint">· ranked by composite score</span>
             </h2>
             <a href={`${INFRA_SOURCE.site}/sandboxes/`} target="_blank" rel="noreferrer" className="font-mono text-xs text-faint hover:text-accent">
               source: {INFRA_SOURCE.author} benchmarks ↗
@@ -70,11 +70,13 @@ export default async function SandboxPage() {
             </p>
           ) : (
             <div className="overflow-x-auto">
-              <div className="min-w-[720px]">
+              <div className="min-w-[860px]">
                 <div className={`grid ${GRID} items-center gap-x-3 border-b border-edge px-3 pb-2 text-[10px] font-medium uppercase tracking-wider text-faint`}>
                   <span>#</span>
                   <span>Provider</span>
-                  <span className="text-right" title="Median TTI, one create at a time">Sequential</span>
+                  <span className="text-right" title="ComputeSDK's composite: latency percentiles × reliability (0–100)">Composite</span>
+                  <span className="text-right" title="Median TTI, one create at a time">Median</span>
+                  <span className="text-right" title="95th-percentile TTI">P95</span>
                   <span className="text-right" title="Median TTI at 100 concurrent creates">Burst ×100</span>
                   <span className="text-right" title="Median TTI, 100 creates at 200ms intervals">Staggered</span>
                   <span className="text-right" title="Successful runs">Success</span>
@@ -84,11 +86,13 @@ export default async function SandboxPage() {
                   {bench.rows.map((r, i) => (
                     <div key={r.provider} className={`rise grid ${GRID} items-center gap-x-3 rounded-lg px-3 py-3 ${i === 0 ? "bg-accent/[0.04]" : ""}`} style={{ animationDelay: `${Math.min(i, 12) * 30}ms` }}>
                       <Rank rank={i + 1} />
-                      <span className="truncate font-display text-[15px] font-medium text-ink">{providerName(r.provider)}</span>
-                      <span className="tnum text-right font-mono text-[13px] text-ink">{ms(r.seqMs)}</span>
+                      <span className="truncate font-display text-[15px] font-medium text-ink">{r.provider}</span>
+                      <span className="tnum text-right font-display text-[15px] font-semibold text-ink">{r.score.toFixed(1)}</span>
+                      <span className="tnum text-right font-mono text-[13px] text-dim">{ms(r.medMs)}</span>
+                      <span className="tnum text-right font-mono text-[13px] text-dim">{ms(r.p95Ms)}</span>
                       <span className="tnum text-right font-mono text-[13px] text-dim">{ms(r.burstMs)}</span>
                       <span className="tnum text-right font-mono text-[13px] text-dim">{ms(r.staggeredMs)}</span>
-                      <span className="tnum text-right font-mono text-[12px] text-faint">{r.ok}/{r.total}</span>
+                      <span className="tnum text-right font-mono text-[12px] text-faint">{r.successPct == null ? "—" : `${r.successPct}%`}</span>
                       <span className="tnum text-right font-mono text-[13px] text-dim">
                         {r.priceHr == null ? "—" : `$${r.priceHr.toFixed(r.priceHr < 0.1 ? 3 : 2)}`}
                         {r.priceHr != null && r.priceConfidence !== "exact" && <sup className="ml-0.5 text-[9px] text-faint">est</sup>}
@@ -104,10 +108,11 @@ export default async function SandboxPage() {
             <div className="rounded-xl border border-edge bg-surface/40 p-5">
               <div className="font-display text-base font-semibold text-ink">How it&apos;s measured</div>
               <p className="mt-2 text-[13px] leading-relaxed text-faint">
-                Time-to-interactive = create a sandbox, execute a command, and wait for the answer —
-                the full round-trip an agent feels on every task. Three modes: sequential (one at a
-                time), burst (100 at once), and staggered (100 at 200&nbsp;ms intervals). Medians over{" "}
-                {bench?.iterations ?? 100} runs per mode; prices normalized to 1&nbsp;vCPU + 2&nbsp;GB.
+                The composite is ComputeSDK&apos;s headline score: cold-start latency percentiles
+                blended with reliability, so a provider can&apos;t top the board on a degenerate run.
+                TTI = create a sandbox, execute a command, wait for the answer. Burst (100 at once)
+                and staggered (100 at 200&nbsp;ms intervals) medians come from the raw repo data;
+                prices normalized to 1&nbsp;vCPU + 2&nbsp;GB.
               </p>
             </div>
             <div className="rounded-xl border border-edge bg-surface/40 p-5">

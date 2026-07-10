@@ -47,12 +47,13 @@ function medians(run: RawRun | null, key: string): Map<string, { med: number | n
 
 // ---------------------------------------------------------------- sandboxes
 export interface SandboxRow {
-  provider: string;
-  seqMs: number | null; // median time-to-interactive, sequential creates
-  burstMs: number | null; // median TTI at 100 concurrent creates
-  staggeredMs: number | null; // median TTI, 100 creates at 200ms stagger
-  ok: number; // successful sequential iterations
-  total: number;
+  provider: string; // display name from the ComputeSDK leaderboard
+  score: number; // ComputeSDK's composite (latency percentiles × reliability), 0–100
+  medMs: number | null; // median sequential TTI
+  p95Ms: number | null;
+  successPct: number | null;
+  burstMs: number | null; // median TTI at 100 concurrent creates (repo raw)
+  staggeredMs: number | null; // median TTI, 100 creates at 200ms stagger (repo raw)
   priceHr: number | null; // $/hr normalized to 1 vCPU + 2 GB
   priceConfidence?: string;
 }
@@ -63,36 +64,69 @@ export interface SandboxBench {
   rows: SandboxRow[];
 }
 
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+/** Rank by ComputeSDK's own composite score (their headline metric — it folds
+ *  reliability in, so degenerate raw data like an all-zero TTI run can't top
+ *  the board). The repo's raw files still supply burst/staggered medians. */
 export async function fetchSandboxBench(): Promise<SandboxBench | null> {
-  const [seq, burst, stag, pricing] = await Promise.all([
-    getJson("results/sequential_tti/latest.json"),
+  const [pageRes, burst, stag, pricing] = await Promise.all([
+    fetch(`${INFRA_SOURCE.site}/sandboxes/`, { headers: { "user-agent": "Mozilla/5.0 (compatible; ixio-leaderboard/1.0; +https://ixio.com)" }, next: { revalidate: 86400 } }).then((r) => (r.ok ? r.text() : null)).catch(() => null),
     getJson("results/burst_tti/latest.json"),
     getJson("results/staggered_tti/latest.json"),
     getJson("pricing.json"),
   ]);
-  if (!seq) return null;
-  const s = medians(seq as RawRun, "ttiMs");
+  if (!pageRes) return null;
+
+  // SSR text rows: "Daytona 94.2 0.46s 0.74s 0.79s 100 %" (name, composite, med, p95, p99, success)
+  const txt = pageRes.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  const re = /([A-Z][A-Za-z0-9]+(?: [A-Z][A-Za-z0-9]+)?) (\d{1,3}(?:\.\d)?) (\d+\.\d{2})s (\d+\.\d{2})s (\d+\.\d{2})s (\d{1,3}) %/g;
+  const STOP = new Set(["Provider", "Composite", "Median", "Details", "Leaderboard"]);
+  const seen = new Map<string, SandboxRow>();
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(txt))) {
+    const name = m[1].replace(/^Success /, "").trim();
+    if (STOP.has(name) || seen.has(name)) continue;
+    const score = parseFloat(m[2]);
+    if (score > 100) continue;
+    seen.set(name, {
+      provider: name, score,
+      medMs: Math.round(parseFloat(m[3]) * 1000),
+      p95Ms: Math.round(parseFloat(m[4]) * 1000),
+      successPct: parseInt(m[6], 10),
+      burstMs: null, staggeredMs: null, priceHr: null,
+    });
+  }
+  if (!seen.size) return null;
+
+  // Join repo raw + pricing by normalized name (exact, then prefix for e.g. "Lightning AI" vs "lightning").
   const b = medians(burst as RawRun, "ttiMs");
   const g = medians(stag as RawRun, "ttiMs");
   const price = new Map<string, { hr: number; conf?: string }>();
   for (const p of ((pricing as { providers?: { id: string; pricing?: { normalized?: { total_1vcpu_2gb_hr?: number; confidence?: string } } }[] } | null)?.providers ?? [])) {
     const n = p.pricing?.normalized;
-    if (typeof n?.total_1vcpu_2gb_hr === "number") price.set(p.id, { hr: n.total_1vcpu_2gb_hr, conf: n.confidence });
+    if (typeof n?.total_1vcpu_2gb_hr === "number") price.set(norm(p.id), { hr: n.total_1vcpu_2gb_hr, conf: n.confidence });
   }
-  const rows: SandboxRow[] = [...s.entries()].map(([provider, v]) => ({
-    provider,
-    seqMs: v.med,
-    burstMs: b.get(provider)?.med ?? null,
-    staggeredMs: g.get(provider)?.med ?? null,
-    ok: v.ok,
-    total: v.total,
-    priceHr: price.get(provider)?.hr ?? null,
-    priceConfidence: price.get(provider)?.conf,
-  }));
-  rows.sort((a, b2) => (a.seqMs ?? Infinity) - (b2.seqMs ?? Infinity));
+  const find = <T,>(map: Map<string, T>, name: string): T | undefined => {
+    const n = norm(name);
+    for (const [k, v] of map) {
+      const kn = norm(k);
+      if (kn === n || n.startsWith(kn) || kn.startsWith(n)) return v;
+    }
+    return undefined;
+  };
+  for (const row of seen.values()) {
+    row.burstMs = find(b, row.provider)?.med ?? null;
+    row.staggeredMs = find(g, row.provider)?.med ?? null;
+    const pr = find(price, row.provider);
+    row.priceHr = pr?.hr ?? null;
+    row.priceConfidence = pr?.conf;
+  }
+
+  const rows = [...seen.values()].sort((a, b2) => b2.score - a.score);
   return {
-    updated: ((seq as RawRun).timestamp ?? "").slice(0, 10),
-    iterations: (seq as RawRun).config?.iterations ?? 100,
+    updated: (((burst as RawRun)?.timestamp ?? "") as string).slice(0, 10) || new Date().toISOString().slice(0, 10),
+    iterations: (burst as RawRun)?.config?.iterations ?? 100,
     rows,
   };
 }
