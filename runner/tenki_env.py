@@ -91,7 +91,7 @@ def create_task_sandbox(task, name: str) -> Sandbox:
             raise RuntimeError(f"runtime setup failed: {(r.stderr_text or r.stdout_text)[:200]}")
         sb.exec("bash", "-lc", f"mkdir -p {WORK}")
         for p in task.workspace.iterdir():
-            if p.name in task.hidden_tests:
+            if not p.is_file() or p.name in task.hidden_tests:
                 continue
             sb.fs.write_bytes(f"{WORK}/{p.name}", p.read_bytes())
         return sb

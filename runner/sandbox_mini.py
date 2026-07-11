@@ -76,6 +76,21 @@ class TFEnv(ContreeEnvironment):
         return self.client.images.use(self.config.image)
 
 
+
+def make_model(model_id: str):
+    """Model for the agent loop. TF-served open models abort with
+    RepeatedFormatError when forced tool-calls meet our long markdown/regex-heavy
+    prompts — the textbased (bash code block) interface is reliable for them.
+    Gateway (Anthropic/OpenAI/xAI) models keep forced tool-calls, which they handle."""
+    _, _, (base, key_env) = MODELS[model_id]
+    kwargs = {"api_key": os.environ[key_env], "api_base": base, "max_tokens": 16000, "drop_params": True}
+    cfg = {"model_kwargs": kwargs}
+    if (base, key_env) == TOKENFACTORY:
+        cfg["model_class"] = "litellm_textbased"
+    else:
+        kwargs["tool_choice"] = "required"
+    return get_model("openai/" + model_id, config=cfg)
+
 def run_one_tenki(task, model_id: str, log) -> dict:
     """Same eval, but the sandbox is a Tenki Firecracker microVM (~2s provisioning)."""
     import tenki_env as te  # lazy: only needed for --backend tenki
@@ -84,11 +99,9 @@ def run_one_tenki(task, model_id: str, log) -> dict:
     sb = te.create_task_sandbox(task, name=f"ixio-{task.id}")
     try:
         env = te.TenkiEnvironment(sb)
-        model = get_model("openai/" + model_id, config={"model_kwargs": {
-            "api_key": os.environ[key_env], "api_base": base, "max_tokens": 16000,
-            "tool_choice": "required", "drop_params": True}})
+        model = make_model(model_id)
         agent = DefaultAgent(model, env, system_template=SYS_T, instance_template=INST_T,
-                             step_limit=40, cost_limit=20.0)
+                             step_limit=40, cost_limit=20.0, max_consecutive_format_errors=20)
         try:
             agent.run(task.prompt)
         except Exception as exc:
@@ -110,14 +123,12 @@ def run_one(task, model_id: str, log) -> dict:
     env = TFEnv(contree_config=ContreeConfig(auth=auth), image=image, image_tag="latest",
                 cwd="/work", import_username="", import_password="", env={**BASE_ENV, **lenv})
     try:
-        stub = {f"/work/{p.name}": str(p) for p in task.workspace.iterdir() if p.name not in task.hidden_tests}
+        stub = {f"/work/{p.name}": str(p) for p in task.workspace.iterdir() if p.is_file() and p.name not in task.hidden_tests}
         env.session.run(shell=setup, files=stub, cwd="/work", env=lenv, disposable=False).wait()
 
-        model = get_model("openai/" + model_id, config={"model_kwargs": {
-            "api_key": os.environ[key_env], "api_base": base, "max_tokens": 16000,
-            "tool_choice": "required", "drop_params": True}})  # force a bash tool call each turn
+        model = make_model(model_id)
         agent = DefaultAgent(model, env, system_template=SYS_T, instance_template=INST_T,
-                             step_limit=40, cost_limit=20.0)
+                             step_limit=40, cost_limit=20.0, max_consecutive_format_errors=20)
         try:
             agent.run(task.prompt)
         except Exception as exc:  # agent gave up / step limit / transient — grade whatever it left

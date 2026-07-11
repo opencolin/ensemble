@@ -1,0 +1,136 @@
+id: py-regex-lite
+language: python
+category: feature
+maxTurns: 35
+prompt: |
+  Implement a small backtracking regular-expression engine in `solution.py`.
+  Provide two public functions:
+
+      match(pattern: str, text: str) -> bool
+      search(pattern: str, text: str) -> tuple[int, int] | None
+
+  `match` returns True iff `pattern` matches the ENTIRE `text` (anchored at both
+  ends). `search` finds the leftmost match and returns its `(start, end)`
+  half-open span, or None if there is no match anywhere. Both operate on ASCII
+  strings. Do NOT delegate to the `re` module or `fnmatch` -- the semantics
+  below differ from theirs (no lazy quantifiers, no capture groups, `{` is always
+  a quantifier, `$` only matches at the very end). Implement the algorithm
+  yourself.
+
+  ============================ SYNTAX ============================
+
+  Atoms:
+  - A literal character matches itself. Every character that is not a
+    metacharacter is a literal. The metacharacters are: . ^ $ * + ? { } ( ) [ ] | \
+    A literal `}` or `]` outside its special context is an ordinary literal.
+  - `.` matches any single character EXCEPT newline `\n` (0x0A).
+  - Escapes (introduced by `\`):
+      * `\d` = a digit [0-9];            `\D` = any char that is not a digit.
+      * `\w` = a word char [A-Za-z0-9_]; `\W` = any char that is not a word char.
+      * `\s` = a whitespace char, one of space, `\t`, `\n`, `\r`, `\f`, `\v`;
+        `\S` = any char that is not whitespace.
+      * `\` followed by any NON-alphanumeric character is that literal character
+        (so `\.` `\*` `\(` `\\` `\-` `\{` etc. match `.` `*` `(` `\` `-` `{`).
+      * `\` followed by an alphanumeric character other than d D w W s S is an
+        error. A trailing `\` at the end of the pattern is an error.
+  - Character class `[...]` matches exactly one character:
+      * An optional leading `^` (immediately after `[`) negates the class: it
+        matches one character NOT in the set.
+      * A `]` as the FIRST item (right after `[` or `[^`) is a literal `]`.
+        Thus `[]a]` matches `]` or `a`, and `[^]]` matches any char except `]`.
+      * `a-b` is an inclusive range by code point; it is an error if
+        code(a) > code(b) (e.g. `[z-a]`).
+      * `-` is a literal `-` when it is the first item, the last item (just
+        before `]`), or when it cannot begin a range because the preceding item
+        was itself a range or a shorthand class. So `[-a]`, `[a-]`, and the
+        second `-` in `[a-c-e]` are all literal; `[a-c-e]` matches
+        {a, b, c, -, e}.
+      * Escapes work inside a class: shorthands `\d \D \w \W \s \S`, and literal
+        escapes like `\]` `\\` `\-`. An escaped character is always a literal,
+        so `[a\-z]` matches the three characters a, `-`, z -- NOT the range a..z.
+        A shorthand class may not be an endpoint of a range (`[a-\d]` is an
+        error).
+      * A class with no closing `]` is an error.
+  - Group `(...)` groups a subexpression (non-capturing). Groups may be nested
+    and quantified: `(ab)+`. An empty group `()` is valid and matches the empty
+    string.
+
+  Quantifiers (each applies to the single preceding atom; ALL are GREEDY and
+  backtrack):
+  - `*`     zero or more      (= {0,})
+  - `+`     one or more       (= {1,})
+  - `?`     zero or one       (= {0,1})
+  - `{m}`   exactly m
+  - `{m,}`  m or more
+  - `{m,n}` between m and n inclusive
+  In `{...}`, m and n are non-negative integers (one or more digits); the lower
+  bound m is required, and m <= n. A `{` ALWAYS begins a quantifier: any brace
+  that is not a well-formed `{m}` / `{m,}` / `{m,n}` is an error (so `a{`, `a{}`,
+  `a{,3}`, `a{2,1}`, `a{x}` are all errors). To match a literal brace, escape it
+  (`\{`).
+
+  Alternation `|` has the lowest precedence; it splits the enclosing regex (or
+  group body) into branches that are tried LEFT TO RIGHT. The first branch that
+  lets the overall match succeed wins (leftmost-alternative preference, NOT
+  longest). A branch may be empty and matches the empty string (so `a|`, `(|a)`,
+  and `|` are valid).
+
+  Anchors are zero-width assertions and may NOT be quantified:
+  - `^` succeeds only at position 0 of `text`.
+  - `$` succeeds only at position len(text) -- the very end. It does NOT match
+    the position just before a trailing newline.
+
+  ========================= MATCH SEMANTICS =========================
+
+  Quantifiers are greedy with backtracking: a quantifier first tries the maximum
+  number of repetitions, then gives repetitions back as needed to let the rest of
+  the pattern match. Backtracking also applies through groups and alternation.
+  Patterns whose repetition can match the empty string (e.g. `(a*)*`) must still
+  TERMINATE -- do not loop forever on empty iterations. Inputs are short.
+
+  `search` scans start positions from 0 upward and, at the first start position
+  where the pattern can match, returns the end of the FIRST complete match found
+  under the ordering above (greedy quantifiers expand first; alternatives are
+  tried left to right). This is not necessarily the longest possible match. An
+  empty (zero-width) match is allowed: it is returned as `(i, i)` at the leftmost
+  position `i` where the pattern matches.
+
+  ============================= ERRORS =============================
+
+  Raise `ValueError` for any malformed pattern, including: unbalanced `(` or `)`;
+  an unterminated `[`; a reversed range like `[z-a]`; a quantifier with nothing
+  to repeat (`*ab`, `(*)`, `a|*`); stacked or lazy quantifiers (`a**`, `a*?`,
+  `a+?`, `a??`); a malformed `{...}` (`a{`, `a{}`, `a{,3}`, `a{2,1}`, `a{x}`);
+  quantifying an anchor (`^*`, `$+`); a trailing backslash; and an unknown
+  alphanumeric escape (`\q`, `\1`).
+
+  ============================ EXAMPLES ============================
+
+  Worked results (derive the rest from the rules above):
+
+      match("", "")                    == True
+      match("abc", "abcd")             == False   # anchored: no trailing junk
+      match("a*a", "aaaa")             == True    # star gives one 'a' back
+      match("(a|ab)c", "abc")          == True    # backtrack to the 2nd branch
+      match("a|ab", "ab")              == True    # anchoring forces the 'ab' branch
+      match("(a*)*b", "aaab")          == True    # must terminate, and matches
+      match("(a+a+)+b", "aaaab")       == True
+      match("(a+a+)+c", "aaaab")       == False   # must terminate, no match
+      match("a{2,4}a", "aaa")          == True    # grab 2, trailing 'a' takes the 3rd
+      match("[a-c-e]", "-")            == True    # the 2nd '-' is a literal
+      match("ab{0}c", "ac")            == True    # zero copies of 'b'
+
+      search("", "abc")                == (0, 0)  # empty match at position 0
+      search("a*", "bbb")              == (0, 0)  # zero-width match, leftmost
+      search("a|ab", "xab")            == (1, 2)  # leftmost-alt first, NOT (1, 3)
+      search("(ab|a)(bc)?", "abc")     == (0, 2)  # 'ab' then (bc)? matches empty
+      search("(a|ab)*", "abab")        == (0, 1)  # 'a' branch, no 2nd iteration
+      search("(ab|a)*", "abab")        == (0, 4)  # 'ab' branch consumes both pairs
+      search("a$", "a\n")              == None    # '$' matches only at the true end
+
+  Implement both functions to this specification. They are graded against a
+  hidden test suite you never see, so handle every rule and edge case above.
+  Do not edit `test_solution.py`.
+acceptance: 'python3 -m pytest -q'
+hiddenTests:
+  - test_solution.py
