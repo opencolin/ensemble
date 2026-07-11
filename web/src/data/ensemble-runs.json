@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09",
+  "generatedAt": "2026-07-11",
   "harness": "claude-code",
   "dryRun": false,
   "results": [
@@ -146,6 +146,24 @@
       "passRate": 100.0,
       "runs": 5,
       "date": "2026-07-09"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "moonshotai/Kimi-K2.7-Code",
+      "modelName": "Kimi K2.7 Code",
+      "modelOrg": "Moonshot AI",
+      "passRate": 100.0,
+      "runs": 5,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "MiniMaxAI/MiniMax-M3",
+      "modelName": "MiniMax M3",
+      "modelOrg": "MiniMax",
+      "passRate": 99.7,
+      "runs": 5,
+      "date": "2026-07-11"
     }
   ]
 }
