@@ -18,6 +18,7 @@ const NAV = [
   { href: "/", label: "Model" },
   { href: "/agents", label: "Agent" },
   { href: "/code-review", label: "Code Review" },
+  { href: "/deep-research", label: "Deep Research" },
   { href: "/sandbox", label: "Sandbox" },
   { href: "/storage", label: "Storage" },
   { href: "/browser", label: "Browser" },
