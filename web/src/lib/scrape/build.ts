@@ -11,7 +11,7 @@ import { fetchChatbotArena, CHATBOT_ARENA_URL } from "./sources/chatbotArena";
 import { fetchArenaAgent, ARENA_AGENT_URL } from "./sources/arenaAgent";
 import { fetchEnsembleRuns, ENSEMBLE_RUNS_URL } from "./sources/ensembleRuns";
 import { fetchStratixCup, STRATIX_CUP_URL } from "./sources/stratixCup";
-import { fetchBridgeBench, BRIDGE_BENCH_URL } from "./sources/bridgeBench";
+import { fetchFrontierMath, FRONTIER_MATH_URL, FRONTIER_MATH_PAGE } from "./sources/frontierMath";
 
 export const BENCHMARKS: Benchmark[] = [
   // Agent benchmarks: scored via a (harness, model) pair → harness boards.
@@ -25,7 +25,7 @@ export const BENCHMARKS: Benchmark[] = [
   { id: "arc-agi", name: "ARC-AGI", metric: "Score", kind: "model", unit: "pct", blurb: "Abstraction & reasoning puzzles (ARC Prize).", source: CHATBOT_ARENA_URL, homepage: "https://arcprize.org/" },
   { id: "arena-agent", name: "Arena Agent", metric: "Net Improvement", kind: "model", unit: "pct", blurb: "Agentic coding eval over real sessions.", source: ARENA_AGENT_URL, homepage: "https://arena.ai/leaderboard/agent" },
   { id: "stratix-cup", name: "Stratix Cup", metric: "Tournament score", kind: "model", unit: "index", blurb: "16 frontier models write their own soccer-strategy code and compete head-to-head (LayerLens).", source: STRATIX_CUP_URL, homepage: "https://layerlens.ai/stratix-cup/season-1/" },
-  { id: "bridge-bench", name: "BridgeBench", metric: "Qualified rate", kind: "model", unit: "pct", blurb: "Vibe-coding tasks (UI, debugging) measured direct from each provider's API; season rebuilt every 90 days (BridgeMind).", source: "https://github.com/bridge-mind/bridgebench", homepage: "https://bridgebench.ai" },
+  { id: "frontier-math", name: "FrontierMath (Tier 4)", metric: "Accuracy", kind: "model", unit: "pct", blurb: "Exceptionally difficult research-level math, scored by Epoch AI on a private held-out set.", source: FRONTIER_MATH_PAGE, homepage: "https://epoch.ai/frontiermath" },
 ];
 
 interface Src { id: string; name: string; url: string; fn: () => Promise<RawRecord[]> }
@@ -37,7 +37,7 @@ const SOURCES: Src[] = [
   { id: "arena-agent", name: "Arena Agent", url: ARENA_AGENT_URL, fn: fetchArenaAgent },
   { id: "ensemble-runs", name: "ixio runs", url: ENSEMBLE_RUNS_URL, fn: fetchEnsembleRuns },
   { id: "stratix-cup", name: "Stratix Cup", url: STRATIX_CUP_URL, fn: fetchStratixCup },
-  { id: "bridge-bench", name: "BridgeBench", url: BRIDGE_BENCH_URL, fn: fetchBridgeBench },
+  { id: "frontier-math", name: "FrontierMath", url: FRONTIER_MATH_URL, fn: fetchFrontierMath },
 ];
 
 const round1 = (x: number) => Math.round(x * 10) / 10;
@@ -220,7 +220,12 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     // every match traced + signed — so it rates well on realism/openness for a model bench.
     "stratix-cup": { agentNative: 35, realism: 80, openness: 85 },
     // Real UI/debug coding tasks scored in a browser, direct-to-provider, open repo + tasks.
-    "bridge-bench": { agentNative: 30, realism: 85, openness: 90 },
+    // BridgeBench removed 2026-07: they restructured to an "arena" architecture and
+    // no longer publish derived leaderboard data (site is Cloudflare-walled). Restore
+    // from git history if bridgebench.ai v3 publishes an open results path.
+    // Verified answers on a private, contamination-resistant set with fully open data —
+    // but it measures math reasoning, not the coding-agent stack, so realism stays mid.
+    "frontier-math": { agentNative: 0, realism: 60, openness: 92 },
   };
   const BW = { agentNative: 0.3, coverage: 0.3, realism: 0.25, openness: 0.15 };
   const bStats = new Map<string, { entries: number; runs: number; harnesses: Set<string>; models: Set<string> }>();
