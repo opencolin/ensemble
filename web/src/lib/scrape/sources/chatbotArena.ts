@@ -5,9 +5,9 @@ export const CHATBOT_ARENA_URL = "https://openlm.ai/chatbot-arena/";
 
 // One static table carries several model-level benchmarks. Each becomes its own
 // benchmark in ixio. (column header, benchmark id, unit)
+// AAII moved to the direct artificialAnalysis source (more models, adds Coding Index).
 const COLS: { header: string; benchmark: string; unit: "elo" | "index" | "pct" }[] = [
   { header: "Coding", benchmark: "arena-coding", unit: "elo" },
-  { header: "AAII", benchmark: "artificial-analysis", unit: "index" },
   { header: "ARC-AGI", benchmark: "arc-agi", unit: "pct" },
 ];
 

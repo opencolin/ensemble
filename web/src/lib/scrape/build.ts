@@ -12,6 +12,7 @@ import { fetchArenaAgent, ARENA_AGENT_URL } from "./sources/arenaAgent";
 import { fetchEnsembleRuns, ENSEMBLE_RUNS_URL } from "./sources/ensembleRuns";
 import { fetchStratixCup, STRATIX_CUP_URL } from "./sources/stratixCup";
 import { fetchFrontierMath, FRONTIER_MATH_URL, FRONTIER_MATH_PAGE } from "./sources/frontierMath";
+import { fetchArtificialAnalysis, ARTIFICIAL_ANALYSIS_URL } from "./sources/artificialAnalysis";
 
 export const BENCHMARKS: Benchmark[] = [
   // Agent benchmarks: scored via a (harness, model) pair → harness boards.
@@ -21,7 +22,8 @@ export const BENCHMARKS: Benchmark[] = [
   { id: "ensemble-runs", name: "ixio runs", metric: "Pass rate", kind: "agent", unit: "pct", blurb: "Our own runs — any harness × any model via the proxy. Fills gaps nobody else measures.", source: ENSEMBLE_RUNS_URL, homepage: ENSEMBLE_RUNS_URL },
   // Model benchmarks: scored on the raw model → model profiles + Top Team.
   { id: "arena-coding", name: "Chatbot Arena (Coding)", metric: "Coding Elo", kind: "model", unit: "elo", blurb: "Human preference Elo on coding prompts (LMArena).", source: CHATBOT_ARENA_URL, homepage: "https://lmarena.ai/" },
-  { id: "artificial-analysis", name: "Artificial Analysis", metric: "Intelligence Index", kind: "model", unit: "index", blurb: "Composite intelligence index across evals.", source: CHATBOT_ARENA_URL, homepage: "https://artificialanalysis.ai/" },
+  { id: "artificial-analysis", name: "Artificial Analysis", metric: "Intelligence Index", kind: "model", unit: "index", blurb: "Composite intelligence index across evals (Artificial Analysis).", source: ARTIFICIAL_ANALYSIS_URL, homepage: "https://artificialanalysis.ai/" },
+  { id: "aa-coding", name: "AA Coding Index", metric: "Coding Index", kind: "model", unit: "index", blurb: "Artificial Analysis’s coding-evals composite (SWE-bench, Terminal-Bench, SciCode, LiveCodeBench…), per model.", source: ARTIFICIAL_ANALYSIS_URL, homepage: "https://artificialanalysis.ai/" },
   { id: "arc-agi", name: "ARC-AGI", metric: "Score", kind: "model", unit: "pct", blurb: "Abstraction & reasoning puzzles (ARC Prize).", source: CHATBOT_ARENA_URL, homepage: "https://arcprize.org/" },
   { id: "arena-agent", name: "Arena Agent", metric: "Net Improvement", kind: "model", unit: "pct", blurb: "Agentic coding eval over real sessions.", source: ARENA_AGENT_URL, homepage: "https://arena.ai/leaderboard/agent" },
   { id: "stratix-cup", name: "Stratix Cup", metric: "Tournament score", kind: "model", unit: "index", blurb: "16 frontier models write their own soccer-strategy code and compete head-to-head (LayerLens).", source: STRATIX_CUP_URL, homepage: "https://layerlens.ai/stratix-cup/season-1/" },
@@ -38,6 +40,7 @@ const SOURCES: Src[] = [
   { id: "ensemble-runs", name: "ixio runs", url: ENSEMBLE_RUNS_URL, fn: fetchEnsembleRuns },
   { id: "stratix-cup", name: "Stratix Cup", url: STRATIX_CUP_URL, fn: fetchStratixCup },
   { id: "frontier-math", name: "FrontierMath", url: FRONTIER_MATH_URL, fn: fetchFrontierMath },
+  { id: "artificial-analysis", name: "Artificial Analysis", url: ARTIFICIAL_ANALYSIS_URL, fn: fetchArtificialAnalysis },
 ];
 
 const round1 = (x: number) => Math.round(x * 10) / 10;
@@ -215,6 +218,7 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     "arena-agent": { agentNative: 45, realism: 80, openness: 60 },
     "arc-agi": { agentNative: 0, realism: 66, openness: 90 },
     "artificial-analysis": { agentNative: 0, realism: 72, openness: 50 },
+    "aa-coding": { agentNative: 0, realism: 78, openness: 60 },
     "arena-coding": { agentNative: 0, realism: 60, openness: 70 },
     // Model-level, but executable head-to-head where models write/iterate real code,
     // every match traced + signed — so it rates well on realism/openness for a model bench.
