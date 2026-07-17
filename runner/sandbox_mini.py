@@ -53,10 +53,13 @@ LANG = {
 
 # model id -> (display name, vendor, (base_url, key_env))
 MODELS = {
+    "anthropic/claude-fable-5": ("Claude Fable 5", "Anthropic", GATEWAY),
     "anthropic/claude-opus-4-8": ("Claude Opus 4.8", "Anthropic", GATEWAY),
     "zai-org/GLM-5.2": ("GLM-5.2", "Z.ai", TOKENFACTORY),
     "moonshotai/Kimi-K2.6": ("Kimi K2.6", "Moonshot AI", TOKENFACTORY),
+    "moonshotai/Kimi-K2.7-Code": ("Kimi K2.7 Code", "Moonshot AI", TOKENFACTORY),
     "MiniMaxAI/MiniMax-M2.5": ("MiniMax M2.5", "MiniMax", TOKENFACTORY),
+    "MiniMaxAI/MiniMax-M3": ("MiniMax M3", "MiniMax", TOKENFACTORY),
     "openai/gpt-oss-120b": ("gpt-oss-120b", "OpenAI", TOKENFACTORY),
     "deepseek-ai/DeepSeek-V4-Pro": ("DeepSeek-V4", "DeepSeek", TOKENFACTORY),
     "meta-llama/Llama-3.3-70B-Instruct": ("Llama 3.3 70B", "Meta", TOKENFACTORY),
@@ -73,6 +76,46 @@ class TFEnv(ContreeEnvironment):
         return self.client.images.use(self.config.image)
 
 
+
+def make_model(model_id: str):
+    """Model for the agent loop. TF-served open models abort with
+    RepeatedFormatError when forced tool-calls meet our long markdown/regex-heavy
+    prompts — the textbased (bash code block) interface is reliable for them.
+    Gateway (Anthropic/OpenAI/xAI) models keep forced tool-calls, which they handle."""
+    _, _, (base, key_env) = MODELS[model_id]
+    kwargs = {"api_key": os.environ[key_env], "api_base": base, "max_tokens": 16000, "drop_params": True}
+    cfg = {"model_kwargs": kwargs}
+    if (base, key_env) == TOKENFACTORY:
+        cfg["model_class"] = "litellm_textbased"
+    else:
+        kwargs["tool_choice"] = "required"
+    return get_model("openai/" + model_id, config=cfg)
+
+def run_one_tenki(task, model_id: str, log) -> dict:
+    """Same eval, but the sandbox is a Tenki Firecracker microVM (~2s provisioning)."""
+    import tenki_env as te  # lazy: only needed for --backend tenki
+
+    name, vendor, (base, key_env) = MODELS[model_id]
+    sb = te.create_task_sandbox(task, name=f"ixio-{task.id}")
+    try:
+        env = te.TenkiEnvironment(sb)
+        model = make_model(model_id)
+        agent = DefaultAgent(model, env, system_template=SYS_T, instance_template=INST_T,
+                             step_limit=40, cost_limit=20.0, max_consecutive_format_errors=20)
+        try:
+            agent.run(task.prompt)
+        except Exception as exc:
+            log(f"    ({name} {task.id} agent: {str(exc)[:60]})")
+        score = te.grade(sb, task, runner.score_from_output)
+    finally:
+        try:
+            sb.terminate()
+        except Exception:
+            pass
+    log(f"  {name:18} {task.id:16} -> {score * 100:5.1f}%")
+    return {"model": model_id, "modelName": name, "vendor": vendor, "task": task.id, "score": score}
+
+
 def run_one(task, model_id: str, log) -> dict:
     name, vendor, (base, key_env) = MODELS[model_id]
     image, setup, lenv = LANG[task.language]
@@ -80,14 +123,12 @@ def run_one(task, model_id: str, log) -> dict:
     env = TFEnv(contree_config=ContreeConfig(auth=auth), image=image, image_tag="latest",
                 cwd="/work", import_username="", import_password="", env={**BASE_ENV, **lenv})
     try:
-        stub = {f"/work/{p.name}": str(p) for p in task.workspace.iterdir() if p.name not in task.hidden_tests}
+        stub = {f"/work/{p.name}": str(p) for p in task.workspace.iterdir() if p.is_file() and p.name not in task.hidden_tests}
         env.session.run(shell=setup, files=stub, cwd="/work", env=lenv, disposable=False).wait()
 
-        model = get_model("openai/" + model_id, config={"model_kwargs": {
-            "api_key": os.environ[key_env], "api_base": base, "max_tokens": 16000,
-            "tool_choice": "required", "drop_params": True}})  # force a bash tool call each turn
+        model = make_model(model_id)
         agent = DefaultAgent(model, env, system_template=SYS_T, instance_template=INST_T,
-                             step_limit=40, cost_limit=20.0)
+                             step_limit=40, cost_limit=20.0, max_consecutive_format_errors=20)
         try:
             agent.run(task.prompt)
         except Exception as exc:  # agent gave up / step limit / transient — grade whatever it left
@@ -109,6 +150,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", default=list(MODELS))
     ap.add_argument("--tasks", nargs="*")
+    ap.add_argument("--backend", choices=["contree", "tenki"], default="contree",
+                    help="sandbox provider: ConTree (Token Factory) or Tenki (Firecracker)")
     ap.add_argument("--workers", type=int, default=5)
     ap.add_argument("--out", default=str(OUT))
     ap.add_argument("--merge", action="store_true", help="merge into existing --out by (harness, model)")
@@ -127,10 +170,11 @@ def main() -> int:
             print(m, flush=True)
 
     jobs = [(t, mid) for mid in a.models for t in tasks]
-    log(f"mini-SWE-agent: {len(jobs)} (model x task) across {len(a.models)} models, {len(tasks)} tasks…")
+    runner_fn = run_one_tenki if a.backend == "tenki" else run_one
+    log(f"mini-SWE-agent [{a.backend}]: {len(jobs)} (model x task) across {len(a.models)} models, {len(tasks)} tasks…")
     per = []
     with cf.ThreadPoolExecutor(max_workers=a.workers) as ex:
-        futs = {ex.submit(run_one, t, mid, log): (t, mid) for (t, mid) in jobs}
+        futs = {ex.submit(runner_fn, t, mid, log): (t, mid) for (t, mid) in jobs}
         for fut in cf.as_completed(futs):
             t, mid = futs[fut]
             try:

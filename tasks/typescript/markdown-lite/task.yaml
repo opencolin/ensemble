@@ -1,0 +1,211 @@
+id: ts-markdown-lite
+language: typescript
+category: feature
+maxTurns: 35
+prompt: |
+  Implement an inline-Markdown renderer in `markdown.mjs`. Use ES module syntax
+  (the file is `.mjs`) and `export` ONE named function `render`. Do NOT use any
+  third-party package (no `marked`, `markdown-it`, `commonmark`, etc.); implement
+  the rules below directly.
+
+  `render(md)` takes a string that is ONE paragraph of inline markdown — a single
+  line, with no line breaks — and returns the corresponding HTML fragment as a
+  string. There is NO surrounding `<p>...</p>`; you render only the inline
+  content.
+
+  This is graded against a hidden test suite you never see, so implement every
+  rule and edge case EXACTLY as written. The rules are derived from CommonMark
+  but are fully restated here and are authoritative. Where they differ from any
+  library or from your memory of CommonMark, follow THIS spec — in particular the
+  three output-escaping rules below, which are deliberately simpler than
+  CommonMark.
+
+  ## Definitions
+
+  - "ASCII punctuation" is any of these 32 characters:
+    ``!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~``
+  - "Whitespace" means the ASCII space character U+0020. The very start and the
+    very end of the input each count as whitespace for the flanking rules below.
+    (Inputs never contain tabs or newlines.)
+
+  ## Output escaping (READ FIRST — these are load-bearing)
+
+  Three different escaping rules apply depending on context:
+
+  1. PLAIN TEXT (ordinary characters that end up as text content): escape `&` as
+     `&amp;`, `<` as `&lt;`, `>` as `&gt;`. Do NOT escape `"` or `'` — leave them
+     verbatim. There is NO entity decoding: EVERY `&` is escaped to `&amp;`,
+     always, even in something that looks like an entity. So the input `&amp;`
+     renders as `&amp;amp;`, and `a&b` renders as `a&amp;b`.
+  2. CODE SPAN CONTENT: escape `&`, `<`, `>`, AND `"` — as `&amp;`, `&lt;`,
+     `&gt;`, `&quot;` respectively. (Unlike plain text, `"` IS escaped here.)
+  3. ATTRIBUTE VALUES (a link's `href` and `title`): escape `&`, `<`, `>`, `"` as
+     in rule 2. Nothing else is transformed (no percent-encoding).
+
+  ## 1. Backslash escapes
+
+  A backslash `\` before an ASCII punctuation character produces that literal
+  character, and the character loses any special meaning (so `\*` is a literal
+  `*` that can never be an emphasis delimiter, `\[` is a literal `[`, `` \` `` is
+  a literal backtick that cannot open a code span). A backslash before any
+  NON-punctuation character (or at the very end of the input) is a literal
+  backslash. Examples: `\a` -> `\a`; `\\` -> `\` (one backslash); ``\` `` -> `` ` ``.
+
+  ## 2. Code spans
+
+  A backtick string is a run of one or more backtick characters. A code span
+  opens with a backtick string and closes with the NEXT backtick string of
+  EXACTLY the same length. Everything between the two is the code span content.
+
+  - The content is treated as raw text: NO backslash escapes, NO emphasis, NO
+    nested spans of any kind are processed inside it. Emit it wrapped in
+    `<code>...</code>`, applying the CODE SPAN escaping rule (`& < > "`).
+  - Space stripping: if the content both begins AND ends with a space, and it is
+    not made entirely of spaces, remove exactly one space from each end. (So
+    `` ` a ` `` -> `<code>a</code>`, but `` ` a` `` -> `<code> a</code>` and
+    `` `  ` `` -> `<code>  </code>`.)
+  - If a backtick string has no matching closer of equal length, it is NOT a code
+    span: emit those backtick characters literally and keep parsing the rest of
+    the string after them (so a later backtick string may still open a span).
+
+  Code spans bind more tightly than emphasis and links: a delimiter or bracket
+  inside a code span is inert.
+
+  ## 3. Emphasis with `*` and `_`
+
+  A "delimiter run" is a maximal run of the SAME character, all `*` or all `_`,
+  that is not backslash-escaped. For a given run, let the "preceding" and
+  "following" characters be the ones immediately before and after it (with start
+  / end of input counting as whitespace). Then:
+
+  - The run is LEFT-FLANKING iff it is not followed by whitespace, AND EITHER
+    (a) it is not followed by ASCII punctuation, OR (b) it is followed by ASCII
+    punctuation and preceded by whitespace or ASCII punctuation.
+  - The run is RIGHT-FLANKING iff it is not preceded by whitespace, AND EITHER
+    (a) it is not preceded by ASCII punctuation, OR (b) it is preceded by ASCII
+    punctuation and followed by whitespace or ASCII punctuation.
+
+  Whether a run can open or close emphasis:
+
+  - A `*` run can OPEN iff it is left-flanking; it can CLOSE iff it is
+    right-flanking.
+  - A `_` run can OPEN iff it is left-flanking AND (it is not right-flanking OR
+    it is preceded by ASCII punctuation). It can CLOSE iff it is right-flanking
+    AND (it is not left-flanking OR it is followed by ASCII punctuation). (The
+    effect: intraword `*` emphasis is allowed, but intraword `_` is not.)
+
+  Matching. Scan left to right. When you reach a run that can close, match it
+  with the NEAREST still-unmatched run before it that can open and uses the same
+  character. When an opener and closer are matched:
+
+  - If BOTH runs have length >= 2, they consume 2 delimiters each and produce
+    `<strong>...</strong>`; otherwise they consume 1 delimiter each and produce
+    `<em>...</em>`.
+  - A run longer than what was consumed keeps its remaining delimiters, which
+    stay available for further matching. This is how `***x***` becomes
+    `<em><strong>x</strong></em>` (the outer `*` pair is em, the inner pair is
+    strong) and how `*foo**bar**baz*` nests a `<strong>` inside an `<em>`.
+
+  The "rule of three". This restricts a pair ONLY when at least one of the two
+  runs can BOTH open and close. In that situation, if the sum of the two runs'
+  ORIGINAL lengths is a multiple of 3, the pair is forbidden UNLESS both original
+  lengths are individually multiples of 3. (Equivalently, when the sum is a
+  multiple of 3, they may pair only if BOTH lengths are multiples of 3.) Use each
+  run's original length here, measured before any delimiters were consumed. This
+  is why `*foo**bar*` renders as `<em>foo**bar</em>`: the `*`(1) opener and
+  `**`(2) closer would sum to 3, so they cannot pair, and the outer single `*`
+  pair wins instead.
+
+  Any delimiter that is never matched is emitted as its literal character(s).
+
+  ## 4. Links (inline form only)
+
+  A link is written `[text](destination)` or `[text](destination "title")` and
+  renders as `<a href="DEST">TEXT</a>` or `<a href="DEST" title="TITLE">TEXT</a>`.
+
+  - `text` is parsed as inline markdown (emphasis, code spans, autolinks all work
+    inside it). The destination and title are NOT parsed as inline markdown.
+  - Destination: either an angle form `<...>` — everything up to the first `>`,
+    which MAY contain spaces but not `<`, `>`, or a newline, and the angle
+    brackets are removed — or a bare form: a run of characters containing no
+    ASCII spaces/controls and no parentheses `(` or `)`. The bare form may be
+    empty (`[a]()` gives `href=""`). Emit the destination using the ATTRIBUTE
+    escaping rule.
+  - Title (optional): after the destination and at least one space, a title
+    wrapped in double quotes `"..."` or single quotes `'...'`. Inside the title,
+    backslash escapes work (so `\"` is a literal quote that does not end a
+    double-quoted title). Emit the title using the ATTRIBUTE escaping rule.
+  - After an optional title there may be spaces, then the closing `)`. If the
+    parenthesized part does not parse as a valid `(destination)` /
+    `(destination "title")`, the construct is NOT a link and the opening `[` is
+    treated as a literal character.
+  - There is NO image syntax: a `!` is always literal text, so `![a](b)` renders
+    as `!` followed by the link `<a href="b">a</a>`.
+  - There is NO reference-link syntax (`[text][label]`, `[text][]`, `[label]`):
+    such brackets that are not immediately followed by a valid `(...)` are
+    literal.
+  - Links may not contain links. When bracket pairs are nested, the INNERMOST
+    pair that forms a valid link wins, and the enclosing `[` and `]` become
+    literal characters. So `[a[b](c)d](e)` renders as
+    `[a<a href="c">b</a>d](e)`.
+  - Emphasis never crosses a link boundary: an emphasis delimiter outside the
+    brackets cannot pair with one inside, and vice versa.
+
+  ## 5. Autolinks
+
+  `<SCHEME:REST>` is an autolink when SCHEME matches `[A-Za-z][A-Za-z0-9+.-]*`
+  (a letter followed by letters, digits, `+`, `.`, `-`) and REST contains no
+  spaces, control characters, `<`, or `>`. It renders as
+  `<a href="URI">URI</a>` where URI is the text between the angle brackets; apply
+  the ATTRIBUTE escaping rule to the href and the PLAIN-TEXT escaping rule to the
+  visible label. (For example `<https://x.com/a?b=1&c=2>` becomes
+  `<a href="https://x.com/a?b=1&amp;c=2">https://x.com/a?b=1&amp;c=2</a>`.)
+
+  A `<...>` that is not a valid autolink is not special: the `<` is a literal
+  character (and thus escapes to `&lt;`). There is no raw-HTML and no email
+  autolink support.
+
+  ## 6. Precedence summary
+
+  Code spans and autolinks are recognized during the left-to-right scan, and link
+  brackets resolve before emphasis; emphasis is matched last and cannot reach
+  into a code span, an autolink, or across a link boundary.
+
+  ## Worked examples (input -> output)
+
+      *foo bar*                 -> <em>foo bar</em>
+      a * foo*                  -> a * foo*
+      foo*bar*baz               -> foo<em>bar</em>baz
+      foo_bar_baz               -> foo_bar_baz
+      _foo_bar_baz_             -> <em>foo_bar_baz</em>
+      **foo, *bar*, baz**       -> <strong>foo, <em>bar</em>, baz</strong>
+      *foo**bar**baz*           -> <em>foo<strong>bar</strong>baz</em>
+      ***x***                   -> <em><strong>x</strong></em>
+      *foo**bar*                -> <em>foo**bar</em>
+      **foo* bar                -> *<em>foo</em> bar
+      \*not em\*                -> *not em*
+      `code`                    -> <code>code</code>
+      `                         -> `
+      `` ` ``                   -> <code>`</code>
+      ` a `                     -> <code>a</code>
+      `a"b`                     -> <code>a&quot;b</code>
+      `a*b`                     -> <code>a*b</code>
+      *a`*`b                    -> *a<code>*</code>b
+      [link *em*](u)            -> <a href="u">link <em>em</em></a>
+      *[t](u)*                  -> <em><a href="u">t</a></em>
+      [a *b](c)*                -> <a href="c">a *b</a>*
+      [x](<a b>)                -> <a href="a b">x</a>
+      [a[b](c)d](e)             -> [a<a href="c">b</a>d](e)
+      [foo][bar]                -> [foo][bar]
+      <https://example.com>     -> <a href="https://example.com">https://example.com</a>
+      <notaurl>                 -> &lt;notaurl&gt;
+      a&b                       -> a&amp;b
+      &amp;                     -> &amp;amp;
+      say "hi"                  -> say "hi"
+
+  Implement `render` in `markdown.mjs` to this specification. It is graded against
+  a hidden test suite you never see, so handle every rule and edge case above. Do
+  NOT edit any test file.
+acceptance: 'node --test'
+hiddenTests:
+  - test.mjs

@@ -1,0 +1,92 @@
+id: go-shell-split
+language: go
+category: feature
+maxTurns: 35
+prompt: |
+  Implement `func Split(input string) ([]string, error)` in `shell.go`
+  (package `shellsplit`) — a POSIX-shell-style word splitter. The current body
+  is a non-working stub; replace it with a correct implementation. Keep the
+  function name and signature, and keep the package name `shellsplit`.
+
+  `Split` reads the whole `input` string and returns the list of words a POSIX
+  shell would produce when splitting a command line into words. This is ONLY
+  tokenizing/quoting/word-splitting: perform NO variable/tilde expansion, NO
+  globbing, and NO command substitution. `$`, `` ` ``, `*`, `?`, `~`, etc. are
+  ordinary literal characters.
+
+  Rules (the hidden tests check exactly these):
+
+  1. UNQUOTED WHITESPACE — space (` `), tab (`\t`), and newline (`\n`) separate
+     words. Runs of whitespace collapse (they do not create empty words), and
+     leading/trailing whitespace is ignored. Note: carriage return (`\r`) is NOT
+     whitespace — it is an ordinary literal character.
+
+  2. SINGLE QUOTES `'...'` — everything between the opening `'` and the next `'`
+     is literal, with NO escape processing at all (a backslash inside single
+     quotes is just a backslash; the first `'` after it therefore CLOSES the
+     quote). An empty `''` contributes an empty string to the current word.
+
+  3. DOUBLE QUOTES `"..."` — inside double quotes a backslash `\` escapes ONLY
+     the characters `$`, `` ` ``, `"`, `\`, and newline; before any of those the
+     backslash is removed and the following character is taken literally (and a
+     backslash before a newline is a line continuation: BOTH the backslash and
+     the newline are removed). Before ANY OTHER character the backslash is NOT
+     special and stays in the value literally (e.g. `"a\nb"` yields the four
+     characters `a \ n b`). A `'` inside double quotes is literal. An empty `""`
+     contributes an empty string to the current word.
+
+  4. UNQUOTED BACKSLASH `\` — escapes the single next character, which is then
+     taken literally and loses any special meaning (so `a\ b` is the one word
+     `a b`). A backslash directly before a newline is a line continuation: both
+     characters are removed and NO word break occurs. A backslash as the very
+     last character of the input (nothing follows) is an error.
+
+  5. COMMENTS — an unquoted `#` begins a comment ONLY when it is at the start of
+     the input or immediately preceded by unquoted whitespace; the comment runs
+     to the end of the current line (a following newline still acts as a
+     separator). A `#` anywhere else is a literal character, so `a#b` is the one
+     word `a#b`.
+
+  6. CONCATENATION — adjacent quoted and unquoted segments with no separator
+     between them join into a SINGLE word. `a"b"'c'd` is one word `abcd`;
+     `a""b` is one word `ab` (the empty quotes add nothing but do not split);
+     `""''` is ONE empty word.
+
+  Return a non-nil error (the test only checks that `err != nil`; the message is
+  up to you) for any of:
+
+  - an unterminated single-quoted string (end of input before the closing `'`),
+  - an unterminated double-quoted string (end of input before the closing `"`),
+  - a trailing backslash (a `\` with no following character).
+
+  The result for an empty input, or input consisting only of whitespace and/or
+  comments, is an EMPTY, NON-NIL slice: return `[]string{}` with a nil error
+  (returning `nil` is wrong — the tests distinguish nil from empty).
+
+  Worked examples (success):
+
+  - `a b  c`            -> `["a","b","c"]`   (runs of whitespace collapse)
+  - `a"b"'c'd`          -> `["abcd"]`        (segments concatenate)
+  - `""`                -> `[""]`            (one empty word)
+  - `""''`             -> `[""]`            (still ONE empty word)
+  - `a '' b`            -> `["a","","b"]`    (quoted empty is its own word here)
+  - `"a\$b"`            -> `["a$b"]`         (\ escapes $ inside double quotes)
+  - `"a\nb"`            -> `["a\nb"]`        (n is not escapable: backslash kept)
+  - `a\nb`              -> `["anb"]`         (unquoted \ escapes n -> literal n)
+  - `\ `                -> `[" "]`           (escaped space = one-space word)
+  - `\'`                -> `["'"]`
+  - `"\""`             -> `["\""]`
+  - `'"'`              -> `["\""]`
+  - `'a\'`             -> `["a\\"]`          (\ is literal in '...'; ' closes)
+  - `a#b`               -> `["a#b"]`         (# not after whitespace: literal)
+  - `echo a# b`         -> `["echo","a#","b"]`
+  - `echo hi # comment` -> `["echo","hi"]`
+  - `#leading`          -> `[]`              (whole line is a comment)
+  - `'#'x`              -> `["#x"]`
+  - a line ending in `\` then a newline joins with the next line (continuation)
+
+  Implement only `shell.go`, to this specification. It is graded against a
+  hidden test suite you never see, so handle every rule and edge case above.
+acceptance: 'go test -json ./...'
+hiddenTests:
+  - shell_test.go

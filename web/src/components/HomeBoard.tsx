@@ -48,8 +48,16 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
 
   const board = boardByHarness(lb, hid); // undefined for a known-but-unbenchmarked harness
   const harness = getHarness(lb, hid)!;
+  const topModel = lb.models[0];
   const topLab = lb.labs[0];
   const topAgent = lb.agents[0];
+  // Fused board inputs: every row gets its all-benchmark standing, and the top
+  // overall models with no row on this harness show as unranked ghost rows.
+  const overallById = Object.fromEntries(lb.models.map((m) => [m.modelId, { rank: m.rank, composite: m.composite }]));
+  const ghosts = board
+    ? lb.models.slice(0, 10).filter((m) => !board.models.some((x) => x.modelId === m.modelId)).slice(0, 3)
+        .map((m) => ({ modelId: m.modelId, modelName: m.modelName, vendor: m.vendor, rank: m.rank, composite: m.composite, openWeight: m.openWeight }))
+    : [];
   const topAgentH = getHarness(lb, topAgent.harnessId);
   const bestOpen = lb.models.find((m) => m.openWeight);
 
@@ -108,7 +116,8 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
 
       {/* cross-ranking highlights */}
       <section className="mx-auto max-w-6xl px-5 py-2">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {topModel && <HighlightCard href={`/models/${slugFor(topModel.modelId)}`} eyebrow="Top model" title={topModel.modelName} sub={`${Object.keys(topModel.scores).length} benchmarks`} stat={`${topModel.composite.toFixed(0)}`} />}
           {topLab && <HighlightCard href={`/team/${slugFor(topLab.vendor)}`} eyebrow="Top team" title={topLab.vendor} sub={topLab.bestModelName} stat={`#1`} />}
           {topAgentH && <HighlightCard href={`/agents/${topAgent.harnessId}`} eyebrow="Top agent" title={topAgentH.name} sub={topAgent.bestModelName} stat={`${topAgent.score.toFixed(0)}`} />}
           {bestOpen && <HighlightCard href={`/models/${slugFor(bestOpen.modelId)}`} eyebrow="Best open-weight" title={bestOpen.modelName} sub={bestOpen.vendor} stat={`#${bestOpen.rank}`} />}
@@ -118,7 +127,7 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
 
       <div key={hid}>
         {board ? (
-          <Board board={board} harness={harness} benchmarks={lb.benchmarks} />
+          <Board board={board} harness={harness} benchmarks={lb.benchmarks} overall={overallById} unmeasured={ghosts} />
         ) : (
           <EmptyBoard harness={harness} />
         )}

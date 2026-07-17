@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22",
+  "generatedAt": "2026-07-11",
   "harness": "claude-code",
   "dryRun": false,
   "results": [
@@ -92,6 +92,141 @@
       "passRate": 100.0,
       "runs": 6,
       "date": "2026-06-22"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "anthropic/claude-fable-5",
+      "modelName": "Claude Fable 5",
+      "modelOrg": "Anthropic",
+      "passRate": 100.0,
+      "runs": 3,
+      "date": "2026-07-09"
+    },
+    {
+      "harness": "Claude Code",
+      "model": "anthropic/claude-fable-5",
+      "modelName": "Claude Fable 5",
+      "modelOrg": "Anthropic",
+      "passRate": 100.0,
+      "runs": 5,
+      "date": "2026-07-09"
+    },
+    {
+      "harness": "Claude Code",
+      "model": "openai/gpt-5.6-sol",
+      "modelName": "GPT-5.6 Sol",
+      "modelOrg": "OpenAI",
+      "passRate": 100.0,
+      "runs": 5,
+      "date": "2026-07-09"
+    },
+    {
+      "harness": "Claude Code",
+      "model": "anthropic/claude-opus-4-8",
+      "modelName": "Claude Opus 4.8",
+      "modelOrg": "Anthropic",
+      "passRate": 100.0,
+      "runs": 5,
+      "date": "2026-07-09"
+    },
+    {
+      "harness": "Claude Code",
+      "model": "openai/gpt-5.5",
+      "modelName": "GPT-5.5",
+      "modelOrg": "OpenAI",
+      "passRate": 100.0,
+      "runs": 5,
+      "date": "2026-07-09"
+    },
+    {
+      "harness": "Claude Code",
+      "model": "xai/grok-4.5",
+      "modelName": "Grok 4.5",
+      "modelOrg": "xAI",
+      "passRate": 100.0,
+      "runs": 5,
+      "date": "2026-07-09"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "moonshotai/Kimi-K2.7-Code",
+      "modelName": "Kimi K2.7 Code",
+      "modelOrg": "Moonshot AI",
+      "passRate": 99.6,
+      "runs": 8,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "MiniMaxAI/MiniMax-M3",
+      "modelName": "MiniMax M3",
+      "modelOrg": "MiniMax",
+      "passRate": 98.4,
+      "runs": 8,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "anthropic/claude-opus-4-8",
+      "modelName": "Claude Opus 4.8",
+      "modelOrg": "Anthropic",
+      "passRate": 100.0,
+      "runs": 3,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "moonshotai/Kimi-K2.6",
+      "modelName": "Kimi K2.6",
+      "modelOrg": "Moonshot AI",
+      "passRate": 2.0,
+      "runs": 3,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "zai-org/GLM-5.2",
+      "modelName": "GLM-5.2",
+      "modelOrg": "Z.ai",
+      "passRate": 83.3,
+      "runs": 6,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "openai/gpt-oss-120b",
+      "modelName": "gpt-oss-120b",
+      "modelOrg": "OpenAI",
+      "passRate": 2.0,
+      "runs": 3,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "MiniMaxAI/MiniMax-M2.5",
+      "modelName": "MiniMax M2.5",
+      "modelOrg": "MiniMax",
+      "passRate": 65.9,
+      "runs": 3,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "modelName": "DeepSeek-V4",
+      "modelOrg": "DeepSeek",
+      "passRate": 100.0,
+      "runs": 3,
+      "date": "2026-07-11"
+    },
+    {
+      "harness": "mini-SWE-agent",
+      "model": "meta-llama/Llama-3.3-70B-Instruct",
+      "modelName": "Llama 3.3 70B",
+      "modelOrg": "Meta",
+      "passRate": 30.1,
+      "runs": 3,
+      "date": "2026-07-11"
     }
   ]
 }

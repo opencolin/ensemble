@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getLeaderboard } from "@/lib/leaderboard";
 import { BENCHMARK_CRITERIA } from "@/lib/types";
+import { fetchSandboxBench, fetchStorageBench, fetchBrowserBench, INFRA_SOURCE } from "@/lib/infraBench";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Rank, StatBar } from "@/components/bits";
@@ -14,8 +16,15 @@ export const metadata: Metadata = {
 const GRID = "grid-cols-[2.5rem_minmax(11rem,1fr)_4.2rem_4.6rem_4.2rem_3.8rem_7rem]";
 
 export default async function BenchmarksPage() {
-  const lb = await getLeaderboard();
+  const [lb, sbx, sto, bro] = await Promise.all([
+    getLeaderboard(), fetchSandboxBench(), fetchStorageBench(), fetchBrowserBench(),
+  ]);
   const ranking = lb.benchmarkRanking;
+  const infra = [
+    { name: "ComputeSDK Sandboxes", what: "Sandbox cold-start: median time-to-interactive (sequential / burst / staggered) + $/hr", n: sbx?.rows.length, href: "/sandbox", src: `${INFRA_SOURCE.site}/sandboxes/` },
+    { name: "ComputeSDK Storage", what: "Object-storage throughput and latency on real 1–16 MB transfers", n: sto?.rows.length, href: "/storage", src: `${INFRA_SOURCE.site}/storage/` },
+    { name: "ComputeSDK Browsers", what: "Remote-browser session round-trip (create · connect · navigate) + actions/s", n: bro?.rows.length, href: "/browser", src: `${INFRA_SOURCE.site}/browsers/` },
+  ];
 
   return (
     <>
@@ -111,6 +120,41 @@ export default async function BenchmarksPage() {
               </>
             )}
           </p>
+        </section>
+
+        {/* infrastructure benchmarks — a different axis, so not in the ranking above */}
+        <section className="mx-auto max-w-6xl px-5 py-8">
+          <div className="mb-3 flex items-baseline justify-between gap-3">
+            <h2 className="font-display text-lg font-semibold tracking-tight">Infrastructure benchmarks</h2>
+            <a href={INFRA_SOURCE.site} target="_blank" rel="noreferrer" className="shrink-0 font-mono text-xs text-faint hover:text-accent">
+              source: {INFRA_SOURCE.author} ↗
+            </a>
+          </div>
+          <p className="mb-5 max-w-2xl text-[13px] leading-relaxed text-faint">
+            These measure the layer <span className="text-dim">under</span> the agent — the sandboxes
+            it executes in, the storage it persists to, the browsers it drives — so they rank{" "}
+            <span className="text-dim">providers</span>, not models, and sit outside the scoring
+            above. Run daily in {INFRA_SOURCE.author}&apos;s open CI; we read the raw results
+            straight from the repo.
+          </p>
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+            {infra.map((b) => (
+              <div key={b.name} className="flex flex-col gap-2 rounded-xl border border-edge bg-surface/40 p-4">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-display text-[15px] font-medium text-ink">{b.name}</span>
+                  <span className="shrink-0 rounded border border-edge px-1.5 py-px font-mono text-[9px] uppercase tracking-wider text-faint">infra</span>
+                </div>
+                <p className="text-[12px] leading-relaxed text-faint">{b.what}</p>
+                <div className="mt-auto flex items-center justify-between pt-1 font-mono text-[11px]">
+                  <span className="text-faint">{b.n ?? "—"} providers · daily</span>
+                  <span className="flex items-center gap-3">
+                    <Link href={b.href} className="text-dim hover:text-accent">board →</Link>
+                    <a href={b.src} target="_blank" rel="noreferrer" className="text-faint hover:text-accent">src ↗</a>
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       </main>
       <SiteFooter meta={lb.meta} />

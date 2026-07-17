@@ -2,8 +2,14 @@
 
 export type Weights = "all" | "open";
 
-/** Segmented All / Open-weight filter, matching the harness-switcher pill style. */
-export function OpenFilter({ value, onChange }: { value: Weights; onChange: (v: Weights) => void }) {
+/** Segmented all-models / open-weight filter, matching the harness-switcher pill style. */
+export function OpenFilter({ value, onChange, labels }: {
+  value: Weights;
+  onChange: (v: Weights) => void;
+  /** Display labels for the [all, open] segments (default "All" / "Open"). */
+  labels?: [string, string];
+}) {
+  const [allLabel, openLabel] = labels ?? ["All", "Open"];
   return (
     <div className="flex items-center gap-1 rounded-lg border border-edge bg-surface/60 p-1" role="group" aria-label="weights filter">
       {(["all", "open"] as const).map((v) => (
@@ -15,7 +21,7 @@ export function OpenFilter({ value, onChange }: { value: Weights; onChange: (v: 
             value === v ? "bg-edge2/60 text-ink" : "text-faint hover:text-dim"
           }`}
         >
-          {v === "all" ? "All" : "Open"}
+          {v === "all" ? allLabel : openLabel}
         </button>
       ))}
     </div>
