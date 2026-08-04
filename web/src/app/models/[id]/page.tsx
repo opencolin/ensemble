@@ -71,7 +71,7 @@ export default async function ModelPage({
     <>
       <SiteHeader />
       <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-10">
-        <Link href="/" className="font-mono text-xs text-faint hover:text-dim">
+        <Link href="/leaderboard" className="font-mono text-xs text-faint hover:text-dim">
           ← Leaderboard
         </Link>
 

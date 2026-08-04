@@ -1,0 +1,187 @@
+/* Homepage styles from the standalone prototype, scoped to .tk-home so they
+ * cannot leak into the Tailwind-styled leaderboard pages. */
+  .tk-home {
+    --bg: #000;
+    --fg: #ededed;
+    --muted: #8f8f8f;
+    --line: #262626;
+    --card: #0a0a0a;
+    --sand: #d9c9a3;
+    --accent: #fff;
+    --radius: 12px;
+  }
+  .tk-home *, .tk-home *::before, .tk-home *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  .tk-home { background: var(--bg); color: var(--fg); }
+  .tk-home {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .tk-home .mono { font-family: "SF Mono", "Menlo", "Consolas", monospace; }
+
+  /* ---------- Nav ---------- */
+  .tk-home nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 28px;
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(0,0,0,.7); backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+  }
+  .tk-home nav.scrolled { border-bottom-color: var(--line); }
+  .tk-home .brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+  .tk-home .brand-mark { display: grid; grid-template-columns: repeat(3, 7px); gap: 2.5px; }
+  .tk-home .brand-mark i {
+    width: 7px; height: 7px; background: var(--fg); border-radius: 1.5px; display: block;
+  }
+  .tk-home .brand-mark i:nth-child(2) { background: var(--sand); }
+  .tk-home .brand-mark i.gap { background: transparent; }
+  .tk-home .brand-name { font-weight: 600; font-size: 17px; letter-spacing: -0.02em; }
+  .tk-home .nav-links { display: flex; gap: 4px; align-items: center; }
+  .tk-home .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 14px;
+    padding: 7px 12px; border-radius: 999px; transition: color .15s, background .15s;
+  }
+  .tk-home .nav-links a:hover { color: var(--fg); background: #161616; }
+  .tk-home .nav-cta {
+    background: var(--fg); color: #000 !important; font-weight: 500;
+  }
+  .tk-home .nav-cta:hover { background: #d4d4d4 !important; color: #000 !important; }
+
+  /* ---------- Hero ---------- */
+  .tk-home #view-hero {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 12px 24px 90px;
+  }
+  .tk-home .hero-canvas-wrap { position: relative; width: min(640px, 92vw); }
+  .tk-home #logoCanvas { width: 100%; display: block; }
+  .tk-home .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 55% 45% at 50% 46%, rgba(255,255,255,.09), transparent 70%);
+  }
+  .tk-home h1.hero-title {
+    font-size: clamp(46px, 8.5vw, 88px);
+    line-height: 1.02; font-weight: 600; letter-spacing: -0.045em;
+    max-width: 12ch;
+    /* pull up so the first line overlaps the animation; sand falls behind the text */
+    margin: calc(min(640px, 92vw) * -0.115) auto 26px;
+    margin-bottom: 26px;
+    position: relative; z-index: 2;
+    /* dark halo so the headline stays readable over the animation */
+    text-shadow:
+      0 0 6px rgba(0,0,0,1),
+      0 0 14px rgba(0,0,0,1),
+      0 0 26px rgba(0,0,0,.98),
+      0 0 48px rgba(0,0,0,.9),
+      0 0 80px rgba(0,0,0,.75),
+      0 0 130px rgba(0,0,0,.55);
+  }
+  .tk-home .tagline {
+    height: 26px; position: relative; width: 100%; margin-bottom: 40px;
+  }
+  .tk-home .tagline span {
+    position: absolute; left: 0; right: 0;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace;
+    font-size: 15px; color: var(--muted); letter-spacing: .04em;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .tk-home .tagline span.on { opacity: 1; transform: translateY(0); }
+  .tk-home .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .tk-home .btn {
+    border: none; cursor: pointer; font-size: 15px; font-weight: 500;
+    padding: 13px 28px; border-radius: 999px;
+    font-family: inherit; transition: all .15s ease;
+  }
+  .tk-home .btn-primary { background: var(--fg); color: #000; }
+  .tk-home .btn-primary:hover { background: #d4d4d4; }
+  .tk-home .btn-ghost {
+    background: #0a0a0a; color: var(--fg); border: 1px solid var(--line);
+  }
+  .tk-home .btn-ghost:hover { border-color: #555; }
+  .tk-home .btn[disabled] { opacity: .38; cursor: not-allowed; }
+  .tk-home .btn-ghost[disabled]:hover { border-color: var(--line); }
+
+  .tk-home .hero-top {
+    display: flex; flex-direction: column; align-items: center; width: 100%;
+  }
+
+  /* ---- wide screens: 3-column layout (title | animation | taglines) ---- */
+ @media (min-width: 1150px) {
+    .tk-home #view-hero { padding-top: 30px; }
+    .tk-home .hero-top {
+      display: grid;
+      /* equal side columns keep the canvas window-centered; tag min prevents
+         tagline wrap; flexible canvas cedes space before either side does */
+      grid-template-columns: minmax(0, 1fr) minmax(420px, 1.6fr) minmax(max-content, 1fr);
+      grid-template-areas:
+        "title canvas tag"
+        "ctas  canvas tag";
+      align-items: center;
+      column-gap: 44px;
+      width: min(1440px, 90vw);
+      margin: 0 auto;
+    }
+    .tk-home .hero-canvas-wrap { grid-area: canvas; width: 100%; }
+    /* draw the animation 20% larger than its column; the art never reaches the
+       canvas edges, so the overhang stays clear of the text columns */
+    .tk-home #logoCanvas { width: 120%; margin-left: -10%; }
+    .tk-home h1.hero-title {
+      grid-area: title; align-self: end; justify-self: start;
+      margin: 0 0 10px; text-align: left;
+      font-size: clamp(44px, 4vw, 72px);
+      text-shadow: none;
+    }
+    .tk-home .hero-ctas { grid-area: ctas; align-self: start; justify-self: start; justify-content: flex-start; }
+    .tk-home .tagline {
+      grid-area: tag; justify-self: start;
+      height: auto; margin-bottom: 0;
+      display: flex; flex-direction: column; gap: 16px; text-align: left;
+    }
+    .tk-home .tagline span { position: static; opacity: .4; transform: none; }
+    .tk-home .tagline span.on { opacity: 1; }
+  }
+
+  .tk-home .hero-products {
+    margin-top: 84px; display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--line); border: 1px solid var(--line);
+    border-radius: var(--radius); overflow: hidden; width: min(940px, 92vw);
+  }
+  .tk-home .hero-products .cell {
+    background: var(--card); padding: 26px 24px; text-align: left;
+    transition: background .2s;
+  }
+  .tk-home .hero-products .cell:hover { background: #111; }
+  .tk-home .cell h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .tk-home .cell h3 .dot { width: 7px; height: 7px; border-radius: 2px; background: var(--sand); display: inline-block; }
+  .tk-home .cell p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+ @media (max-width: 720px) { .tk-home .hero-products { grid-template-columns: 1fr; } }
+
+  .tk-home footer {
+    border-top: 1px solid var(--line); color: #555; font-size: 13px;
+    padding: 48px 28px 28px;
+  }
+  .tk-home .foot-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px; max-width: 1000px; margin: 0 auto;
+  }
+ @media (max-width: 760px) { .tk-home .foot-grid { grid-template-columns: 1fr 1fr; } }
+  .tk-home .foot-brand .brand { margin-bottom: 12px; }
+  .tk-home .foot-tag { color: #444; font-family: "SF Mono", "Menlo", monospace; font-size: 12.5px; }
+  .tk-home .foot-col h4 {
+    color: var(--fg); font-size: 13px; font-weight: 600;
+    margin-bottom: 14px; letter-spacing: .01em;
+  }
+  .tk-home .foot-col a {
+    display: block; color: var(--muted); text-decoration: none;
+    font-size: 13.5px; padding: 5px 0; transition: color .15s;
+  }
+  .tk-home .foot-col a:hover { color: var(--fg); }
+  .tk-home .foot-bottom {
+    max-width: 1000px; margin: 36px auto 0; padding-top: 20px;
+    border-top: 1px solid var(--line); color: #555; font-size: 12.5px;
+  }
+
+  .tk-home .fade-in { animation: fadeUp .45s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
