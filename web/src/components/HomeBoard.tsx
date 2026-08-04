@@ -99,7 +99,7 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
           </div>
           <p className="text-[13px] text-faint">
             Three rankings off one dataset:{" "}
-            <Link href="/" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Model</Link>,{" "}
+            <Link href="/leaderboard" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Model</Link>,{" "}
             <Link href="/agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Agent</Link>,{" "}
             <Link href="/team" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Team</Link>.
           </p>

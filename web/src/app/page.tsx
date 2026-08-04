@@ -1,21 +1,12 @@
-import { getLeaderboard } from "@/lib/leaderboard";
-import { SiteHeader } from "@/components/SiteHeader";
-import { HomeBoard } from "@/components/HomeBoard";
-import { Methodology } from "@/components/Methodology";
-import { SiteFooter } from "@/components/SiteFooter";
+import type { Metadata } from "next";
+import { HomeHero } from "@/components/HomeHero";
 
-export const revalidate = 86400;
+export const metadata: Metadata = {
+  title: "ixio — Agent Native Infrastructure",
+  description:
+    "Disposable sandboxes, agent code review, and GitHub runners on demand. Use it, break it, walk away — it turns to sand.",
+};
 
-export default async function Home() {
-  const lb = await getLeaderboard();
-  return (
-    <>
-      <SiteHeader />
-      <main className="flex-1">
-        <HomeBoard lb={lb} />
-        <Methodology lb={lb} />
-      </main>
-      <SiteFooter meta={lb.meta} />
-    </>
-  );
+export default function Home() {
+  return <HomeHero />;
 }

@@ -55,7 +55,7 @@ export default async function AgentsPage() {
             An <span className="text-ink">agent = a model + a harness</span>. The harness is the
             scaffolding — the <span className="text-ink">CLI or TUI</span> — that wraps a raw model
             and turns it into something that edits files, runs tools, and finishes a task. The{" "}
-            <Link href="/" className="text-dim underline-offset-2 hover:text-accent hover:underline">
+            <Link href="/leaderboard" className="text-dim underline-offset-2 hover:text-accent hover:underline">
               Top Model
             </Link>{" "}
             board holds the harness fixed and ranks models; here we flip it and rank the{" "}
@@ -66,7 +66,7 @@ export default async function AgentsPage() {
           {/* cross-ranking links */}
           <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-edge bg-surface/40 px-5 py-3 text-[13px] text-faint">
             Three rankings off one dataset:{" "}
-            <Link href="/" className="text-dim underline-offset-2 hover:text-accent hover:underline">
+            <Link href="/leaderboard" className="text-dim underline-offset-2 hover:text-accent hover:underline">
               Top Model
             </Link>
             {" · "}

@@ -15,7 +15,8 @@ export function Mark({ className = "" }: { className?: string }) {
 }
 
 const NAV = [
-  { href: "/", label: "Model" },
+  { href: "/", label: "Home" },
+  { href: "/leaderboard", label: "Model" },
   { href: "/agents", label: "Agent" },
   { href: "/code-review", label: "Code Review" },
   { href: "/deep-research", label: "Deep Research" },
@@ -24,7 +25,7 @@ const NAV = [
   { href: "/browser", label: "Browser" },
   { href: "/benchmarks", label: "Benchmarks" },
   { href: "/gaps", label: "Gaps" },
-  { href: "/#method", label: "Method" },
+  { href: "/leaderboard#method", label: "Method" },
 ];
 
 export function SiteHeader() {
@@ -38,7 +39,8 @@ export function SiteHeader() {
         </Link>
         <nav className="flex items-center gap-1 overflow-x-auto whitespace-nowrap text-sm text-dim">
           {NAV.map((n) => {
-            const active = n.href === "/" ? pathname === "/" : pathname.startsWith(n.href.replace(/#.*$/, "")) && n.href !== "/#method";
+            const base = n.href.replace(/#.*$/, "");
+            const active = base === "/" ? pathname === "/" : pathname.startsWith(base) && !n.href.includes("#");
             return (
               <Link
                 key={n.href}
