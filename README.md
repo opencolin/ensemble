@@ -89,3 +89,6 @@ Tiers follow the field: top 25% **Excellent**, bottom 40% **Iffy**, the rest **S
 
 - Proxy: [KiranChilledOut/claude-code-proxy](https://github.com/KiranChilledOut/claude-code-proxy)
 - Scoring vocabulary (Pass / Ships / Stays / Cost) inspired by [CodingAgentBench](https://codingagentbench.com/leaderboard).
+- Market-traction scores for agent products from [The Agent Benchmark](https://theagentbenchmark.com/)
+  (scraped live for the Top Agent page; full-site snapshot via `scripts/scrape_agent_benchmark.mjs`
+  → `web/src/data/agent-benchmark.json`).

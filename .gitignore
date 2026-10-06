@@ -15,6 +15,12 @@ results/runs/
 results/leaderboard.dryrun.json
 results/**/*.tmp
 
+# scraper page cache (scripts/scrape_agent_benchmark.mjs)
+.cache/
+
+# per-machine Claude Code permissions
+.claude/settings.local.json
+
 # os / editor
 .DS_Store
 *.swp

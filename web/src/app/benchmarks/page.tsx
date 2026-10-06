@@ -82,7 +82,11 @@ export default async function BenchmarksPage() {
                         </span>
                       </div>
                       <span className="font-mono text-[11px] text-faint">
-                        {b.kind === "agent" ? `${b.pairs} agent×model pairs${b.evaluations > b.pairs ? ` · ${b.evaluations.toLocaleString()} runs` : ""}` : `${b.modelCount} models`} · {b.metric}
+                        {b.kind === "agent"
+                          ? `${b.pairs} agent×model pairs${b.evaluations > b.pairs ? ` · ${b.evaluations.toLocaleString()} runs` : ""}`
+                          : b.kind === "harness"
+                            ? `${b.harnessCount} agents`
+                            : `${b.modelCount} models`} · {b.metric}
                       </span>
                     </div>
                     <Crit v={b.agentNative} />

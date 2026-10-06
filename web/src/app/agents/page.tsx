@@ -5,6 +5,7 @@ import { getHarness } from "@/lib/select";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { AgentsTable } from "@/components/AgentsTable";
+import { TractionTable } from "@/components/TractionTable";
 import Link from "next/link";
 
 export const revalidate = 86400;
@@ -86,6 +87,11 @@ export default async function AgentsPage() {
         </section>
 
         <AgentsTable all={rows} open={rowsOpen} />
+
+        <TractionTable
+          traction={lb.traction ?? []}
+          benchmarks={lb.benchmarks}
+        />
 
         {known.length > 0 && (
           <section className="mx-auto max-w-6xl px-5 py-8">

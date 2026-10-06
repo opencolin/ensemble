@@ -11,8 +11,9 @@ export interface Benchmark {
   id: string; // "terminal-bench"
   name: string; // "Terminal-Bench 2.0"
   metric: string; // "Accuracy"
-  /** "agent" = scored via a (harness, model) pair; "model" = scored on the raw model. */
-  kind: "agent" | "model";
+  /** "agent" = scored via a (harness, model) pair; "model" = scored on the raw
+   *  model; "harness" = scored on the harness/product alone (no model axis). */
+  kind: "agent" | "model" | "harness";
   unit: "pct" | "elo" | "index";
   blurb: string;
   source: string; // leaderboard URL we scrape
@@ -92,6 +93,24 @@ export interface ModelProfile {
   tier: Tier;
 }
 
+/** A harness/product scored by a harness-kind benchmark (e.g. The Agent
+ *  Benchmark rates shipping agent products 0–10 on cited public evidence).
+ *  Shown on Top Agent as the market-traction axis, next to benchmark scores. */
+export interface TractionEntry {
+  harnessId: string;
+  /** Name as the source lists it (may be a product we have no board for). */
+  name: string;
+  vendor: string;
+  benchmark: string; // benchmark id
+  rank: number;
+  /** Normalized 0..100 (source units ×10 for a 0–10 scale). */
+  score: number;
+  /** Subscores in source units, e.g. { proof: 10, scale: 10, momentum: 10, autonomy: 8 }. */
+  parts?: Record<string, number>;
+  /** This harness also has (harness × model) scores on our boards. */
+  onBoards: boolean;
+}
+
 /** A lab/company, represented by its single best model (Top Labs). */
 export interface LabEntry {
   vendor: string;
@@ -108,7 +127,7 @@ export interface LabEntry {
 export interface BenchmarkRank {
   id: string;
   name: string;
-  kind: "agent" | "model";
+  kind: "agent" | "model" | "harness";
   metric: string;
   source: string;
   homepage: string;
@@ -153,6 +172,8 @@ export interface Leaderboard {
   agents: AgentEntry[];
   /** Harnesses re-ranked using only their open-weight models. */
   agentsOpen: AgentEntry[];
+  /** Harness-level market-traction scores (harness-kind benchmarks). Absent in old snapshots. */
+  traction?: TractionEntry[];
   models: ModelProfile[];
   labs: LabEntry[];
   /** Teams re-ranked by their best open-weight model. */

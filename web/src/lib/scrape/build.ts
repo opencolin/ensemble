@@ -1,9 +1,10 @@
 import type {
   Leaderboard, Benchmark, Harness, HarnessBoard, ModelEntry, AgentEntry,
-  ModelProfile, LabEntry, ScoreCell, SourceStatus, Tier,
+  ModelProfile, LabEntry, ScoreCell, SourceStatus, Tier, TractionEntry,
 } from "../types";
 import type { RawRecord } from "./record";
 import { canonHarness, canonModel, KNOWN_HARNESSES } from "./canon";
+import { fetchTheAgentBenchmark, THE_AGENT_BENCHMARK_URL } from "./sources/theAgentBenchmark";
 import { fetchSweBench, SWE_BENCH_URL } from "./sources/swebench";
 import { fetchTerminalBench, TERMINAL_BENCH_URL } from "./sources/terminalBench";
 import { fetchCodingAgentBench, CODING_AGENT_BENCH_URL } from "./sources/codingAgentBench";
@@ -24,6 +25,8 @@ export const BENCHMARKS: Benchmark[] = [
   { id: "arc-agi", name: "ARC-AGI", metric: "Score", kind: "model", unit: "pct", blurb: "Abstraction & reasoning puzzles (ARC Prize).", source: CHATBOT_ARENA_URL, homepage: "https://arcprize.org/" },
   { id: "arena-agent", name: "Arena Agent", metric: "Net Improvement", kind: "model", unit: "pct", blurb: "Agentic coding eval over real sessions.", source: ARENA_AGENT_URL, homepage: "https://arena.ai/leaderboard/agent" },
   { id: "stratix-cup", name: "Stratix Cup", metric: "Tournament score", kind: "model", unit: "index", blurb: "16 frontier models write their own soccer-strategy code and compete head-to-head (LayerLens).", source: STRATIX_CUP_URL, homepage: "https://layerlens.ai/stratix-cup/season-1/" },
+  // Harness benchmark: scores the shipping product (no model axis) → Top Agent's traction board.
+  { id: "the-agent-benchmark", name: "The Agent Benchmark", metric: "Score (0–10)", kind: "harness", unit: "index", blurb: "~1k agent products scored 0–10 on cited public proof, scale, momentum and autonomy; we track its Software engineer market.", source: THE_AGENT_BENCHMARK_URL, homepage: THE_AGENT_BENCHMARK_URL },
 ];
 
 interface Src { id: string; name: string; url: string; fn: () => Promise<RawRecord[]> }
@@ -35,6 +38,7 @@ const SOURCES: Src[] = [
   { id: "arena-agent", name: "Arena Agent", url: ARENA_AGENT_URL, fn: fetchArenaAgent },
   { id: "ensemble-runs", name: "ixio runs", url: ENSEMBLE_RUNS_URL, fn: fetchEnsembleRuns },
   { id: "stratix-cup", name: "Stratix Cup", url: STRATIX_CUP_URL, fn: fetchStratixCup },
+  { id: "the-agent-benchmark", name: "The Agent Benchmark", url: THE_AGENT_BENCHMARK_URL, fn: fetchTheAgentBenchmark },
 ];
 
 const round1 = (x: number) => Math.round(x * 10) / 10;
@@ -69,8 +73,11 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
   // scraped leaderboards list them before release).
   const EXCLUDE_MODEL_IDS = new Set(["claude-fable-5", "fable-5"]);
   const harnesses = new Map<string, Harness>();
-  const recs: CRec[] = records.map((r) => {
-    const m = canonModel(r.modelName, r.modelOrg, r.license);
+  // Harness-kind benchmarks score the product alone — no model axis. They feed
+  // the traction board (and benchmark ranking), never model boards/composites.
+  const harnessRecs = records.filter((r) => r.benchmarkKind === "harness" && r.harnessName);
+  const recs: CRec[] = records.filter((r) => r.benchmarkKind !== "harness").map((r) => {
+    const m = canonModel(r.modelName ?? "", r.modelOrg, r.license);
     let harnessId: string | undefined;
     if (r.benchmarkKind === "agent" && r.harnessName) {
       const h = canonHarness(r.harnessName, r.harnessOrg);
@@ -112,6 +119,29 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     boards.push({ harnessId, models, benchmarks });
     harnesses.get(harnessId)!.featured = models.length >= 3;
   }
+
+  // ---- market traction (harness-kind benchmarks) ----
+  // Dedupe by canonical harness id (best score wins). These are NOT registered
+  // in `harnesses`: most are products with no (harness × model) data, and the
+  // "known, not yet benchmarked" list would drown in them.
+  const tmap = new Map<string, TractionEntry>();
+  for (const r of harnessRecs) {
+    const h = canonHarness(r.harnessName!, r.harnessOrg);
+    const prev = tmap.get(h.id);
+    if (prev && prev.score >= r.score) continue;
+    tmap.set(h.id, {
+      harnessId: h.id,
+      name: r.harnessName!.trim(),
+      vendor: h.vendor,
+      benchmark: r.benchmark,
+      rank: 0,
+      score: r.score,
+      parts: r.parts,
+      onBoards: boardMap.has(h.id),
+    });
+  }
+  const traction = [...tmap.values()].sort((a, b) => b.score - a.score);
+  traction.forEach((t, i) => (t.rank = i + 1));
 
   // Notable coding agents with no benchmark data yet (shown on Top Agent).
   for (const k of KNOWN_HARNESSES) {
@@ -209,6 +239,10 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     // Model-level, but executable head-to-head where models write/iterate real code,
     // every match traced + signed — so it rates well on realism/openness for a model bench.
     "stratix-cup": { agentNative: 35, realism: 80, openness: 85 },
+    // Harness-level: rates the shipping agent product (our harness axis) from cited
+    // public evidence — real-world adoption, not executable tasks, so realism is low
+    // by this rubric; every point links its source, so openness is high.
+    "the-agent-benchmark": { agentNative: 40, realism: 20, openness: 85 },
   };
   const BW = { agentNative: 0.3, coverage: 0.3, realism: 0.25, openness: 0.15 };
   const bStats = new Map<string, { entries: number; runs: number; harnesses: Set<string>; models: Set<string> }>();
@@ -219,6 +253,13 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     if (r.harnessId) s.harnesses.add(r.harnessId);
     s.models.add(r.modelId);
     bStats.set(r.benchmark, s);
+  }
+  for (const t of traction) {
+    const s = bStats.get(t.benchmark) ?? { entries: 0, runs: 0, harnesses: new Set<string>(), models: new Set<string>() };
+    s.entries++;
+    s.runs++;
+    s.harnesses.add(t.harnessId);
+    bStats.set(t.benchmark, s);
   }
   const activeB = BENCHMARKS.filter((b) => bStats.has(b.id));
   const maxPairs = Math.max(1, ...activeB.map((b) => (b.kind === "agent" ? bStats.get(b.id)!.entries : 0)));
@@ -241,7 +282,9 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     ? "claude-code"
     : agents.find((a) => harnesses.get(a.harnessId)?.featured)?.harnessId ?? agents[0]?.harnessId ?? "";
 
-  const shownBenchmarks = BENCHMARKS.filter((b) => recs.some((r) => r.benchmark === b.id));
+  const shownBenchmarks = BENCHMARKS.filter(
+    (b) => recs.some((r) => r.benchmark === b.id) || traction.some((t) => t.benchmark === b.id),
+  );
   return {
     meta: {
       title: "ixio — best models for coding agents",
@@ -260,6 +303,7 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     boards,
     agents,
     agentsOpen,
+    traction,
     models,
     labs,
     labsOpen,

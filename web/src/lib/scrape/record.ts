@@ -2,15 +2,19 @@
 export interface RawRecord {
   source: string;
   benchmark: string;
-  benchmarkKind: "agent" | "model";
-  /** Present for agent benchmarks (the scaffold/CLI). */
+  /** "agent" = (harness, model) pair; "model" = raw model; "harness" = the harness/product alone. */
+  benchmarkKind: "agent" | "model" | "harness";
+  /** Present for agent and harness benchmarks (the scaffold/CLI/product). */
   harnessName?: string;
   harnessOrg?: string;
-  modelName: string;
+  /** Absent for harness benchmarks — they score the product, not a model. */
+  modelName?: string;
   modelOrg?: string;
   /** Score in display units. */
   score: number;
   unit: "pct" | "elo" | "index";
+  /** Subscores in source units (e.g. The Agent Benchmark's proof/scale/momentum/autonomy, 0-10). */
+  parts?: Record<string, number>;
   date?: string;
   stderr?: number;
   license?: string;
