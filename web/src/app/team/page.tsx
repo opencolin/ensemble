@@ -8,7 +8,7 @@ import { LabsTable } from "@/components/LabsTable";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: "Top Team — ixio",
+  title: "Top Lab — ixio",
   description:
     "Which team makes the best coding model? ixio ranks each team by its single best model — a composite percentile-blended across public benchmarks.",
 };
@@ -44,7 +44,7 @@ export default async function TeamPage() {
             <Link href="/leaderboard" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Model</Link>,{" "}
             <Link href="/agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Harness</Link>,{" "}
             <Link href="/top-agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Agent</Link>,
-            and Top Team.
+            and Top Lab.
           </p>
 
           <div className="mt-9 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-edge/70 pt-6 sm:grid-cols-4">

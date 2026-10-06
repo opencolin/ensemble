@@ -94,7 +94,7 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
             <Link href="/leaderboard" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Model</Link>,{" "}
             <Link href="/agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Harness</Link>,{" "}
             <Link href="/top-agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Agent</Link>,{" "}
-            <Link href="/team" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Team</Link>.
+            <Link href="/team" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Lab</Link>.
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export function HomeBoard({ lb }: { lb: Leaderboard }) {
       {/* cross-ranking highlights */}
       <section className="mx-auto max-w-6xl px-5 py-2">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {topLab && <HighlightCard href={`/team/${slugFor(topLab.vendor)}`} eyebrow="Top team" title={topLab.vendor} sub={topLab.bestModelName} stat={`#1`} />}
+          {topLab && <HighlightCard href={`/team/${slugFor(topLab.vendor)}`} eyebrow="Top lab" title={topLab.vendor} sub={topLab.bestModelName} stat={`#1`} />}
           {topAgentH && <HighlightCard href={`/agents/${topAgent.harnessId}`} eyebrow="Top harness" title={topAgentH.name} sub={topAgent.bestModelName} stat={`${topAgent.score.toFixed(0)}`} />}
           {bestOpen && <HighlightCard href={`/models/${slugFor(bestOpen.modelId)}`} eyebrow="Best open-weight" title={bestOpen.modelName} sub={bestOpen.vendor} stat={`#${bestOpen.rank}`} />}
           {board?.models[0] && <HighlightCard href={`/models/${slugFor(board.models[0].modelId)}`} eyebrow={`#1 on ${harness.name}`} title={board.models[0].modelName} sub={board.models[0].vendor} stat={`${board.models[0].composite.toFixed(0)}`} />}

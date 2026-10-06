@@ -19,7 +19,7 @@ const NAV = [
   { href: "/leaderboard", label: "Top Model" },
   { href: "/agents", label: "Top Harness" },
   { href: "/top-agents", label: "Top Agent" },
-  { href: "/team", label: "Top Team" },
+  { href: "/team", label: "Top Lab" },
   { href: "/benchmarks", label: "Benchmarks" },
   { href: "/gaps", label: "Gaps" },
   { href: "/leaderboard#method", label: "Method" },

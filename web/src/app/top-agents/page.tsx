@@ -93,7 +93,7 @@ export default async function TopAgentsPage() {
             <span className="text-ink">Top Agent</span>
             {" · "}
             <Link href="/team" className="text-dim underline-offset-2 hover:text-accent hover:underline">
-              Top Team
+              Top Lab
             </Link>
           </div>
 

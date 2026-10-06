@@ -51,7 +51,7 @@ export default async function TeamPage({ params }: { params: Promise<{ vendor: s
       <main className="flex-1">
         <section className="mx-auto max-w-6xl px-5 pt-10">
           <Link href="/team" className="font-mono text-xs text-faint hover:text-dim">
-            ← Top Team
+            ← Top Lab
           </Link>
 
           <div className="mt-5 flex flex-col gap-6 border-b border-edge/70 pb-8 sm:flex-row sm:items-end sm:justify-between">

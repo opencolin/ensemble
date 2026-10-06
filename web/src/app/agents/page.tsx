@@ -77,7 +77,7 @@ export default async function AgentsPage() {
             </Link>
             {" · "}
             <Link href="/team" className="text-dim underline-offset-2 hover:text-accent hover:underline">
-              Top Team
+              Top Lab
             </Link>
           </div>
 
