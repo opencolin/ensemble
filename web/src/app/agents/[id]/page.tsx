@@ -50,7 +50,7 @@ export default async function AgentPage({ params }: { params: Promise<{ id: stri
       <main className="flex-1">
         <section className="mx-auto max-w-6xl px-5 pt-10">
           <Link href="/agents" className="font-mono text-xs text-faint hover:text-dim">
-            ← Top Agent
+            ← Top Harness
           </Link>
 
           <div className="mt-5 flex flex-col gap-6 border-b border-edge/70 pb-8 sm:flex-row sm:items-end sm:justify-between">
@@ -82,7 +82,7 @@ export default async function AgentPage({ params }: { params: Promise<{ id: stri
             </div>
 
             <div className="flex items-end gap-8">
-              {agent && <Stat k="Agent rank" v={`#${agent.rank}`} cls={TIER_CLASS[agent.tier].text} />}
+              {agent && <Stat k="Harness rank" v={`#${agent.rank}`} cls={TIER_CLASS[agent.tier].text} />}
               {agent && <Stat k="Score" v={agent.score.toFixed(1)} />}
             </div>
           </div>

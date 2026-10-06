@@ -151,6 +151,8 @@ export interface SourceStatus {
   url: string;
   ok: boolean;
   entries: number;
+  /** Source was down; entries come from the last-good committed snapshot. */
+  stale?: boolean;
 }
 
 export interface Leaderboard {

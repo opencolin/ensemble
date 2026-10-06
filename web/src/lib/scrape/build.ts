@@ -5,6 +5,7 @@ import type {
 import type { RawRecord } from "./record";
 import { canonHarness, canonModel, KNOWN_HARNESSES } from "./canon";
 import { fetchTheAgentBenchmark, THE_AGENT_BENCHMARK_URL } from "./sources/theAgentBenchmark";
+import sourceSnapshot from "@/data/source-records.snapshot.json";
 import { fetchSweBench, SWE_BENCH_URL } from "./sources/swebench";
 import { fetchTerminalBench, TERMINAL_BENCH_URL } from "./sources/terminalBench";
 import { fetchCodingAgentBench, CODING_AGENT_BENCH_URL } from "./sources/codingAgentBench";
@@ -30,7 +31,7 @@ export const BENCHMARKS: Benchmark[] = [
 ];
 
 interface Src { id: string; name: string; url: string; fn: () => Promise<RawRecord[]> }
-const SOURCES: Src[] = [
+export const SOURCES: Src[] = [
   { id: "coding-agent-bench", name: "CodingAgentBench", url: CODING_AGENT_BENCH_URL, fn: fetchCodingAgentBench },
   { id: "swe-bench", name: "SWE-bench", url: SWE_BENCH_URL, fn: fetchSweBench },
   { id: "terminal-bench", name: "Terminal-Bench", url: TERMINAL_BENCH_URL, fn: fetchTerminalBench },
@@ -59,12 +60,18 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
   const records: RawRecord[] = [];
   const sources: SourceStatus[] = SOURCES.map((s, i) => {
     const r = settled[i];
-    if (r.status === "fulfilled") {
+    if (r.status === "fulfilled" && r.value.length > 0) {
       records.push(...r.value);
       return { id: s.id, name: s.name, url: s.url, ok: true, entries: r.value.length };
     }
-    console.error(`[scrape] ${s.id} failed:`, r.reason?.message ?? r.reason);
-    return { id: s.id, name: s.name, url: s.url, ok: false, entries: 0 };
+    // Source down (or returned nothing): fall back to its last-good committed
+    // records so an upstream outage never shrinks the site. Refresh the snapshot
+    // with `npx tsx scripts/snapshot-sources.mts`.
+    const reason = r.status === "rejected" ? (r.reason?.message ?? r.reason) : "0 entries";
+    const fallback = (sourceSnapshot as unknown as RawRecord[]).filter((x) => x.source === s.id);
+    console.error(`[scrape] ${s.id} failed (${reason}); using ${fallback.length} snapshot records`);
+    records.push(...fallback);
+    return { id: s.id, name: s.name, url: s.url, ok: false, entries: fallback.length, stale: fallback.length > 0 };
   });
 
   // ---- canonicalize ----

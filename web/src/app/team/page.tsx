@@ -40,9 +40,10 @@ export default async function TeamPage() {
           </p>
 
           <p className="mt-5 max-w-2xl text-[13px] text-faint">
-            One dataset, three rankings:{" "}
+            One dataset, four rankings:{" "}
             <Link href="/leaderboard" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Model</Link>,{" "}
-            <Link href="/agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Agent</Link>,
+            <Link href="/agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Harness</Link>,{" "}
+            <Link href="/top-agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">Top Agent</Link>,
             and Top Team.
           </p>
 

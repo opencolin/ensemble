@@ -10,7 +10,7 @@ console.log("\n=== SOURCES ===");
 for (const s of lb.meta.sources) console.log(`  ${s.ok ? "ok " : "FAIL"} ${s.name.padEnd(16)} ${s.entries} entries`);
 console.log(`  total records: ${lb.meta.totalEntries} | harnesses: ${lb.meta.harnessCount} | models: ${lb.meta.modelCount}`);
 
-console.log("\n=== TOP AGENT (harnesses) ===");
+console.log("\n=== TOP HARNESS ===");
 for (const a of lb.agents.slice(0, 14)) console.log(`  #${String(a.rank).padStart(2)} ${a.tier.padEnd(9)} ${p(a.score).padStart(5)}  ${a.harnessId.padEnd(16)} best: ${a.bestModelName} (${a.bestScore}) · ${a.modelsTested} models · [${a.benchmarks.join(",")}]`);
 
 console.log("\n=== TOP LABS ===");

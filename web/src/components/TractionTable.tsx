@@ -36,10 +36,14 @@ export function TractionTable({ traction, benchmarks }: { traction: TractionEntr
         </span>
       </div>
       <p className="mb-5 max-w-2xl text-[13px] leading-relaxed text-faint">
-        A different axis than the boards above: not how well a harness drives a model, but whether
-        the shipping product is <span className="text-dim">real in the market</span>. Every coding
-        agent in {bench?.name ?? "the source"}&apos;s Software engineer market, scored 0–10 from
-        cited public evidence — proof (customers), scale (company), momentum (shipping), autonomy.
+        A different axis than the{" "}
+        <Link href="/agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">
+          Top Harness
+        </Link>{" "}
+        boards: not how well a harness drives a model, but whether the shipping product is{" "}
+        <span className="text-dim">real in the market</span>. Every coding agent in{" "}
+        {bench?.name ?? "the source"}&apos;s Software engineer market, scored 0–10 from cited public
+        evidence — proof (customers), scale (company), momentum (shipping), autonomy.
       </p>
 
       <div className="overflow-x-auto">
@@ -104,8 +108,12 @@ export function TractionTable({ traction, benchmarks }: { traction: TractionEntr
 
       <p className="mt-4 font-mono text-[11px] leading-relaxed text-faint">
         Traction isn&apos;t capability — a well-funded agent can still lose to a scrappy harness on
-        the boards above. Agents marked <span className="text-dim">on boards</span> have
-        harness × model benchmark scores too.
+        the benchmark boards. Agents marked <span className="text-dim">on boards</span> also have
+        harness × model scores on{" "}
+        <Link href="/agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">
+          Top Harness
+        </Link>
+        .
       </p>
     </section>
   );

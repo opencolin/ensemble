@@ -5,13 +5,12 @@ import { getHarness } from "@/lib/select";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { AgentsTable } from "@/components/AgentsTable";
-import { TractionTable } from "@/components/TractionTable";
 import Link from "next/link";
 
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: "Top Agent — ixio",
+  title: "Top Harness — ixio",
   description:
     "Which coding-agent harness is best? ixio ranks the CLIs and TUIs that turn a model into an agent by the best results they get from the models we tested.",
 };
@@ -66,12 +65,16 @@ export default async function AgentsPage() {
 
           {/* cross-ranking links */}
           <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-edge bg-surface/40 px-5 py-3 text-[13px] text-faint">
-            Three rankings off one dataset:{" "}
+            Four rankings off one dataset:{" "}
             <Link href="/leaderboard" className="text-dim underline-offset-2 hover:text-accent hover:underline">
               Top Model
             </Link>
             {" · "}
-            <span className="text-ink">Top Agent</span>
+            <span className="text-ink">Top Harness</span>
+            {" · "}
+            <Link href="/top-agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">
+              Top Agent
+            </Link>
             {" · "}
             <Link href="/team" className="text-dim underline-offset-2 hover:text-accent hover:underline">
               Top Team
@@ -88,10 +91,15 @@ export default async function AgentsPage() {
 
         <AgentsTable all={rows} open={rowsOpen} />
 
-        <TractionTable
-          traction={lb.traction ?? []}
-          benchmarks={lb.benchmarks}
-        />
+        <section className="mx-auto max-w-6xl px-5 py-2">
+          <div className="rounded-xl border border-edge bg-surface/40 px-5 py-3 text-[13px] text-faint">
+            Wondering which of these agents are <span className="text-dim">real in the market</span>?{" "}
+            <Link href="/top-agents" className="text-accent underline-offset-2 hover:underline">
+              Top Agent
+            </Link>{" "}
+            ranks shipping agent products by evidence-based traction (The Agent Benchmark).
+          </div>
+        </section>
 
         {known.length > 0 && (
           <section className="mx-auto max-w-6xl px-5 py-8">
