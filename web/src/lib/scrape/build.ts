@@ -283,6 +283,11 @@ export async function buildLeaderboard(scrapedAt: string): Promise<Leaderboard> 
     };
   });
   benchmarkRanking.sort((a, b) => b.score - a.score);
+  // Editorial pin: The Agent Benchmark anchors the Top Agent page, so it holds
+  // the #2 slot. Its rubric score stays honest — as a harness benchmark it runs
+  // no harness × model pairs, so it can never earn coverage points.
+  const tabIdx = benchmarkRanking.findIndex((b) => b.id === "the-agent-benchmark");
+  if (tabIdx > 1) benchmarkRanking.splice(1, 0, ...benchmarkRanking.splice(tabIdx, 1));
   benchmarkRanking.forEach((b, i) => (b.rank = i + 1));
 
   const defaultHarnessId = harnesses.get("claude-code")?.featured
