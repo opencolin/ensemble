@@ -132,10 +132,6 @@ export default async function Home() {
               we rank the benchmarks themselves
             </Link>
             {" · "}
-            <Link href="/gaps" className="text-dim underline-offset-2 hover:text-accent hover:underline">
-              the harness × model pairs nobody measures
-            </Link>
-            {" · "}
             <Link href="/leaderboard#method" className="text-dim underline-offset-2 hover:text-accent hover:underline">
               methodology
             </Link>

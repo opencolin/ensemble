@@ -21,7 +21,6 @@ const NAV = [
   { href: "/agents", label: "Top Harness" },
   { href: "/team", label: "Top Lab" },
   { href: "/benchmarks", label: "Benchmarks" },
-  { href: "/gaps", label: "Gaps" },
   { href: "/leaderboard#method", label: "Method" },
 ];
 
@@ -50,14 +49,6 @@ export function SiteHeader() {
               </Link>
             );
           })}
-          <a
-            href="https://github.com/KiranChilledOut/claude-code-proxy"
-            target="_blank"
-            rel="noreferrer"
-            className="ml-1 rounded-md border border-edge px-3 py-1.5 text-ink transition-colors hover:border-edge2 hover:bg-surface"
-          >
-            Proxy ↗
-          </a>
         </nav>
       </div>
     </header>
