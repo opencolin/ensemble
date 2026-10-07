@@ -18,7 +18,7 @@ export const BENCHMARKS: Benchmark[] = [
   // Agent benchmarks: scored via a (harness, model) pair → harness boards.
   { id: "coding-agent-bench", name: "CodingAgentBench", metric: "Pass rate", kind: "agent", unit: "pct", blurb: "Open coding agents (CLIs/TUIs) across open-weight models.", source: CODING_AGENT_BENCH_URL, homepage: "https://codingagentbench.com/" },
   { id: "swe-bench", name: "SWE-bench Verified", metric: "% Resolved", kind: "agent", unit: "pct", blurb: "Resolve real GitHub issues; hidden tests must pass.", source: SWE_BENCH_URL, homepage: "https://www.swebench.com/" },
-  { id: "terminal-bench", name: "Terminal-Bench 2.0", metric: "Accuracy", kind: "agent", unit: "pct", blurb: "Complete real end-to-end terminal tasks.", source: TERMINAL_BENCH_URL, homepage: "https://www.tbench.ai/" },
+  { id: "terminal-bench", name: "Terminal-Bench", metric: "Resolution rate", kind: "agent", unit: "pct", blurb: "Complete real end-to-end terminal tasks (currently v4.0).", source: TERMINAL_BENCH_URL, homepage: "https://www.tbench.ai/" },
   { id: "ensemble-runs", name: "ixio runs", metric: "Pass rate", kind: "agent", unit: "pct", blurb: "Our own runs — any harness × any model via the proxy. Fills gaps nobody else measures.", source: ENSEMBLE_RUNS_URL, homepage: ENSEMBLE_RUNS_URL },
   // Model benchmarks: scored on the raw model → model profiles + Top Team.
   { id: "arena-coding", name: "Chatbot Arena (Coding)", metric: "Coding Elo", kind: "model", unit: "elo", blurb: "Human preference Elo on coding prompts (LMArena).", source: CHATBOT_ARENA_URL, homepage: "https://lmarena.ai/" },
