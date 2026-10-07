@@ -66,15 +66,15 @@ export default async function AgentsPage() {
           {/* cross-ranking links */}
           <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-edge bg-surface/40 px-5 py-3 text-[13px] text-faint">
             Four rankings off one dataset:{" "}
+            <Link href="/top-agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">
+              Top Agent
+            </Link>
+            {" · "}
             <Link href="/leaderboard" className="text-dim underline-offset-2 hover:text-accent hover:underline">
               Top Model
             </Link>
             {" · "}
             <span className="text-ink">Top Harness</span>
-            {" · "}
-            <Link href="/top-agents" className="text-dim underline-offset-2 hover:text-accent hover:underline">
-              Top Agent
-            </Link>
             {" · "}
             <Link href="/team" className="text-dim underline-offset-2 hover:text-accent hover:underline">
               Top Lab

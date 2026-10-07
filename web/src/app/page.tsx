@@ -117,9 +117,9 @@ export default async function Home() {
         {/* the four rankings */}
         <section className="mx-auto max-w-6xl px-5 pb-10">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <RankCard n="01" href="/leaderboard" label="Top Model" axis="the compute" question="Which model is the best coding brain?" rows={models} />
-            <RankCard n="02" href="/agents" label="Top Harness" axis="the interface" question="Which CLI or IDE gets the most out of a model?" rows={harnesses} />
-            <RankCard n="03" href="/top-agents" label="Top Agent" axis="the product" question="Which shipping agents are real in the market?" rows={agents} />
+            <RankCard n="01" href="/top-agents" label="Top Agent" axis="the product" question="Which shipping agents are real in the market?" rows={agents} />
+            <RankCard n="02" href="/leaderboard" label="Top Model" axis="the compute" question="Which model is the best coding brain?" rows={models} />
+            <RankCard n="03" href="/agents" label="Top Harness" axis="the interface" question="Which CLI or IDE gets the most out of a model?" rows={harnesses} />
             <RankCard n="04" href="/team" label="Top Lab" axis="the maker" question="Which lab makes the best coding model?" rows={labs} />
           </div>
         </section>

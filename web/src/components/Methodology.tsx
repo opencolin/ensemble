@@ -3,7 +3,7 @@ import type { Leaderboard } from "@/lib/types";
 const STEPS = [
   { n: "01", t: "Aggregate public leaderboards", d: "We scrape established benchmark leaderboards daily and normalize their messy model and harness names into one dataset." },
   { n: "02", t: "Split agent vs model", d: "Agent benchmarks score a (harness, model) pair; model benchmarks score the raw model. That split is what lets us rank harnesses and labs separately." },
-  { n: "03", t: "Four rankings, one dataset", d: "Top Model (best model per harness), Top Harness (the harnesses), Top Agent (shipping agent products by market traction), and Top Lab (each team by its single best model)." },
+  { n: "03", t: "Four rankings, one dataset", d: "Top Agent (shipping agent products by market traction), Top Model (best model per harness), Top Harness (the harnesses), and Top Lab (each team by its single best model)." },
 ];
 
 export function Methodology({ lb }: { lb: Leaderboard }) {
